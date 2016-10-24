@@ -697,7 +697,7 @@ var_dump($error);
    function create_thumbnail_videos($target_file,$destFile)
    {
      // Change the path according to your server.
-      $ffmpeg_path = 'C:\\xampp\\htdocs\\AbivaHR\\assets\\ffmpeg\\bin\\';
+      $ffmpeg_path = './assets/ffmpeg/bin/';
 
       $output = array();
 
