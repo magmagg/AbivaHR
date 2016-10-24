@@ -289,8 +289,6 @@ class Admin extends CI_Controller
     $middlename = $this->input->post('mname');
     $lastname = $this->input->post('lname');
     $email = $this->input->post('email');
-    $address = $this->input->post('address');
-    $phone = $this->input->post('cpnumber');
     $department = $this->input->post('department');
 
     $data = array('user_username'=>$username,
@@ -298,12 +296,20 @@ class Admin extends CI_Controller
                   'user_middlename'=>$middlename,
                   'user_lastname'=>$lastname,
                   'user_email'=>$email,
-                  'user_address'=>$address,
-                  'user_cpnumber'=>$phone,
                   'user_department'=>$department
                 );
 
     $this->Admin_model->submit_one_employee($data, $id);
+
+    $this->session->set_flashdata('notify',"<script>
+        new PNotify({
+        title: 'Success!',
+        text: 'Employee has been edited',
+        type: 'success'
+      });
+    </script>");
+
+
     redirect(base_url().'Admin/employees');
   }
 
@@ -333,7 +339,7 @@ function submit_add_employee()
                 'user_password'=>password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'user_department'=>$this->input->post('department'),
                 'user_picture'=>getcwd()."/assets/images/avatars/avatar2.png",
-                'user_isadmin'=>1
+                'user_isadmin'=>0
               );
 
   $duplicate_username = $this->Admin_model->check_username_duplicate($this->input->post('username'));
@@ -974,8 +980,8 @@ var_dump($error);
       if($indicator == 1){
       $this->session->set_flashdata('notify',"<script>
           new PNotify({
-          title: 'Regular Success',
-          text: 'That thing that you were trying to do worked!',
+          title: 'Success!',
+          text: 'File has been uploaded',
           type: 'success'
         });
       </script>");

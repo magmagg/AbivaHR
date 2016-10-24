@@ -27,7 +27,7 @@
 						</div>
 						<div class="timeline-panel">
 							<div class="widget-header">
-								<h1 class="widget-title"><?=$a->ann_title?></h1>
+								<h3 class="widget-title"><?=$a->ann_title?></h3>
 								<p><small class="text-muted">
                                               <i class="fa fa-clock-o"></i>
                                               <?=$a->ann_timestamp?>
@@ -35,13 +35,12 @@
 								</p>
 							</div>
 							<div class="space-12"></div>
-							<div class="well well-lg">
-								<div class="timeline-body">
+							<div class="timeline-body">
 									<p>
 										<?=$a->ann_content?>
 									</p>
 								</div>
-							</div>
+
 							<small><?php echo humanTiming($time); ?> ago </small>
 						</div>
 					</li>
@@ -58,21 +57,20 @@
 							</div>
 							<div class="timeline-panel">
 								<div class="widget-header">
-									<h1 class="widget-title"><?=$a->ann_title?></h1>
+									<h3 class="widget-title"><?=$a->ann_title?></h3>
 									<p><small class="text-muted">
                                               <i class="fa fa-clock-o"></i>
                                               <?=$a->ann_timestamp?>
                                             </small>
 								</div>
 								<div class="space-12"></div>
-								<div class="well well-lg">
 									<div class="timeline-body">
 
 										<p>
 											<?=$a->ann_content?>
 										</p>
 									</div>
-								</div>
+
 								<small><?php echo humanTiming($time); ?> ago </small>
 							</div>
 						</li>

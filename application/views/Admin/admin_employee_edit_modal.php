@@ -48,26 +48,10 @@
 					</div>
 
 					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Address </label>
-
-						<div class="col-sm-9">
-							<input type="text" name="address" class="col-xs-10 col-sm-5" />
-						</div>
-					</div>
-
-					<div class="form-group">
 						<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Email </label>
 
 						<div class="col-sm-9">
 							<input type="text" name="email" class="col-xs-10 col-sm-5" />
-						</div>
-					</div>
-
-					<div class="form-group">
-						<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Phone </label>
-
-						<div class="col-sm-9">
-							<input type="text" name="cpnumber" id="input-mask-phone" class="col-xs-10 col-sm-5" />
 						</div>
 					</div>
 
