@@ -214,7 +214,7 @@
 					showConfirmButton: false
 				});
 				setTimeout(function() {
-					location.href = "<?php echo base_url();?>Admin/view_gallery/" + response;
+					location.href = "<?php echo base_url();?>Admin/view_videos/" + response;
 				}, 2000);
 				// Gets triggered when the files have successfully been sent.
 				// Redirect user or notify of success.
