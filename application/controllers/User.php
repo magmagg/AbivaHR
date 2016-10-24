@@ -207,7 +207,7 @@ class User extends CI_Controller
                               'user_picture'=>$success['upload_data']['full_path']
                             );
 
-                            $remove = 'C:/xampp/htdocs/AbivaHR/';
+                            $remove = getcwd();
                             if (strpos($success['upload_data']['full_path'], $remove) === 0)
                              {
                                 $picture = substr($success['upload_data']['full_path'], strlen($remove));
@@ -539,7 +539,7 @@ function do_Upload_gallery()
     function create_thumbnail_videos($target_file,$destFile)
     {
       // Change the path according to your server.
-       $ffmpeg_path = 'C:\\xampp\\htdocs\\AbivaHR\\assets\\ffmpeg\\bin\\';
+       $ffmpeg_path = './assets/ffmpeg/bin/';
 
        $output = array();
 
