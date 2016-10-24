@@ -4,8 +4,7 @@
 		<h3 class="header smaller lighter blue">
 			<i class="ace-icon fa fa-users blue"></i>
 			Manage Employees
-			<button class="btn btn-sm btn-success pull-right">Import users</button>
-		</h3>
+				</h3>
 			<table style="width:100%" class="table table-striped table-bordered table-hover we" id="dataTables-example">
 				<thead>
 					<tr>
@@ -169,6 +168,7 @@
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
+<script src="<?php echo base_url(); ?>assets/js/pnotify.custom.min.js"></script>
 <!-- DataTables JavaScript -->
 <script src="<?php echo base_url(); ?>assets/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.bootstrap.min.js"></script>
@@ -257,8 +257,6 @@ $(".ace-switch-5").change(function () {
 		var updatelname = $(e.relatedTarget).data('updatelname');
     var updateuname = $(e.relatedTarget).data('updateuname');
 		var updateemail = $(e.relatedTarget).data('updateemail');
-    var updatecpnumber = $(e.relatedTarget).data('updatecpnumber');
-		var updateaddress = $(e.relatedTarget).data('updateaddress');
     var updatedept = $(e.relatedTarget).data('updatedept');
     //populate the textbox
     $(e.currentTarget).find('input[name="id"]').val(updateid);
@@ -267,14 +265,13 @@ $(".ace-switch-5").change(function () {
 		$(e.currentTarget).find('input[name="lname"]').val(updatelname);
     $(e.currentTarget).find('input[name="uname"]').val(updateuname);
     $(e.currentTarget).find('input[name="email"]').val(updateemail);
-		$(e.currentTarget).find('input[name="cpnumber"]').val(updatecpnumber);
-    $(e.currentTarget).find('input[name="address"]').val(updateaddress);
     $(e.currentTarget).find('input[name="dept"]').val(updatedept);
 });
     </script>
 
 
 <!-- inline scripts related to this page -->
+<?=$this->session->flashdata('notify');?>
 </body>
 
 </html>

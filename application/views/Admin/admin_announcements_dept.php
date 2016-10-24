@@ -35,13 +35,13 @@
 								</p>
 							</div>
 							<div class="space-12"></div>
-							<div class="well well-lg">
-								<div class="timeline-body">
-									<p>
-										<?=$a->ann_content?>
-									</p>
-								</div>
+
+							<div class="timeline-body">
+								<p>
+									<?=$a->ann_content?>
+								</p>
 							</div>
+
 							<small><?php echo humanTiming($time); ?> ago </small>
 						</div>
 					</li>
@@ -65,23 +65,30 @@
                                             </small>
 								</div>
 								<div class="space-12"></div>
-								<div class="well well-lg">
-									<div class="timeline-body">
 
-										<p>
-											<?=$a->ann_content?>
-										</p>
-									</div>
+								<div class="timeline-body">
+
+									<p>
+										<?=$a->ann_content?>
+									</p>
 								</div>
 								<small><?php echo humanTiming($time); ?> ago </small>
 							</div>
 						</li>
 				</ul>
 				<?php
-               $count +=1;
-             }
-           }
-         }
+				$count +=1;
+			}
+		}
+	}
+ else
+ {
+	?>
+					<p class="alert alert-danger">
+						No announcements to show.
+					</p>
+
+					<?php	 }
 
          function humanTiming ($time)
                             {
@@ -106,7 +113,7 @@
                             }
 
              ?>
-		</div>
+			</div>
 			<!-- /.panel-body -->
 
 
