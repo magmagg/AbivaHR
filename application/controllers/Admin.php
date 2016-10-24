@@ -698,12 +698,12 @@ var_dump($error);
    {
      // Change the path according to your server.
       $ffmpeg_path = './assets/ffmpeg/bin/';
-
+      $target_file = '"'.$target_file.'"';
+      $destFile = '"'.$destFile.'"';
       $output = array();
 
       $cmd = sprintf('%sffmpeg -i %s -an -ss 00:00:05 -r 1 -vframes 1 -y %s',
           $ffmpeg_path, $target_file, $destFile);
-
       if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
           $cmd = str_replace('/', DIRECTORY_SEPARATOR, $cmd);
       else
