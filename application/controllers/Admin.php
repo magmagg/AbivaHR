@@ -606,6 +606,21 @@ var_dump($error);
        $this->Admin_model->delete_gallery_album($id);
      }
 
+     function manage_gallery()
+     {
+       $header['active_head'] = 'gallery';
+       $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+       $id = $this->uri->segment(3);
+       $data['gallery'] = $this->Admin_model->get_specific_gallery($id);
+       foreach($data['gallery'] as $d)
+       {
+         $data['galleryname'] = $d->gfolder_name;
+       }
+       $data['galleryid'] = $id;
+       $this->load->view('Admin/admin_header',$header);
+       $this->load->view('Admin/admin_manage_gallery',$data);
+     }
+
   //===============================VIDEOS=======================================//
   function upload_videos()
   {
