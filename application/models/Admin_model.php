@@ -261,6 +261,20 @@ class Admin_model extends CI_Model
   {
     $this->db->delete('tblvideos_folder', array('vfolder_id'=>$id));
   }
+
+  function get_one_video($id)
+  {
+    $this->db->select('video_path,video_name');
+    $this->db->from('tblvideos_content');
+    $this->db->where('video_id',$id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function delete_one_video($id)
+  {
+    $this->db->delete('tblvideos_content', array('video_id'=>$id));    
+  }
 //===================================MESSAGES============================================//
 function get_list_employees()
 {

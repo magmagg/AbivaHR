@@ -24,12 +24,7 @@
                     <div class="inner"><?=$v->vfolder_name?></div>
                   </div>
                 </a>
-                <div class="tools tools-bottom">
-                    <a href="#" onclick="foo(<?=$v->vfolder_id?>)">
-                    <i class="ace-icon fa fa-times red"></i>
-                  </a>
-                </div>
-              </li>
+            </li>
             <?php endforeach;?>
 
             <?php }
@@ -112,32 +107,6 @@
 <!-- inline scripts related to this page -->
 </body>
 
-<script>
-	function foo(id) {
-		swal({
-				title: "Are you sure?",
-				text: "You will not be able to recover this album!",
-				type: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Yes, delete it!",
-				closeOnConfirm: false
-			},
-			function(isConfirm) {
-				if (isConfirm) {
-					$.ajax({
-						type: 'POST',
-						url: "<?php echo base_url();?>Admin/delete_videos_album/" + id,
-						success: function(data) {
-							$('#li' + id).fadeOut('slow', function() {
-              $('#li'+id).remove();
-							});
-							swal("Deleted!", "Album deleted!", "success");
-						}
-					});
-				} else {}
-			});
-	}
-</script>
+
 
 </html>

@@ -58,7 +58,7 @@
 	<div class="col-xs-12">
 		<h3 class="header smaller lighter blue"><?=$galleryname?>
 			<a onclick="foo(<?=$galleryid?>)"><button class="btn btn-danger pull-right">Delete album</button></a>
-      <a href="<?php echo base_url();?>Admin/manage_gallery/<?=$galleryid?>"><button class="btn btn-info pull-right">Manage album</button></a>
+      <a href="<?php echo base_url();?>Admin/manage_videos/<?=$galleryid?>"><button class="btn btn-info pull-right">Manage album</button></a>
       <a href="<?php echo base_url();?>Admin/upload_videos/<?=$galleryid?>"><button class="btn btn-success pull-right">Add Videos</button></a>
 </h3>
 
@@ -205,6 +205,34 @@
 		videojs: true
 	});
 </script>
+
+<script>
+	function foo(id) {
+		swal({
+				title: "Are you sure?",
+				text: "You will not be able to recover this album!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, delete it!",
+				closeOnConfirm: false
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: 'POST',
+						url: "<?php echo base_url();?>Admin/delete_videos_album/" + id,
+						success: function(data)
+            {
+              swal({   title: "Success!",   text: "Redirecting in 2 seconds",   timer: 2000,   imageUrl: "<?php echo base_url();?>/assets/img/loading1.gif",    showConfirmButton: false });
+              setTimeout(function(){ location.href = "<?php echo base_url();?>Admin/videos"; }, 2000);
+						}
+					});
+				} else {}
+			});
+	}
+</script>
+
 </body>
 
 </html>
