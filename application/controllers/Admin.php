@@ -610,6 +610,7 @@ var_dump($error);
        }
        $this->Admin_model->delete_gallery_pictures($id);
        $this->Admin_model->delete_gallery_album($id);
+       redirect('Admin/gallery');
      }
 
      function manage_gallery()
@@ -618,13 +619,39 @@ var_dump($error);
        $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
        $id = $this->uri->segment(3);
        $data['gallery'] = $this->Admin_model->get_specific_gallery($id);
-       foreach($data['gallery'] as $d)
+       if($data['gallery'])
        {
-         $data['galleryname'] = $d->gfolder_name;
+         foreach($data['gallery'] as $d)
+         {
+           $data['galleryname'] = $d->gfolder_name;
+         }
+         $data['galleryid'] = $id;
+         $this->load->view('Admin/admin_header',$header);
+         $this->load->view('Admin/admin_manage_gallery',$data);
        }
-       $data['galleryid'] = $id;
-       $this->load->view('Admin/admin_header',$header);
-       $this->load->view('Admin/admin_manage_gallery',$data);
+       else
+       {
+         redirect('Admin/gallery');
+       }
+     }
+
+     function delete_pictures()
+     {
+       foreach($this->input->post('pictures') as $id)
+       {
+         $data['details'] = $this->Admin_model->get_one_picture($id);
+         foreach($data['details'] as $d)
+         {
+           $path = $d->picture_path;
+           $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $d->picture_path);
+           $ext = pathinfo($d->picture_path, PATHINFO_EXTENSION);
+           $picture_name = $withoutExt.'_thumb.'.$ext;
+           unlink($picture_name);
+           unlink($path);
+         }
+         $this->Admin_model->delete_one_picture_model($id);
+       }
+       redirect('Admin/manage_gallery/'.$this->input->post('return'));
      }
 
   //===============================VIDEOS=======================================//

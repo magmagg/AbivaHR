@@ -83,7 +83,7 @@
 
 					</div>
 				</div>
-					<span class="help-block">*Maximum of 1Gb</span>
+					<span class="help-block">*Maximum of 1Gb each</span>
 
 		</div>
 		<div class="col-md-6">
