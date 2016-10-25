@@ -18,43 +18,6 @@ class Admin_model extends CI_Model
   		$query = $this->db->get();
   		return $query->result();
     }
-
-    //================================DASHBOARD===================================//
-
-    function get_todolist($ID)
-    {
-      $this->db->select('*');
-      $this->db->from('tbltodolist');
-      $this->db->where('todo_employee_id_fk',$ID);
-      $query = $this->db->get();
-      return $query->result();
-    }
-
-    function submit_todolist($data)
-    {
-      $this->db->insert('tbltodolist',$data);
-    }
-
-    function delete_one_todo($ID)
-    {
-      $this->db->delete('tbltodolist', array('todo_id' => $ID));
-    }
-
-    function process_todo($data,$ID)
-    {
-      $this->db->where('todo_id',$ID);
-      $this->db->update('tbltodolist',$data);
-    }
-
-    function todo_check($ID)
-    {
-      $this->db->select('*');
-      $this->db->from('tbltodolist');
-      $this->db->where('todo_id',$ID);
-      $query = $this->db->get();
-      return $query->result();
-    }
-
     //==================================END============================//
 
 
@@ -298,6 +261,20 @@ class Admin_model extends CI_Model
   function delete_video_album($id)
   {
     $this->db->delete('tblvideos_folder', array('vfolder_id'=>$id));
+  }
+
+  function get_one_video($id)
+  {
+    $this->db->select('video_path,video_name');
+    $this->db->from('tblvideos_content');
+    $this->db->where('video_id',$id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function delete_one_video($id)
+  {
+    $this->db->delete('tblvideos_content', array('video_id'=>$id));
   }
 //===================================MESSAGES============================================//
 function get_list_employees()

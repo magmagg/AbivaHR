@@ -38,9 +38,6 @@ class Admin extends CI_Controller
                              'logged_in'=>true
                             );
         }
-
-
-
         $this->session->set_userdata($sessiondata);
       }
       else
@@ -67,44 +64,6 @@ class Admin extends CI_Controller
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_index', $data);
   }
-
-  function submit_todolist()
-  {
-    $data = array(
-                  'todo_title'=>$this->input->post('title'),
-                  'todo_employee_id_fk'=>$this->session->userdata['id'],
-                  'todo_isfinished'=>0
-                );
-
-      $this->Admin_model->submit_todolist($data);
-      redirect(base_url().'Admin');
-
-  }
-
-  function delete_one_todo()
-  {
-    $ID = $this->uri->segment(3);
-    $this->Admin_model->delete_one_todo($ID);
-  }
-
-  function process_todo()
-  {
-    $ID = $this->uri->segment(3);
-
-    $data['details'] = $this->Admin_model->todo_check($ID);
-    foreach($data['details'] as $row)
-    {
-      if($row->todo_isfinished == 1)
-      {
-        $data = array('todo_isfinished'=>0);
-      }else
-      {
-        $data = array('todo_isfinished'=>1);
-      }
-    }
-    $this->Admin_model->process_todo($data,$ID);
-  }
-
   //============================PROFILE===================================//
   function user_profile()
   {
@@ -668,7 +627,7 @@ var_dump($error);
          }
          $data['galleryid'] = $id;
          $this->load->view('Admin/admin_header',$header);
-         $this->load->view('Admin/admin_manage_gallery',$data);
+         $this->load->view('Admin/admin_gallery_manage',$data);
        }
        else
        {
@@ -863,6 +822,61 @@ var_dump($error);
      }
      $this->Admin_model->delete_video($id);
      $this->Admin_model->delete_video_album($id);
+   }
+
+   function manage_videos()
+   {
+     $header['active_head'] = 'gallery';
+     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $id = $this->uri->segment(3);
+     $data['videos'] = $this->Admin_model->get_specific_videos($id);
+     if($data['videos'])
+     {
+       foreach($data['videos'] as $d)
+       {
+         $data['galleryname'] = $d->vfolder_name;
+       }
+       $data['galleryid'] = $id;
+       $this->load->view('Admin/admin_header',$header);
+       $this->load->view('Admin/admin_videos_manage',$data);
+     }
+     else
+     {
+       redirect('Admin/videos');
+     }
+   }
+
+   function delete_one_video()
+   {
+     $id = $this->uri->segment(3);
+     $data['details'] = $this->Admin_model->get_one_video($id);
+     foreach($data['details'] as $d)
+     {
+       $path = $d->video_path;
+       $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $d->video_path);
+        $picture_name = $withoutExt.'.png.';
+     }
+     unlink($picture_name);
+     unlink($path);
+     $this->Admin_model->delete_one_video($id);
+   }
+
+   function delete_videos()
+   {
+     foreach($this->input->post('videos') as $id)
+     {
+       $data['details'] = $this->Admin_model->get_one_video($id);
+       foreach($data['details'] as $d)
+       {
+         $path = $d->video_path;
+         $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $d->video_path);
+          $picture_name = $withoutExt.'.png.';
+          unlink($picture_name);
+          unlink($path);
+       }
+       $this->Admin_model->delete_one_video($id);
+     }
+     redirect('Admin/manage_videos/'.$this->input->post('return'));
    }
 
 
