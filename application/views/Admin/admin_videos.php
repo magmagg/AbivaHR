@@ -17,13 +17,18 @@
               $ext = pathinfo($v->video_path, PATHINFO_EXTENSION);
               $picture_name = $withoutExt.'.png';
               $foldername = 'assets/files/videos/'; ?>
-              <li>
+              <li id="li<?=$v->vfolder_id?>">
                 <a href="<?php echo base_url();?>Admin/view_videos/<?=$v->vfolder_id?>" data-rel="colorbox">
-                  <div style="width:150px; height:150px; background: url(<?php echo base_url().$foldername?><?=str_replace(' ', '%20', $v->vfolder_name)?>/<?=$picture_name?>) no-repeat; background-size:cover; background-position:center;"></div>
+                  <div style="width:150px; height:150px; background: url(<?php echo base_url().$foldername?><?=str_replace(' ', '%20', $v->vfolder_name)?>/<?=str_replace(' ', '%20',$picture_name)?>) no-repeat; background-size:cover; background-position:center;"></div>
                     <div class="text">
                     <div class="inner"><?=$v->vfolder_name?></div>
                   </div>
                 </a>
+                <div class="tools tools-bottom">
+                    <a href="#" onclick="foo(<?=$v->vfolder_id?>)">
+                    <i class="ace-icon fa fa-times red"></i>
+                  </a>
+                </div>
               </li>
             <?php endforeach;?>
 
@@ -98,6 +103,7 @@
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
+<script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 
 <!-- ace scripts -->
 <script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
@@ -105,5 +111,33 @@
 
 <!-- inline scripts related to this page -->
 </body>
+
+<script>
+	function foo(id) {
+		swal({
+				title: "Are you sure?",
+				text: "You will not be able to recover this album!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, delete it!",
+				closeOnConfirm: false
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: 'POST',
+						url: "<?php echo base_url();?>Admin/delete_videos_album/" + id,
+						success: function(data) {
+							$('#li' + id).fadeOut('slow', function() {
+              $('#li'+id).remove();
+							});
+							swal("Deleted!", "Album deleted!", "success");
+						}
+					});
+				} else {}
+			});
+	}
+</script>
 
 </html>

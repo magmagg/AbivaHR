@@ -83,6 +83,7 @@
 					</div>
 				</div>
 
+					<span class="help-block">*Maximum of 1Gb</span>
 		</div>
 
 
@@ -240,12 +241,19 @@
 
 
 				$("#submit-button").click(function(e) {
-					var box1 = $('#autocomplete');
-					var box2 = $('#foldername');
-					box2.val(box1.val());
-					e.preventDefault();
-					e.stopPropagation();
-					myDropzone.processQueue();
+
+					if($.trim($('#autocomplete').val()) == '')
+					{
+					}
+					else
+					{
+						var box1 = $('#autocomplete');
+						var box2 = $('#foldername');
+						box2.val(box1.val());
+						e.preventDefault();
+						e.stopPropagation();
+						myDropzone.processQueue();
+					}
 				});
 
 				// Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead

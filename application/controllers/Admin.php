@@ -497,7 +497,10 @@ var_dump($error);
      {
        $data = array('gfolder_name'=>$gallery);
        $gfolder_id = $this->Admin_model->insert_new_gfolder($data);
-       mkdir( './assets/files/gallery/'.$gallery, 0777, true);
+       if (!file_exists( './assets/files/gallery/'.$gallery))
+       {
+        mkdir( './assets/files/gallery/'.$gallery, 0777, true);
+      }
      }
 
      foreach($_FILES['file']['tmp_name'] as $index => $f)
@@ -535,11 +538,6 @@ var_dump($error);
            $i++;
        }
          $uploadOk = 1;
-     }
-     // Check file size
-     if ($_FILES["file"]["size"][$index] > 500000) {
-         echo "Sorry, your file is too large.";
-         $uploadOk = 0;
      }
      // Check if $uploadOk is set to 0 by an error
      if ($uploadOk == 0) {
@@ -597,6 +595,38 @@ var_dump($error);
        $this->Admin_model->delete_one_picture_model($id);
      }
 
+     function delete_album()
+     {
+       $id = $this->uri->segment(3);
+
+       $data['details'] = $this->Admin_model->get_gallery_by_folder($id);
+       foreach($data['details'] as $d)
+       {
+         unlink($d->picture_path);
+         $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $d->picture_path);
+          $ext = pathinfo($d->picture_path, PATHINFO_EXTENSION);
+          $picture_name = $withoutExt.'_thumb.'.$ext;
+          unlink($picture_name);
+       }
+       $this->Admin_model->delete_gallery_pictures($id);
+       $this->Admin_model->delete_gallery_album($id);
+     }
+
+     function manage_gallery()
+     {
+       $header['active_head'] = 'gallery';
+       $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+       $id = $this->uri->segment(3);
+       $data['gallery'] = $this->Admin_model->get_specific_gallery($id);
+       foreach($data['gallery'] as $d)
+       {
+         $data['galleryname'] = $d->gfolder_name;
+       }
+       $data['galleryid'] = $id;
+       $this->load->view('Admin/admin_header',$header);
+       $this->load->view('Admin/admin_manage_gallery',$data);
+     }
+
   //===============================VIDEOS=======================================//
   function upload_videos()
   {
@@ -636,7 +666,10 @@ var_dump($error);
      {
        $data = array('vfolder_name'=>$videofolder);
        $vfolder_id = $this->Admin_model->insert_new_vfolder($data);
+       if (!file_exists('./assets/files/videos/'.$videofolder))
+       {
        mkdir( './assets/files/videos/'.$videofolder, 0777, true);
+      }
      }
 
      foreach($_FILES['file']['tmp_name'] as $index => $f)
@@ -746,6 +779,24 @@ var_dump($error);
      $this->load->view('Admin/admin_header',$header);
      $this->load->view('Admin/admin_videos_view',$data);
    }
+
+   function delete_videos_album()
+   {
+     $id = $this->uri->segment(3);
+
+     $data['details'] = $this->Admin_model->get_videos_by_folder($id);
+     foreach($data['details'] as $d)
+     {
+       unlink($d->video_path);
+
+       $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $d->video_path);
+       $picture_name = $withoutExt.'.png';
+       unlink($picture_name);
+     }
+     $this->Admin_model->delete_video($id);
+     $this->Admin_model->delete_video_album($id);
+   }
+
 
   //============================ANNOUNCEMEntS===================================//
   function announcements()

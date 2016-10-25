@@ -150,14 +150,14 @@
 		autoProcessQueue: false,
 		uploadMultiple: true,
 		parallelUploads: 100,
-		maxFiles: 100,
+		maxFiles: 1000,
 		addRemoveLinks: true,
 		acceptedFiles: "image/jpeg,image/png,image/gif",
 		previewTemplate: $('#preview-template').html(),
 
 		thumbnailHeight: 120,
 		thumbnailWidth: 120,
-		maxFilesize: 0.5,
+		maxFilesize: 1000,
 
 		//addRemoveLinks : true,
 		//dictRemoveFile: 'Remove',

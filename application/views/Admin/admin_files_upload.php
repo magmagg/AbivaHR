@@ -83,6 +83,7 @@
 
 					</div>
 				</div>
+					<span class="help-block">*Maximum of 1Gb</span>
 
 		</div>
 		<div class="col-md-6">
@@ -183,6 +184,7 @@
 <script src="<?php echo base_url(); ?>assets/js/chosen.jquery.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/jquery.autocomplete.min.js"></script>
+<script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 
 <!-- ace scripts -->
 <script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
@@ -206,7 +208,7 @@
 
 			thumbnailHeight: 120,
 			thumbnailWidth: 120,
-			maxFilesize: 10,
+			maxFilesize: 1000,
 
 			//addRemoveLinks : true,
 			//dictRemoveFile: 'Remove',
@@ -238,12 +240,20 @@
 
 
 				$("#submit-button").click(function(e) {
-					var box1 = $('#autocomplete');
-					var box2 = $('#foldername');
-					box2.val(box1.val());
-					e.preventDefault();
-					e.stopPropagation();
-					myDropzone.processQueue();
+
+					if($( "#form-field-select-3 option:selected" ).text("") && $.trim($('#autocomplete').val()) == '')
+					{
+					sweetAlert("Error", "Please input Department and/or Foldername", "error");
+					}
+					else
+					{
+						var box1 = $('#autocomplete');
+						var box2 = $('#foldername');
+						box2.val(box1.val());
+						e.preventDefault();
+						e.stopPropagation();
+						myDropzone.processQueue();
+					}
 				});
 
 				// Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
