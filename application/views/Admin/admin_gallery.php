@@ -4,6 +4,12 @@
 
 		<h3 class="header smaller lighter blue">Albums</h3>
 
+    <?php
+        if(!empty($gallery))
+           {
+
+             ?>
+
 					<ul class="ace-thumbnails clearfix">
             <?php foreach($gallery as $g): ?>
               <?php
@@ -26,6 +32,18 @@
 
               </li>
             <?php endforeach;?>
+
+            <?php }
+                    else
+                    {
+                      ?>
+                       <p class="alert alert-danger">
+                         No pictures to show.
+                      </p>
+
+                  <?php
+                    }
+                    ?>
 
 					</ul>
 				</div><!-- PAGE CONTENT ENDS -->

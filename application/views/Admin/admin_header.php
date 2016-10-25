@@ -241,31 +241,23 @@
 
 					<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-							<button class="btn btn-success">
-								<i class="ace-icon fa fa-signal"></i>
-							</button>
+								<a class="btn btn-success" href="<?php echo base_url();?>Admin/announcements"> <i class="ace-icon fa fa-bullhorn"></i> </a>
 
-							<button class="btn btn-info">
-								<i class="ace-icon fa fa-pencil"></i>
-							</button>
+								<a class="btn btn-info" href="<?php echo base_url();?>Admin/messages"> <i class="ace-icon fa fa-envelope-o"></i> </a>
 
-							<button class="btn btn-warning">
-								<i class="ace-icon fa fa-users"></i>
-							</button>
+								<a class="btn btn-warning" href="<?php echo base_url();?>Admin/upload_files"> <i class="ace-icon fa fa-file"></i> </a>
 
-							<button class="btn btn-danger">
-								<i class="ace-icon fa fa-cogs"></i>
-							</button>
+								<a class="btn btn-danger" href="<?php echo base_url();?>Admin/gallery"> <i class="ace-icon fa fa-picture-o"></i> </a>
 						</div>
 
 						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-							<span class="btn btn-success"></span>
+							<a class="btn btn-success" href="<?php echo base_url();?>Admin/announcements"> <i class="ace-icon fa fa-bullhorn"></i> </a>
 
-							<span class="btn btn-info"></span>
+							<a class="btn btn-info" href="<?php echo base_url();?>Admin/messages"> <i class="ace-icon fa fa-envelope-o"></i> </a>
 
-							<span class="btn btn-warning"></span>
+							<a class="btn btn-warning" href="<?php echo base_url();?>Admin/upload_files"> <i class="ace-icon fa fa-file"></i> </a>
 
-							<span class="btn btn-danger"></span>
+							<a class="btn btn-danger" href="<?php echo base_url();?>Admin/gallery"> <i class="ace-icon fa fa-picture-o"></i> </a>
 						</div>
 					</div><!-- /.sidebar-shortcuts -->
 

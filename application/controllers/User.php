@@ -228,17 +228,22 @@ class User extends CI_Controller
       }
 
       function change_password()
-    	{
-    		$data['password'] = $this->User_model->check_password($this->input->post('userid'));
-    		if($data['password'])
-    		{
-    			foreach($data['password'] as $h)
-    			{
-    				$hash = $h->user_password;
-    			}
+      {
+        $data['password'] = $this->User_model->check_password($this->input->post('userid'));
+        if($data['password'])
+        {
+          foreach($data['password'] as $h)
+          {
+            $hash = $h->user_password;
+          }
 
-    				if (password_verify($this->input->post('oldpassword'), $hash))
-    				{
+          if ($this->input->post('oldpassword')==$this->input->post('newpassword'))
+          {
+            echo 2;
+          }
+          else {
+            if (password_verify($this->input->post('oldpassword'), $hash))
+            {
 
               $id = $this->input->post('userid');
               $data = array('user_password'=>password_hash($this->input->post('newpassword'), PASSWORD_DEFAULT));
@@ -246,10 +251,13 @@ class User extends CI_Controller
               $this->User_model->update_password($data,$id);
 
               echo 1;
-    	       }else
+             }else
               {
                 echo 0;
-          		}
+              }
+          }
+
+
     	}
 
   }

@@ -77,16 +77,15 @@
 													</a>
 
 													<div class="profile-social-links align-center">
-
-														<a href="#" class="tooltip-info"  title="" data-original-title="<?php echo $Linkedin?>">
-															<i class="middle ace-icon fa fa-linkedin-square fa-2x blue"></i>
-														</a>
-
-														<a href="#" class="tooltip-error"  title=""  data-original-title="<?php echo $Google?>">
+														<a href="#" class="tooltip-error" title="" data-original-title="Visit my Google Plus">
 															<i class="middle ace-icon fa fa-google-plus fa-2x red "></i>
 														</a>
 
-														<a href="#" class="tooltip-info" title="" data-original-title="<?php echo $Wordpress?>">
+														<a href="#" class="tooltip-info" title="" data-original-title="Visit my Linkedin">
+															<i class="middle ace-icon fa fa-linkedin-square fa-2x blue"></i>
+														</a>
+
+														<a href="#" class="tooltip-info" title="" data-original-title="Visit my Wordpress">
 															<i class="middle ace-icon fa fa-wordpress fa-2x blue"></i>
 														</a>
 													</div>
@@ -211,14 +210,14 @@
 																Basic Info
 															</a>
 														</li>
-
+														<!--
 														<li>
 															<a data-toggle="tab" href="#edit-settings">
 																<i class="purple ace-icon fa fa-cog bigger-125"></i>
 																Settings
 															</a>
 														</li>
-
+														-->
 														<li>
 															<a data-toggle="tab" href="#edit-password">
 																<i class="blue ace-icon fa fa-key bigger-125"></i>
@@ -392,7 +391,7 @@
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input type="text" name="googleplus" value="<?php echo $Google?>"/>
+																		<input type="text" name="googleplus"  value="<?php echo $Google?>"/>
 																		<i class="ace-icon fa fa-google-plus red"></i>
 																	</span>
 																</div>
@@ -405,7 +404,7 @@
 
 																<div class="col-sm-9">
 																	<span class="input-icon input-icon-right">
-																		<input type="text" name="linkedin"  value="<?php echo $Linkedin?>"/>
+																		<input type="text" name="linkedin" value="<?php echo $Linkedin?>"/>
 																		<i class="ace-icon fa fa-linkedin blue "></i>
 																	</span>
 																</div>
@@ -523,7 +522,7 @@
 																	</button>
 
 																	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-																	<button class="btn btn-lg btn-white primary" type="reset">
+																	<button class="btn btn-lg btn-white primary" type="reset" id="resetpassword">
 																		<i class="ace-icon fa fa-undo bigger-110"></i>
 																		Reset
 																	</button>
@@ -675,7 +674,7 @@
 											confirmButtonText: "Ok"
 										},
 										function() {
-											window.location.href = "<?php echo base_url();?>User/user_profile";
+											window.location.href = "<?php echo base_url();?>Admin/user_profile";
 										});
 								} else {
 									swal({
@@ -747,19 +746,29 @@
 									$("#submit_password").html('Save');
 									if(data == 1)
 									{
+
+								    document.getElementById("resetpassword").click();
 										swal({
 											title: "Success!!",
 											text: "Password has been updated!",
 											type: "success",
 											confirmButtonText: "Ok" });
 									}
-									else
+									else if(data == 0)
 									{
 											swal({
 												title: "Error!!",
 												text: "Wrong password!",
 												type: "error",
 												confirmButtonText: "Ok" });
+									}
+									else if (data == 2)
+									{
+										swal({
+											title: "Error!!",
+											text: "New password cannot be the same as old password!",
+											type: "error",
+											confirmButtonText: "Ok" });
 									}
 							}
 					});

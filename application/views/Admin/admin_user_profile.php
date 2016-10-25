@@ -708,7 +708,7 @@
 					newpassword: {
 						required: true,
 						minlength: 5,
-						
+
 					},
 					cpassword: {
 						required: true,
@@ -746,7 +746,7 @@
 									$("#submit_password").html('Save');
 									if(data == 1)
 									{
-										
+
 								    document.getElementById("resetpassword").click();
 										swal({
 											title: "Success!!",
@@ -754,13 +754,21 @@
 											type: "success",
 											confirmButtonText: "Ok" });
 									}
-									else
+									else if(data == 0)
 									{
 											swal({
 												title: "Error!!",
 												text: "Wrong password!",
 												type: "error",
 												confirmButtonText: "Ok" });
+									}
+									else if (data == 2)
+									{
+										swal({
+											title: "Error!!",
+											text: "New password cannot be the same as old password!",
+											type: "error",
+											confirmButtonText: "Ok" });
 									}
 							}
 					});

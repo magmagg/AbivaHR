@@ -4,6 +4,12 @@
 
 		<h3 class="header smaller lighter blue">Video albums</h3>
 
+    <?php
+        if(!empty($videos))
+           {
+
+             ?>
+
 					<ul class="ace-thumbnails clearfix">
             <?php foreach($videos as $v): ?>
               <?php
@@ -25,6 +31,18 @@
                 </div>
               </li>
             <?php endforeach;?>
+
+            <?php }
+                    else
+                    {
+                      ?>
+                       <p class="alert alert-danger">
+                         No videos to show.
+                      </p>
+
+                  <?php
+                    }
+                    ?>
 
 					</ul>
 				</div><!-- PAGE CONTENT ENDS -->
