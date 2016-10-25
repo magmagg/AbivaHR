@@ -199,12 +199,6 @@
 								</a>
 
 								<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-									<li>
-										<a href="#">
-											<i class="ace-icon fa fa-cog"></i>
-											Settings
-										</a>
-									</li>
 
 									<li>
 										<a href="<?php echo base_url();?>Admin/user_profile">
@@ -262,6 +256,13 @@
 					</div><!-- /.sidebar-shortcuts -->
 
 					<ul class="nav nav-list">
+						<li class="<?= ($active_page == 'index') ? 'active':''; ?>">
+							<a href="<?php echo base_url();?>User/index">
+								<i class="menu-icon fa fa-dashboard"></i>
+								<span class="menu-text"> Dashboard </span>
+							</a>
+						</li>
+						
 						<li class="<?= ($active_page == 'user_profile') ? 'active':''; ?>">
 							<a href="<?php echo base_url();?>Admin/user_profile">
 								<i class="menu-icon fa fa-user"></i>

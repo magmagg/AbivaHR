@@ -197,12 +197,6 @@
 								</a>
 
 								<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-									<li>
-										<a href="#">
-											<i class="ace-icon fa fa-cog"></i>
-											Settings
-										</a>
-									</li>
 
 									<li>
 										<a href="<?php echo base_url();?>User/user_profile">
@@ -267,8 +261,7 @@
 								<span class="menu-text"> Dashboard </span>
 							</a>
 						</li>
-
-					<ul class="nav nav-list">
+						
 						<li class="<?= ($active_page == 'user_profile') ? 'active':''; ?>">
 							<a href="<?php echo base_url();?>User/user_profile">
 								<i class="menu-icon fa fa-user"></i>
