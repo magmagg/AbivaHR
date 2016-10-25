@@ -333,12 +333,15 @@ function do_Upload_gallery()
    {
      $data = array('gfolder_name'=>$gallery);
      $gfolder_id = $this->User_model->insert_new_gfolder($data);
-     mkdir( getcwd().'\\assets\\files\\gallery\\'.$gallery, 0777, true);
+     if (!file_exists( './assets/files/gallery/'.$gallery))
+     {
+      mkdir( './assets/files/gallery/'.$gallery, 0777, true);
+    }
    }
 
    foreach($_FILES['file']['tmp_name'] as $index => $f)
    {
-   $target_dir =  getcwd().'\\assets\\files\\gallery\\'.$gallery."\\";
+   $target_dir =  './assets/files/gallery/'.$gallery."/";
    $target_file = $target_dir . basename($_FILES["file"]["name"][$index]);
    $uploadOk = 1;
    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -432,6 +435,7 @@ function do_Upload_gallery()
      unlink($path);
      $this->User_model->delete_one_picture_model($id);
    }
+
 
    //===============================VIDEOS=======================================//
    function upload_videos()

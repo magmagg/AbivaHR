@@ -166,6 +166,25 @@ class Admin_model extends CI_Model
     $this->db->delete('tblgallery_pictures', array('picture_id'=>$id));
   }
 
+  function get_gallery_by_folder($id)
+  {
+    $this->db->select('picture_path');
+    $this->db->from('tblgallery_pictures');
+    $this->db->where('gfolder_id_fk',$id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function delete_gallery_pictures($id)
+  {
+    $this->db->delete('tblgallery_pictures', array('gfolder_id_fk'=>$id));
+  }
+
+  function delete_gallery_album($id)
+  {
+    $this->db->delete('tblgallery_folder', array('gfolder_id'=>$id));
+  }
+
   //=================================VIDEOS===============================//
   function get_videos_folder()
   {
@@ -222,6 +241,25 @@ class Admin_model extends CI_Model
     $this->db->where('f.vfolder_id',$id);
     $query = $this->db->get();
     return $query->result();
+  }
+
+  function get_videos_by_folder($id)
+  {
+    $this->db->select('video_path,video_name');
+    $this->db->from('tblvideos_content');
+    $this->db->where('vfolder_id_fk',$id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function delete_video($id)
+  {
+    $this->db->delete('tblvideos_content', array('vfolder_id_fk'=>$id));
+  }
+
+  function delete_video_album($id)
+  {
+    $this->db->delete('tblvideos_folder', array('vfolder_id'=>$id));
   }
 //===================================MESSAGES============================================//
 function get_list_employees()

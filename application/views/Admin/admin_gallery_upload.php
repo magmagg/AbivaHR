@@ -24,6 +24,7 @@
 				</div>
 			<?php endif;?>
 
+				<span class="help-block">*Maximum of 1Gb</span>
 			<div class="col-md-offset-3 col-md-9">
 				<button class="btn btn-info pull-right" type="submit" id="submit-button">
 					<i class="ace-icon fa fa-check bigger-110"></i> Submit
@@ -150,14 +151,14 @@
 		autoProcessQueue: false,
 		uploadMultiple: true,
 		parallelUploads: 100,
-		maxFiles: 100,
+		maxFiles: 1000,
 		addRemoveLinks: true,
 		acceptedFiles: "image/jpeg,image/png,image/gif",
 		previewTemplate: $('#preview-template').html(),
 
 		thumbnailHeight: 120,
 		thumbnailWidth: 120,
-		maxFilesize: 0.5,
+		maxFilesize: 1000,
 
 		//addRemoveLinks : true,
 		//dictRemoveFile: 'Remove',

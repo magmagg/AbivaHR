@@ -11,13 +11,19 @@
               $ext = pathinfo($g->picture_path, PATHINFO_EXTENSION);
               $picture_name = $withoutExt.'_thumb.'.$ext;
               $foldername = 'assets/files/gallery/'; ?>
-              <li>
+              <li id="li<?=$g->gfolder_id?>">
                 <a href="<?php echo base_url();?>Admin/view_gallery/<?=$g->gfolder_id?>" data-rel="colorbox">
                   <div style="width:150px; height:150px; background: url(<?php echo base_url().$foldername?><?=str_replace(' ', '%20', $g->gfolder_name)?>/<?=$picture_name?>) no-repeat; background-size:cover; background-position:center;"></div>
                     <div class="text">
                     <div class="inner"><?=$g->gfolder_name?></div>
                   </div>
                 </a>
+                <div class="tools tools-bottom">
+										<a href="#" onclick="foo(<?=$g->gfolder_id?>)">
+										<i class="ace-icon fa fa-times red"></i>
+									</a>
+								</div>
+
               </li>
             <?php endforeach;?>
 
@@ -80,6 +86,7 @@
 <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
 <!-- page specific plugin scripts -->
+<script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 
 <!-- ace scripts -->
 <script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
@@ -87,5 +94,33 @@
 
 <!-- inline scripts related to this page -->
 </body>
+
+<script>
+	function foo(id) {
+		swal({
+				title: "Are you sure?",
+				text: "You will not be able to recover this album!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, delete it!",
+				closeOnConfirm: false
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: 'POST',
+						url: "<?php echo base_url();?>Admin/delete_album/" + id,
+						success: function(data) {
+							$('#li' + id).fadeOut('slow', function() {
+              $('#li'+id).remove();
+							});
+							swal("Deleted!", "Album deleted!", "success");
+						}
+					});
+				} else {}
+			});
+	}
+</script>
 
 </html>
