@@ -24,7 +24,7 @@
 				</div>
 			<?php endif;?>
 
-				<span class="help-block">*Maximum of 1Gb</span>
+				<span class="help-block">*Maximum of 1Gb each</span>
 			<div class="col-md-offset-3 col-md-9">
 				<button class="btn btn-info pull-right" type="submit" id="submit-button">
 					<i class="ace-icon fa fa-check bigger-110"></i> Submit

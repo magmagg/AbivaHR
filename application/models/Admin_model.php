@@ -154,7 +154,7 @@ class Admin_model extends CI_Model
 
   function get_one_picture($id)
   {
-      $this->db->select('picture_path');
+      $this->db->select('picture_path,picture_name');
       $this->db->from('tblgallery_pictures');
       $this->db->where('picture_id',$id);
       $query = $this->db->get();

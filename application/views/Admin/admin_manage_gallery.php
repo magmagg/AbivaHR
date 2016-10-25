@@ -2,9 +2,11 @@
     <div class="col-xs-12">
         <div>
 
-            <h3 class="header smaller lighter blue">Manage <?=$galleryname?></h3>
+            <h3 class="header smaller lighter blue">Manage <?=$galleryname?><button id="submit_form" class="btn btn-danger pull-right">Delete</button></a></h3>
 
+                             <form method="POST" action="<?php echo base_url();?>Admin/delete_pictures" id="delete_pictures" >
             <ul class="ace-thumbnails clearfix">
+
                 <?php foreach($gallery as $g): ?>
                 <?php
               $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $g->picture_name);
@@ -16,7 +18,8 @@
                         <div class="text">
                         </div>
                         <center>
-                            <input type="checkbox" name="vehicle" value="<?=$g->picture_id?>">
+                            <input type="checkbox" name="pictures[]" id="c_b" value="<?=$g->picture_id?>">
+                            <input type="hidden" name="return" value="<?=$galleryid?>">
                         </center>
                         <div class="tools tools-top">
                             <a href="#" onclick="foo(<?=$g->picture_id?>)">
@@ -26,7 +29,7 @@
 
                     </li>
                     <?php endforeach;?>
-
+                  </form>
             </ul>
         </div>
         <!-- PAGE CONTENT ENDS -->
@@ -122,6 +125,27 @@
                 } else {}
             });
     }
+</script>
+
+<script>
+$( "#submit_form" ).click(function()
+{
+  swal({
+          title: "Are you sure?",
+          text: "You will not be able to recover deleted pictures!",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Yes, delete it!",
+          closeOnConfirm: false
+      },
+      function(isConfirm) {
+          if (isConfirm) {
+
+            $( "#delete_pictures" ).submit();
+          } else {}
+      });
+});
 </script>
 
 </html>

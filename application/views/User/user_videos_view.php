@@ -1,3 +1,59 @@
+<style>
+.thumbnail {
+    width: 320px;
+    height: 240px;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+}
+
+.image img {
+    -webkit-transition: all 0.5s ease; /* Safari and Chrome */
+    -moz-transition: all 0.5s ease; /* Firefox */
+    -ms-transition: all 0.5s ease; /* IE 9 */
+    -o-transition: all 0.5s ease; /* Opera */
+    transition: all 0.5s ease;
+}
+
+.image:hover img {
+    -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+
+     	opacity: .7;
+     	-o-transition-duration: 1s;
+     	-moz-transition-duration: 1s;
+     	-webkit-transition: -webkit-transform 1s;
+     	-webkit-box-shadow: 0px 0px 4px #000;
+     	-moz-box-shadow: 0px 0px 4px #000;
+     	box-shadow: 0px 0px 4px #000;
+}
+
+.lg-backdrop.in {
+    opacity: 0.85;
+}
+.fixed-size.lg-outer .lg-inner {
+  background-color: #FFF;
+}
+.fixed-size.lg-outer .lg-sub-html {
+  position: absolute;
+  text-align: left;
+}
+.fixed-size.lg-outer .lg-toolbar {
+  background-color: transparent;
+  height: 0;
+}
+.fixed-size.lg-outer .lg-toolbar .lg-icon {
+  color: #FFF;
+}
+.fixed-size.lg-outer .lg-img-wrap {
+  padding: 12px;
+}
+</style>
 <div class="row">
 	<div class="col-xs-12">
 		<h3 class="header smaller lighter blue"><?=$galleryname?><a href="<?php echo base_url();?>User/upload_videos/<?=$galleryid?>"><button class="btn btn-success pull-right">Add Videos</button></a>
@@ -34,7 +90,7 @@
 						      $videothumb = base_url().$foldername.str_replace(' ', '%20', $g->vfolder_name).'/'.$picture_name;
 						      ?>
 					<span class="rollover"></span>
-					<a class="item" data-poster="<?=$videothumb?>" data-sub-html="video caption1" data-html="#video<?=$i?>">
+					<a class="item image" data-poster="<?=$videothumb?>" data-sub-html="video caption1" data-html="#video<?=$i?>">
 													<img src="<?=$videothumb?>" />	</a>
 					<?php $i++;?>
 					<?php endforeach;?>
