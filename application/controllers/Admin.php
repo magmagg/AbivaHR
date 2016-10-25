@@ -38,9 +38,6 @@ class Admin extends CI_Controller
                              'logged_in'=>true
                             );
         }
-
-
-
         $this->session->set_userdata($sessiondata);
       }
       else
@@ -49,7 +46,7 @@ class Admin extends CI_Controller
       }
     }
   }
-
+//========================DASHBOARD=====================//
   function index()
   {
     $header['active_head'] = '';
@@ -61,8 +58,48 @@ class Admin extends CI_Controller
         type: 'success'
     	});
     </script>");
+    $ID = $this->session->userdata['id'];
+    $data['todolist'] = $this->Admin_model->get_todolist($ID);
+
     $this->load->view('Admin/admin_header',$header);
-    $this->load->view('Admin/admin_index');
+    $this->load->view('Admin/admin_index', $data);
+  }
+
+  function submit_todolist()
+  {
+    $data = array(
+                  'todo_title'=>$this->input->post('title'),
+                  'todo_employee_id_fk'=>$this->session->userdata['id'],
+                  'todo_isfinished'=>0
+                );
+
+      $this->Admin_model->submit_todolist($data);
+      redirect(base_url().'Admin');
+
+  }
+
+  function delete_one_todo()
+  {
+    $ID = $this->uri->segment(3);
+    $this->Admin_model->delete_one_todo($ID);
+  }
+
+  function process_todo()
+  {
+    $ID = $this->uri->segment(3);
+
+    $data['details'] = $this->Admin_model->todo_check($ID);
+    foreach($data['details'] as $row)
+    {
+      if($row->todo_isfinished == 1)
+      {
+        $data = array('todo_isfinished'=>0);
+      }else
+      {
+        $data = array('todo_isfinished'=>1);
+      }
+    }
+    $this->Admin_model->process_todo($data,$ID);
   }
   //============================PROFILE===================================//
   function user_profile()
