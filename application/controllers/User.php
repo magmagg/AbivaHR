@@ -384,10 +384,6 @@ function do_Upload_gallery()
        $uploadOk = 1;
    }
    // Check file size
-   if ($_FILES["file"]["size"][$index] > 500000) {
-       echo "Sorry, your file is too large.";
-       $uploadOk = 0;
-   }
    // Check if $uploadOk is set to 0 by an error
    if ($uploadOk == 0) {
        echo "Sorry, your file was not uploaded.";
