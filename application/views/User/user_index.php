@@ -2,7 +2,7 @@
 .place {background-color: #336699; }
 .place:hover, .place.gray
 {
-	background-color: #bdc3c7;
+	background-color: #DADFE1;
 	text-decoration:line-through;
 }
 #result_location span {
@@ -14,6 +14,7 @@
 	<div class="col-xs-12">
 		<!-- PAGE CONTENT BEGINS -->
 		<div class="col-xs-8">
+			<div class="widget-box">
 			<div class="widget-body">
 				<div class="widget-main padding-4">
 					<div class="tab-content padding-8">
@@ -89,6 +90,7 @@
 				</div>
 			</div>
     </div>
+	</div>
 
 		<div class="row">
 									<div class="col-sm-4">
