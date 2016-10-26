@@ -288,7 +288,38 @@ class Admin extends CI_Controller
                 );
 
     $this->Admin_model->submit_one_message($data, $id);
+  }
 
+  function test_message()
+  {
+    $header['active_head'] = 'messages';
+    $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $data['messages'] = $this->Admin_model->get_all_messages();
+    $this->load->view('Admin/admin_header',$header);
+    $this->load->view('Admin/admin_messages_test',$data);
+  }
+
+  function send_message()
+  {
+		$arr['name'] = $this->input->post('name');
+		$arr['email'] = $this->input->post('email');
+		$arr['subject'] = $this->input->post('subject');
+		$arr['message'] = $this->input->post('message');
+
+		$this->db->insert('message',$arr);
+		$detail = $this->db->select('*')->from('message')->where('id',$this->db->insert_id())->get()->row();
+		$arr['name'] = $detail->name;
+		$arr['email'] = $detail->email;
+		$arr['subject'] = $detail->subject;
+		$arr['created_at'] = $detail->created_at;
+		$arr['message'] = $detail->message;
+		$arr['id'] = $detail->id;
+		$arr['new_count_message'] = $this->db->where('read_status',0)->count_all_results('message');
+		$arr['success'] = true;
+		$arr['notif'] = '<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 alert alert-success" role="alert"> <i class="fa fa-check"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Message sent ...</div>';
+
+
+		echo json_encode($arr);
   }
 
   //============================EMPLOYEES===================================//

@@ -160,11 +160,7 @@
 																		</div>
 																	</div>
 																</div>
-
-
-=======
-								<iframe src="" frameborder="0" height="450" scrolling="no" width="720" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
->>>>>>> 03eec5459b054008c90ebd69eb4af270168a9b13
+									
 									<!-- PAGE CONTENT ENDS -->
 							</div><!-- /.col -->
 						</div><!-- /.row -->
