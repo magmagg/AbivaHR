@@ -335,6 +335,14 @@ function get_thread_number()
     return $this->db->insert_id();
   }
 
+  function get_all_messages()
+  {
+    $this->db->select('*');
+    $this->db->from('message');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
 //===================================EMPLOYEES============================================//
 
 function get_employees()
