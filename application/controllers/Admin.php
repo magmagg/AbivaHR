@@ -537,11 +537,12 @@ var_dump($error);
      {
        $data = array('gfolder_name'=>$gallery);
        $gfolder_id = $this->Admin_model->insert_new_gfolder($data);
-       if (!file_exists( './assets/files/gallery/'.$gallery))
-       {
-        mkdir( './assets/files/gallery/'.$gallery, 0777, true);
-      }
      }
+
+     if (!file_exists( './assets/files/gallery/'.$gallery))
+     {
+      mkdir( './assets/files/gallery/'.$gallery, 0777, true);
+    }
 
      foreach($_FILES['file']['tmp_name'] as $index => $f)
      {
@@ -733,11 +734,13 @@ var_dump($error);
      {
        $data = array('vfolder_name'=>$videofolder);
        $vfolder_id = $this->Admin_model->insert_new_vfolder($data);
-       if (!file_exists('./assets/files/videos/'.$videofolder))
-       {
-       mkdir( './assets/files/videos/'.$videofolder, 0777, true);
-      }
+
      }
+
+     if (!file_exists('./assets/files/videos/'.$videofolder))
+     {
+     mkdir( './assets/files/videos/'.$videofolder, 0777, true);
+    }
 
      foreach($_FILES['file']['tmp_name'] as $index => $f)
      {

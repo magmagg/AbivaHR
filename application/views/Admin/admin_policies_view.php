@@ -12,7 +12,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>ID</th>
+                    <th>Page</th>
                     <th>Action</th>
                 </tr>
             </thead>
