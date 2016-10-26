@@ -31,7 +31,7 @@
 
 																<ul class="item-orange clearfix">
 																	<label class="inline">
-																		<input type="text" name="title" class="ace" />
+																		<input type="text" name="title" class="ace" required/>
 																		<span class="lbl"> Add task</span>
 																	</label>
 
@@ -45,7 +45,7 @@
 															<?php if($l->todo_isfinished == 0):		?>
 
 														<ul id="tasks" class="item-list">
-															<li class="item-red clearfix place" id="todo<?=$l->todo_id?>">
+															<li class="item-green clearfix place" id="todo<?=$l->todo_id?>">
 																<label class="inline">
 																	<div id="result_location" class="todo<?=$l->todo_id?>">
 																	<div class="lbl" id="toggle<?=$l->todo_id?>"> <?=$l->todo_title?>
@@ -220,6 +220,9 @@
 		<script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/ace.min.js"></script>
 
+		<script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
+		<script src="<?php echo base_url();?>assets/js/jquery.validate.min.js"></script>
+
 		<!-- inline scripts related to this page -->
 		<script>
 		$( document ).ready(function() {
@@ -278,6 +281,5 @@
 					});
 			}
 		</script>
-		<?=$this->session->flashdata('notify');?>
 	</body>
 </html>

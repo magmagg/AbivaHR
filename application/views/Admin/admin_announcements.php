@@ -37,10 +37,10 @@
 							<?=$a->ann_timestamp?>
 						</td>
 						<td>
-									<button class="btn btn-block btn-white btn-info editmodalshow" onclick="editModal(<?=$a->ann_id?>)" ><i class="ace-icon fa fa-pencil bigger-120"></i></button>
+									<button class="btn btn-block btn-info editmodalshow" onclick="editModal(<?=$a->ann_id?>)" ><i class="ace-icon fa fa-pencil bigger-120"></i></button>
 						</td>
 						<td>
-							<button class="btn btn-block btn-white btn-danger" onclick="foo(<?=$a->ann_id?>)"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>
+							<button class="btn btn-block btn-danger" onclick="foo(<?=$a->ann_id?>)"><i class="ace-icon fa fa-trash-o bigger-120"></i></button>
 						</td>
 					</tr>
 
@@ -203,8 +203,8 @@ $(".js-example-placeholder-single").select2({
 						$("#post_button").html('Posting<img width="30" height="20" src="<?php echo base_url();?>assets/img/myloading.gif"> ');
 					},
 					success: function(data) {
-						var editButton = "<button class=\"btn btn-block btn-white btn-info editmodalshow\" onclick=\"editModal("+data.ann_id+")\"><i class=\"ace-icon fa fa-pencil bigger-120\"></i></button>";
-						var deleteButton = "<button class=\"btn btn-block btn-white btn-danger\"  onclick=\"foo(" + data.ann_id + ")\"><i class=\"ace-icon fa fa-trash-o bigger-120\"></i></button>";
+						var editButton = "<button class=\"btn btn-block btn-info editmodalshow\" onclick=\"editModal("+data.ann_id+")\"><i class=\"ace-icon fa fa-pencil bigger-120\"></i></button>";
+						var deleteButton = "<button class=\"btn btn-block btn-danger\"  onclick=\"foo(" + data.ann_id + ")\"><i class=\"ace-icon fa fa-trash-o bigger-120\"></i></button>";
 						$("#post_button").html('Post');
 						var MyUniqueID = data.ann_id; // this is the uniqueId.
 						var rowIndex = $('#dataTables-example').dataTable().fnAddData([

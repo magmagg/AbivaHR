@@ -33,8 +33,8 @@
                                 <option value="<?=$d->department_id?>"> <?=$d->department_name;?> </option>
                                 <?php endforeach; ?>
                             </select>
-                            <input type="button" name="Button" class="btn-success" value="All" id="selectall"/>
-                            <input type="button" name="Button" class="btn-danger" value="Clear" id="selectnone"/>
+                            <input type="button" name="Button" class="btn btn-minier btn-success" value="All" id="selectall"/>
+                            <input type="button" name="Button" class="btn btn-minier btn-danger" value="Clear" id="selectnone"/>
                         </div>
                     </div>
             </div>

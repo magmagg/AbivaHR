@@ -3,7 +3,6 @@
 		<!-- PAGE CONTENT BEGINS -->
 		<div class="panel-heading">
 			<h3 class="header smaller lighter blue">
-        <i class="ace-icon fa fa-bullhorn blue"></i>
         Announcements
       </h3>
 		</div>

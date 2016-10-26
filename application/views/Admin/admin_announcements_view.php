@@ -24,7 +24,7 @@
               <?=$d->department_name?>
           </td>
           <td>
-                <button class="btn btn-block btn-white btn-success" onclick="location.href='<?php echo base_url();?>Admin/view_announcements_by_dept/<?=$d->department_id?>'"><i class="ace-icon fa fa-eye bigger-120"></i></button>
+                <button class="btn btn-block btn-success" onclick="location.href='<?php echo base_url();?>Admin/view_announcements_by_dept/<?=$d->department_id?>'"><i class="ace-icon fa fa-eye bigger-120"></i></button>
           </td>
         </tr>
 

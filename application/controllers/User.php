@@ -132,6 +132,7 @@ class User extends CI_Controller
       $googleplus = $this->input->post('googleplus');
       $linkedin = $this->input->post('linkedin');
       $wordpress = $this->input->post('wordpress');
+      $picture = $this->input->post('display_pic');
 
       $check = $this->input->post('check');
 
@@ -191,7 +192,7 @@ class User extends CI_Controller
 
                 $success = array('upload_data' => $this->upload->data());
 
-                $data = array('user_username'=>$username,
+                $data = array('user_username'=>$uname,
                               'user_firstname'=>$firstname,
                               'user_middlename'=>$middlename,
                               'user_lastname'=>$lastname,
@@ -207,11 +208,9 @@ class User extends CI_Controller
                               'user_picture'=>$success['upload_data']['full_path']
                             );
 
-                            $remove = getcwd();
-                            if (strpos($success['upload_data']['full_path'], $remove) === 0)
-                             {
-                                $picture = substr($success['upload_data']['full_path'], strlen($remove));
-                              }
+                            $add = '/assets/files/profile_pictures/';
+                            $picture = $add.$success['upload_data']['raw_name'].$success['upload_data']['file_ext'];
+
 
                             $this->session->set_userdata('username',$username);
                             $this->session->set_userdata('firstname',$firstname);
