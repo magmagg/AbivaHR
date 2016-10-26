@@ -116,7 +116,60 @@
 <script src="<?php echo base_url(); ?>assets/js/ace.min.js"></script>
 
 <!-- inline scripts related to this page -->
+<script>
+$(document).ready(function() {
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+			var dataString = {
+				sender_id: $("#sender_id").val(),
+				receiver_id: $("#receiver_id").val(),
+				message: $("#message").val()
+			};
 
+			console.log(dataString);
+			$.ajax({
+				type: "POST",
+				url: "<?php echo base_url('Chat/send_message');?>",
+				data: dataString,
+				dataType: "json",
+				cache: false,
+				success: function(data) {
+					$("#message").val('');
+					if (data.success == true) {
+
+						$("#notif").html(data.notif);
+
+						var socket = io.connect('http://' + window.location.hostname + ':3000');
+
+						socket.emit('new_count_message', {
+							new_count_message: data.new_count_message
+						});
+
+						socket.emit('new_message', {
+							sender_id: data.sender_id,
+							receiver_id: data.receiver_id,
+							created_at: data.created_at,
+							message: data.message,
+							user_picture: data.user_picture
+						});
+
+					} else if (data.success == false) {
+						$("#message").val(data.message);
+
+					}
+
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+				},
+
+			});
+      return false;
+    }
+  });
+});
+</script>
 <script>
 function load_socket()
 {
