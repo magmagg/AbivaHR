@@ -27,12 +27,11 @@ io.on('connection', function (socket) {
 
   socket.on( 'new_message', function( data ) {
     io.sockets.emit( 'new_message', {
-    	name: data.name,
-    	email: data.email,
-    	subject: data.subject,
+    	sender_id: data.sender_id,
+    	receiver_id: data.receiver_id,
     	created_at: data.created_at,
-    	id: data.id,
-      message: data.message
+      message: data.message,
+      user_picture: data.user_picture
     });
   });
 
