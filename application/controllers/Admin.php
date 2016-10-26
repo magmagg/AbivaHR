@@ -205,11 +205,6 @@ class Admin extends CI_Controller
 
                             $picture = $add.$success['upload_data']['raw_name'].$success['upload_data']['file_ext'];
 
-                            $remove = getcwd();
-                            if (strpos($success['upload_data']['full_path'], $remove) === 0)
-                             {
-                                $picture = substr($success['upload_data']['full_path'], strlen($remove));
-                              }
 
                             $this->session->set_userdata('username',$username);
                             $this->session->set_userdata('firstname',$firstname);
@@ -299,29 +294,7 @@ class Admin extends CI_Controller
     $this->load->view('Admin/admin_messages_test',$data);
   }
 
-  function send_message()
-  {
-		$arr['name'] = $this->input->post('name');
-		$arr['email'] = $this->input->post('email');
-		$arr['subject'] = $this->input->post('subject');
-		$arr['message'] = $this->input->post('message');
 
-		$this->db->insert('message',$arr);
-		$detail = $this->db->select('*')->from('message')->where('id',$this->db->insert_id())->get()->row();
-
-		$arr['name'] = $detail->name;
-		$arr['email'] = $detail->email;
-		$arr['subject'] = $detail->subject;
-		$arr['created_at'] = $detail->created_at;
-		$arr['message'] = $detail->message;
-		$arr['id'] = $detail->id;
-		$arr['new_count_message'] = $this->db->where('read_status',0)->count_all_results('message');
-		$arr['success'] = true;
-		$arr['notif'] = '<div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 alert alert-success" role="alert"> <i class="fa fa-check"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Message sent ...</div>';
-
-
-		echo json_encode($arr);
-  }
 
   //============================EMPLOYEES===================================//
   function employees()

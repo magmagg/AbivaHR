@@ -19,10 +19,7 @@ class User extends CI_Controller
         $username = $this->session->flashdata('username');
         $data['details'] = $this->User_model->get_user_details($username);
         foreach($data['details'] as $row)
-        {;
-
-
-
+        {
         $sessiondata = array('id'=>$row->user_id,
                             'user_name'=>$row->user_username,
                             'firstname'=>$row->user_firstname,
