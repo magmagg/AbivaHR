@@ -51,6 +51,7 @@ class Admin extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    /*
     $this->session->set_flashdata('notify',"<script>
     		new PNotify({
         title: 'Regular Success',
@@ -58,6 +59,7 @@ class Admin extends CI_Controller
         type: 'success'
     	});
     </script>");
+    */
     $ID = $this->session->userdata['id'];
     $data['todolist'] = $this->Admin_model->get_todolist($ID);
 
@@ -132,6 +134,7 @@ class Admin extends CI_Controller
       $googleplus = $this->input->post('googleplus');
       $linkedin = $this->input->post('linkedin');
       $wordpress = $this->input->post('wordpress');
+      $picture = $this->input->post('display_pic');
 
       $check = $this->input->post('check');
 
@@ -207,22 +210,17 @@ class Admin extends CI_Controller
                               'user_picture'=>$success['upload_data']['full_path']
                             );
 
-                            $remove = getcwd();
-                            if (strpos($success['upload_data']['full_path'], $remove) === 0)
-                             {
-                                $picture = substr($success['upload_data']['full_path'], strlen($remove));
-                              }
+                            $add = '/assets/files/profile_pictures/';
+                            $picture = $add.$success['upload_data']['raw_name'].$success['upload_data']['file_ext'];
 
-                            $this->session->set_userdata('username',$username);
+                            $this->session->set_userdata('username',$uname);
                             $this->session->set_userdata('firstname',$firstname);
                             $this->session->set_userdata('middlename',$middlename);
                             $this->session->set_userdata('lastname',$lastname);
                             $this->session->set_userdata('picture',$picture);
 
-                            var_dump($success);
                             $this->Admin_model->edit_one_user_profile($data, $id);
                             redirect(base_url().'Admin/user_profile');
-                            print_r($this->session->all_userdata());
               }
       }
 

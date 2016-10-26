@@ -36,8 +36,8 @@
 
                                 <option value=""></option>
                             </select>
-                            <input type="button" name="Button" class="btn-success" value="All" id="selectall2"/>
-                            <input type="button" name="Button" class="btn-danger" value="Clear" id="selectnone2"/>
+                            <input type="button" name="Button" class="btn btn-minier btn-success" value="All" id="selectall2"/>
+                            <input type="button" name="Button" class="btn btn-minier btn-danger" value="Clear" id="selectnone2"/>
                         </div>
                     </div>
             </div>
