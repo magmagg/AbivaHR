@@ -22,19 +22,13 @@ class Admin extends CI_Controller
         foreach($data['details'] as $row)
         {
 
-          $remove = getcwd();
-          if (strpos($row->user_picture, $remove) === 0)
-           {
-              $picture = substr($row->user_picture, strlen($remove));
-            }
-
         $sessiondata = array('id'=>$row->user_id,
                             'user_name'=>$row->user_username,
                             'firstname'=>$row->user_firstname,
                              'middlename'=>$row->user_middlename,
                              'lastname'=>$row->user_lastname,
                              'department'=>$row->user_department,
-                             'picture'=>$picture,
+                             'picture'=>$row->user_picture,
                              'logged_in'=>true
                             );
         }
@@ -173,7 +167,7 @@ class Admin extends CI_Controller
 
       else if ($check == 1)
       {
-            $config['upload_path']          = './assets/files/profile_pictures/';
+            $config['upload_path']          = getcwd().'\\assets\\files\\profile_pictures\\';
             $config['allowed_types']        = 'gif|jpg|png';
 
 
@@ -194,6 +188,8 @@ class Admin extends CI_Controller
 
                 $success = array('upload_data' => $this->upload->data());
 
+                $add = './assets/files/profile_pictures/';
+
                 $data = array('user_username'=>$uname,
                               'user_firstname'=>$firstname,
                               'user_middlename'=>$middlename,
@@ -207,10 +203,9 @@ class Admin extends CI_Controller
                               'user_google'=>$googleplus,
                               'user_linkedin'=>$linkedin,
                               'user_wordpress'=>$wordpress,
-                              'user_picture'=>$success['upload_data']['full_path']
+                              'user_picture'=>$add.$success['upload_data']['raw_name'].$success['upload_data']['file_ext']
                             );
 
-                            $add = '/assets/files/profile_pictures/';
                             $picture = $add.$success['upload_data']['raw_name'].$success['upload_data']['file_ext'];
 
                             $this->session->set_userdata('username',$uname);
@@ -219,8 +214,10 @@ class Admin extends CI_Controller
                             $this->session->set_userdata('lastname',$lastname);
                             $this->session->set_userdata('picture',$picture);
 
+                            var_dump($success);
                             $this->Admin_model->edit_one_user_profile($data, $id);
                             redirect(base_url().'Admin/user_profile');
+                            print_r($this->session->all_userdata());
               }
       }
 

@@ -282,7 +282,7 @@
 										<div class="col-sm-9">
 											<div class="input-medium">
 												<div class="input-group">
-													<input class="input-medium date-picker" id="form-field-date" name="bday" value="<?php echo $Bday?>" type="text" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
+													<input class="input-medium date-picker" id="form-field-date" name="bday" value="<?php echo $Bday?>" type="text" data-date-format="dd-mm-yyyy	" placeholder="dd-mm-yyyy" />
 													<span class="input-group-addon">
 																				<i class="ace-icon fa fa-calendar"></i>
 																			</span>

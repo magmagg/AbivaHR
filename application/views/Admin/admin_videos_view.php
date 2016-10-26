@@ -57,9 +57,9 @@
 <div class="row">
 	<div class="col-xs-12">
 		<h3 class="header smaller lighter blue"><?=$galleryname?>
-			<a onclick="foo(<?=$galleryid?>)"><button class="btn btn-danger pull-right">Delete album</button></a>
-      <a href="<?php echo base_url();?>Admin/manage_videos/<?=$galleryid?>"><button class="btn btn-info pull-right">Manage album</button></a>
-      <a href="<?php echo base_url();?>Admin/upload_videos/<?=$galleryid?>"><button class="btn btn-success pull-right">Add Videos</button></a>
+			<a onclick="foo(<?=$galleryid?>)"><button class="btn btn-sm btn-danger pull-right">Delete album</button></a>
+      <a href="<?php echo base_url();?>Admin/manage_videos/<?=$galleryid?>"><button class="btn btn-sm btn-info pull-right">Manage album</button></a>
+      <a href="<?php echo base_url();?>Admin/upload_videos/<?=$galleryid?>"><button class="btn btn-sm btn-success pull-right">Add Videos</button></a>
 </h3>
 
 

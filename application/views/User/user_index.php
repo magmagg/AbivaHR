@@ -41,7 +41,7 @@
 							<?php if($l->todo_isfinished == 0):		?>
 
 						<ul id="tasks" class="item-list">
-							<li class="item-red clearfix place" id="todo<?=$l->todo_id?>">
+							<li class="item-green clearfix place" id="todo<?=$l->todo_id?>">
 								<label class="inline">
 									<div id="result_location" class="todo<?=$l->todo_id?>">
 									<div class="lbl" id="toggle<?=$l->todo_id?>"> <?=$l->todo_title?>
@@ -92,70 +92,7 @@
     </div>
 	</div>
 
-		<div class="row">
-									<div class="col-sm-4">
-										<div class="widget-box">
-											<div class="widget-header widget-header-flat">
-												<h4 class="widget-title smaller">
-													<i class="ace-icon fa fa-quote-left smaller-80"></i>
-													BlockQuote & Address
-												</h4>
-											</div>
 
-											<div class="widget-body">
-												<div class="widget-main">
-													<div class="row">
-														<div class="col-xs-12">
-															<blockquote class="pull-right">
-																<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-
-																<small>
-																	Someone famous
-																	<cite title="Source Title">Source Title</cite>
-																</small>
-															</blockquote>
-														</div>
-													</div>
-
-													<div class="row">
-														<div class="col-xs-12">
-															<blockquote>
-																<p class="lighter line-height-125">
-																	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-																</p>
-
-																<small>
-																	Someone famous
-																	<cite title="Source Title">Source Title</cite>
-																</small>
-															</blockquote>
-														</div>
-													</div>
-
-													<hr />
-													<address>
-														<strong>Twitter, Inc.</strong>
-
-														<br />
-														795 Folsom Ave, Suite 600
-														<br />
-														San Francisco, CA 94107
-														<br />
-														<abbr title="Phone">P:</abbr>
-														(123) 456-7890
-													</address>
-
-													<address>
-														<strong>Full Name</strong>
-
-														<br />
-														<a href="mailto:#">first.last@example.com</a>
-													</address>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
 
 
 
