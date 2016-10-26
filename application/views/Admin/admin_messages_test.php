@@ -17,7 +17,7 @@
 
 						<div class="widget-body">
 							<div class="widget-main no-padding">
-								<div class="dialogs" id="message-tbody"  style="overflow:scroll;height:400px">
+								<div class="dialogs" id="message-tbody">
 									<!-- DIALOGS HERE -->
 									<?php foreach($messages as $m): ?>
 									<div class="itemdiv dialogdiv">
@@ -89,13 +89,20 @@
 		</script>
 		<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
+
+
 		<!-- page specific plugin scripts -->
 		<script src="<?php echo base_url(); ?>assets/js/pnotify.custom.min.js"></script>
 		<script src="<?php echo base_url(); ?>node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
 		<!-- ace scripts -->
 		<script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/ace.min.js"></script>
+<script>				$('.dialogs,.comments').ace_scroll({
+					size: 300
+			    });
 
+
+</script>
 		<script>
   $(document).ready(function(){
     $("#submit").click(function(){

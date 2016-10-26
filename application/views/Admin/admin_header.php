@@ -37,6 +37,8 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-skins.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-rtl.min.css" />
 
+				<script src="assets/js/ace-extra.min.js"></script>
+
 
 		<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="<?php echo base_url();?>assets/css/ace-ie.min.css" />
@@ -126,7 +128,7 @@
 						<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 								<a class="btn btn-success" href="<?php echo base_url();?>Admin/announcements"> <i class="ace-icon fa fa-bullhorn"></i> </a>
 
-								<a class="btn btn-info" href="<?php echo base_url();?>Admin/messages"> <i class="ace-icon fa fa-envelope-o"></i> </a>
+								<a class="btn btn-info" href="<?php echo base_url();?>Chat"> <i class="ace-icon fa fa-envelope-o"></i> </a>
 
 								<a class="btn btn-warning" href="<?php echo base_url();?>Admin/upload_files"> <i class="ace-icon fa fa-file"></i> </a>
 
@@ -136,7 +138,7 @@
 						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 							<a class="btn btn-success" href="<?php echo base_url();?>Admin/announcements"> <i class="ace-icon fa fa-bullhorn"></i> </a>
 
-							<a class="btn btn-info" href="<?php echo base_url();?>Admin/messages"> <i class="ace-icon fa fa-envelope-o"></i> </a>
+							<a class="btn btn-info" href="<?php echo base_url();?>Chat"> <i class="ace-icon fa fa-envelope-o"></i> </a>
 
 							<a class="btn btn-warning" href="<?php echo base_url();?>Admin/upload_files"> <i class="ace-icon fa fa-file"></i> </a>
 
@@ -160,7 +162,7 @@
 						</li>
 
 						<li class="<?= ($active_page == 'messages') ? 'active':''; ?>">
-							<a href="<?php echo base_url();?>Admin/messages">
+							<a href="<?php echo base_url();?>Chat">
 								<i class="menu-icon fa fa-envelope-o"></i>
 								<span class="menu-text"> Messages </span>
 							</a>
