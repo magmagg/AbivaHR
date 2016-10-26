@@ -21,11 +21,7 @@ class User extends CI_Controller
         foreach($data['details'] as $row)
         {;
 
-          $remove = getcwd();
-          if (strpos($row->user_picture, $remove) === 0)
-           {
-              $picture = substr($row->user_picture, strlen($remove));
-            }
+
 
         $sessiondata = array('id'=>$row->user_id,
                             'user_name'=>$row->user_username,
@@ -33,7 +29,7 @@ class User extends CI_Controller
                              'middlename'=>$row->user_middlename,
                              'lastname'=>$row->user_lastname,
                              'department'=>$row->user_department,
-                             'picture'=>$picture,
+                             'picture'=>$row->user_picture,
                              'logged_in_user'=>true
                             );
         }
@@ -192,6 +188,7 @@ class User extends CI_Controller
 
                 $success = array('upload_data' => $this->upload->data());
 
+                $add = './assets/files/profile_pictures/';
                 $data = array('user_username'=>$uname,
                               'user_firstname'=>$firstname,
                               'user_middlename'=>$middlename,
@@ -205,10 +202,9 @@ class User extends CI_Controller
                               'user_google'=>$googleplus,
                               'user_linkedin'=>$linkedin,
                               'user_wordpress'=>$wordpress,
-                              'user_picture'=>$success['upload_data']['full_path']
+                              'user_picture'=>$add.$success['upload_data']['raw_name'].$success['upload_data']['file_ext']
                             );
 
-                            $add = '/assets/files/profile_pictures/';
                             $picture = $add.$success['upload_data']['raw_name'].$success['upload_data']['file_ext'];
 
 
