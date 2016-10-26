@@ -236,7 +236,7 @@
 
 							<a class="btn btn-success" href="<?php echo base_url();?>User/announcements"> <i class="ace-icon fa fa-bullhorn"></i> </a>
 
-							<a class="btn btn-info" href="<?php echo base_url();?>User/messages"> <i class="ace-icon fa fa-envelope-o"></i> </a>
+							<a class="btn btn-info" href="<?php echo base_url();?>Chat"> <i class="ace-icon fa fa-envelope-o"></i> </a>
 
 							<a class="btn btn-warning" href="<?php echo base_url();?>User/upload_files"> <i class="ace-icon fa fa-file"></i> </a>
 
@@ -246,7 +246,7 @@
 						<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 							<a class="btn btn-success" href="<?php echo base_url();?>User/announcements"> <i class="ace-icon fa fa-bullhorn"></i> </a>
 
-							<a class="btn btn-info" href="<?php echo base_url();?>User/messages"> <i class="ace-icon fa fa-envelope-o"></i> </a>
+							<a class="btn btn-info" href="<?php echo base_url();?>Chat"> <i class="ace-icon fa fa-envelope-o"></i> </a>
 
 							<a class="btn btn-warning" href="<?php echo base_url();?>User/upload_files"> <i class="ace-icon fa fa-file"></i> </a>
 
@@ -261,7 +261,7 @@
 								<span class="menu-text"> Dashboard </span>
 							</a>
 						</li>
-						
+
 						<li class="<?= ($active_page == 'user_profile') ? 'active':''; ?>">
 							<a href="<?php echo base_url();?>User/user_profile">
 								<i class="menu-icon fa fa-user"></i>
@@ -277,7 +277,7 @@
 						</li>
 
 						<li class="<?= ($active_page == 'messages') ? 'active':''; ?>">
-							<a href="<?php echo base_url();?>User/messages">
+							<a href="<?php echo base_url();?>Chat">
 								<i class="menu-icon fa fa-envelope-o"></i>
 								<span class="menu-text"> Messages </span>
 							</a>
