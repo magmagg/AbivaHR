@@ -132,7 +132,6 @@
 	</tbody>
 </table>
 
-
 <script type="text/javascript">
 	jQuery(function($) {
 		$('#myModal input[type=file]').ace_file_input({
@@ -142,14 +141,16 @@
 			no_icon: 'ace-icon fa fa-cloud-upload',
 			droppable: true,
 			thumbnail: 'large',
+			maxSize: 1000000000, //~1 Gb
 			before_remove: function() {
 				$("#filechanged").val(0);
 				return true;
 			}
-		})
+		}).on('file.error.ace', function(event, info) {
+				alert('File exceeds 1Gb');
+		 });
 	});
 </script>
-
 <script>
 	function foo(id) {
 		swal({

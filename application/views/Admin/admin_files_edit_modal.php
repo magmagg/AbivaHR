@@ -12,8 +12,9 @@
 							<div class="space"></div>
 							<input type="hidden" name="foldername" id="foldername">
 							<input type="hidden" name="filechanged" id="filechanged" value="0">
-        		<input type="file" name="uploadfile" id="fileinput" size="20" />
+        		<input type="file" name="uploadfile" id="fileinput"/>
 							<span class="help-block">If no file is chosen, Version will not be affected, Only the display name.</span>
+								<span class="help-block">*Up to 1Gb only</span>
 						</div>
 						<input type="hidden" name="old_file_id" id="old_file_id">
 
@@ -103,6 +104,11 @@ frm.find('input[type=file]').each(function(){
 						$('#filesedit'+mydata.id).find('td:eq(1)').append(mydata.updatedname);
 					$('#filesedit'+mydata.id).find('td:eq(2)').text(mydata.version);
 					$('#filesedit'+mydata.id).fadeIn('slow');
+					new PNotify({
+					title: 'Update',
+					text: 'File updated!',
+					type: 'success'
+					});
 					});
 				}
 		});

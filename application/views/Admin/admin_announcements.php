@@ -326,6 +326,8 @@ function editModal(id)
 								$('#'+mydata.id).find('td:eq(2)').text(mydata.content);
 								$('#'+mydata.id).find('td:eq(3)').text(mydata.timestamp);
 									$('#'+mydata.id).fadeIn('slow');
+
+									swal("Edited!", "Your announcement has been edited.", "success");
 								});
             }
         });
