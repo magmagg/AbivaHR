@@ -418,6 +418,7 @@ function deactivate_user()
   $ID = $this->uri->segment(3);
   $data = array('user_active'=>0);
   $this->Admin_model->process_activation($data,$ID);
+  echo 0;
 }
 
 function activate_user()
@@ -425,6 +426,7 @@ function activate_user()
   $ID = $this->uri->segment(3);
   $data = array('user_active'=>1);
   $this->Admin_model->process_activation($data,$ID);
+  echo 1;
 }
 
 function submit_import_employees()

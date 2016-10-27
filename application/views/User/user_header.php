@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/justifiedGallery.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/video-js.css" />
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/animate.css" />
+		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/pnotify.custom.min.css" />
 
 		<!-- text fonts -->
 		<link rel="stylesheet" href="<?php echo base_url();?>assets/css/fonts.googleapis.com.css" />

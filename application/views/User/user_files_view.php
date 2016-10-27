@@ -100,6 +100,7 @@
 <script src="<?php echo base_url(); ?>assets/js/jquery.dataTables.bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/dataTables.buttons.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/sweetalert.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/pnotify.custom.min.js"></script>
 
 <!-- ace scripts -->
 <script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>

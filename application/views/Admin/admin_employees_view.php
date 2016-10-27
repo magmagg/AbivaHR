@@ -175,6 +175,7 @@
 <script src="<?php echo base_url(); ?>assets/bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
 
 <script src="<?php echo base_url(); ?>assets/js/select2.full.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/pnotify.custom.min.js"></script>
 
 <script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/jquery.validate.min.js"></script>
@@ -239,9 +240,24 @@ $(".ace-switch-5").change(function () {
     $.ajax({
         type: "POST",
         url: link,
-        success: function (msg)
+        success: function (data)
         {
-
+					if(data == 1)
+					{
+						new PNotify({
+						title: 'Activate',
+						text: 'User activated',
+						type: 'success'
+					});
+					}
+					else if(data == 0)
+					{
+						new PNotify({
+						title: 'Deactivate',
+						text: 'User deactivated',
+						type: 'error'
+					});
+					}
         }
     });
 })

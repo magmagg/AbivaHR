@@ -141,11 +141,14 @@
 			no_icon: 'ace-icon fa fa-cloud-upload',
 			droppable: true,
 			thumbnail: 'large',
-      before_remove : function() {
-      	$( "#filechanged" ).val(0);
-        return true;
-    }
-		})
+			maxSize: 1000000000, //~1 Gb
+			before_remove: function() {
+				$("#filechanged").val(0);
+				return true;
+			}
+		}).on('file.error.ace', function(event, info) {
+				alert('File exceeds 1Gb');
+		 });
 	});
 </script>
 

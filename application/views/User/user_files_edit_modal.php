@@ -103,6 +103,11 @@ frm.find('input[type=file]').each(function(){
 					$('#filesedit'+mydata.id).find('td:eq(1)').append(mydata.updatedname);
 					$('#filesedit'+mydata.id).find('td:eq(2)').text(mydata.version);
 					$('#filesedit'+mydata.id).fadeIn('slow');
+					new PNotify({
+					title: 'Update',
+					text: 'File updated!',
+					type: 'success'
+					});
 					});
 				}
 		});
