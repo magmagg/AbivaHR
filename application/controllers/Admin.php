@@ -164,7 +164,7 @@ class Admin extends CI_Controller
 
       else if ($check == 1)
       {
-            $config['upload_path']          = getcwd().'\\assets\\files\\profile_pictures\\';
+            $config['upload_path']          = './assets/files/profile_pictures/';
             $config['allowed_types']        = 'gif|jpg|png';
 
 
@@ -397,7 +397,7 @@ function submit_add_employee()
                 'user_username'=>$this->input->post('username'),
                 'user_password'=>password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'user_department'=>$this->input->post('department'),
-                'user_picture'=>getcwd()."/assets/images/avatars/avatar2.png",
+                'user_picture'=>"./assets/images/avatars/avatar2.png",
                 'user_isadmin'=>0
               );
 
@@ -475,7 +475,7 @@ var_dump($error);
                                         'user_username'=>$row['Username'],
                                         'user_password'=>password_hash('password', PASSWORD_DEFAULT),
                                         'user_department'=>$department,
-                                        'user_picture'=>getcwd()."/assets/images/avatars/avatar2.png",
+                                        'user_picture'=>"./assets/images/avatars/avatar2.png",
                                         'user_isadmin'=>1
                                       );
                     $this->Admin_model->insert_user($insert_data);
@@ -977,6 +977,7 @@ var_dump($error);
 									'ann_id'=>$id,
 									'ann_time'=>$time
 									);
+    $data['success'] = true;
 		echo json_encode($data);
 
 	  //redirect(base_url().'Admin/announcements');
@@ -1430,6 +1431,19 @@ var_dump($error);
     $this->Admin_model->delete_files_by_folder($id);
     $this->Admin_model->delete_shared_by_folder($id);
     $this->Admin_model->delete_folder($id);
+  }
+
+  function view_shared_files()
+  {
+    $header['active_head'] = 'files';
+    $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+
+    $data['files'] = $this->Admin_model->get_shared_files($this->session->userdata['department']);
+    $data['users'] = $this->Admin_model->get_user_names();
+    $data['departments'] = $this->Admin_model->get_departments();
+
+    $this->load->view('Admin/admin_header',$header);
+    $this->load->view('Admin/admin_files_shared_view',$data);
   }
 
   //================================POLICIES======================//

@@ -597,6 +597,18 @@ function check_username_duplicate($email)
     return $query->result();
   }
 
+  function get_shared_files($id)
+  {
+    $this ->db->select('fo.ffolder_name,fo.ffolder_dept_id_fk,co.*,de.*');
+    $this->db->from('tblfiles_shared as sh');
+    $this->db->join('tblfiles_folder as fo', 'sh.shared_ffolder_id_fk = fo.ffolder_id');
+    $this->db->join('tbldepartments as de', 'sh.shared_dept_id_fk = de.department_id');
+    $this->db->join('tblfiles_content as co', 'co.files_ffolder_id_fk = fo.ffolder_id');
+    $this->db->where('de.department_id', $id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
   //==================POLICIES=======================//
   function get_policies_table()
   {
