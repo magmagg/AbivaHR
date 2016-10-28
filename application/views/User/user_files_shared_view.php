@@ -214,7 +214,7 @@
 <script>
 $( ".filearchive" ).click(function() {
 	var id = this.id;
-	window.open("<?php echo base_url();?>Admin/view_shared_archive/"+id, '_blank');
+	window.open("<?php echo base_url();?>User/view_shared_archive/"+id, '_blank');
 });
 </script>
 

@@ -939,6 +939,32 @@ function do_Upload_gallery()
      $this->User_model->delete_folder($id);
    }
 
+   function view_shared_files()
+   {
+     $header['active_head'] = 'files';
+     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+
+     $data['files'] = $this->User_model->get_shared_files($this->session->userdata['department']);
+     $data['users'] = $this->User_model->get_user_names();
+     $data['departments'] = $this->User_model->get_departments();
+
+     $this->load->view('User/user_header',$header);
+     $this->load->view('User/user_files_shared_view',$data);
+   }
+
+   function view_shared_archive()
+   {
+     $header['active_head'] = 'files';
+     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $filesid = $this->uri->segment(3);
+     $data['archive'] = $this->User_model->get_files_archive($filesid);
+     $data['departmentid'] = $this->uri->segment(4);
+     $data['folderid'] = $this->uri->segment(5);
+     $data['users'] = $this->User_model->get_user_names();
+     $this->load->view('User/user_header',$header);
+     $this->load->view('User/user_files_shared_archive', $data);
+   }
+
    //============================MESSAGES===================================//
    function messages()
    {
