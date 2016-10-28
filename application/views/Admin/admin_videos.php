@@ -16,10 +16,12 @@
               $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $v->video_name);
               $ext = pathinfo($v->video_path, PATHINFO_EXTENSION);
               $picture_name = $withoutExt.'.png';
-              $foldername = 'assets/files/videos/'; ?>
+              $foldername = 'assets/files/videos/';
+
+              $videothumb = base_url().$foldername.str_replace(' ', '%20', $v->vfolder_name).'/'.$picture_name;?>
               <li id="li<?=$v->vfolder_id?>">
                 <a href="<?php echo base_url();?>Admin/view_videos/<?=$v->vfolder_id?>" data-rel="colorbox">
-                  <div style="width:150px; height:150px; background: url(<?php echo base_url().$foldername?><?=str_replace(' ', '%20', $v->vfolder_name)?>/<?=str_replace(' ', '%20',$picture_name)?>) no-repeat; background-size:cover; background-position:center;"></div>
+                  <img src="<?=$videothumb?>" style="width:150px;height:150px;">
                     <div class="text">
                     <div class="inner"><?=$v->vfolder_name?></div>
                   </div>
