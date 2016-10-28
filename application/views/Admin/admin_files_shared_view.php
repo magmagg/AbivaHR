@@ -217,7 +217,55 @@ $( ".filearchive" ).click(function() {
 	window.open("<?php echo base_url();?>Admin/view_shared_archive/"+id, '_blank');
 });
 </script>
+<script type="text/javascript">
+	jQuery(function($) {
+		$('#myModal input[type=file]').ace_file_input({
+			style: 'well',
+			btn_choose: 'Drop files here or click to choose',
+			btn_change: null,
+			no_icon: 'ace-icon fa fa-cloud-upload',
+			droppable: true,
+			thumbnail: 'large',
+			maxSize: 1000000000, //~1 Gb
+			before_remove: function() {
+				$("#filechanged").val(0);
+				return true;
+			}
+		}).on('file.error.ace', function(event, info) {
+				alert('File exceeds 1Gb');
+		 });
+	});
+</script>
+<script>
+$(document).ready(function() {
+  $(".editmodal").click(function(e) {
+    e.preventDefault();
+    var id = $(this).attr("id");
+    $.ajax({
+        type: 'POST',
+        url: "<?php echo base_url();?>Admin/get_one_file/" + id,
+        success: function(data) {
+            $('#displayname').val(data.display_name);
+            $('#old_file_id').val(data.id);
+            $('#foldername').val(data.foldername);
+            $('#shared').val(1);
+            $('#myModal').modal('show');
+        },
+        dataType:"json"
+    });
+  });
+});
 
+$('#myModal').on('shown.bs.modal', function() {
+    if (!ace.vars['touch']) {
+      $(this).find('.chosen-container').each(function() {
+        $(this).find('a:first-child').css('width', '210px');
+        $(this).find('.chosen-drop').css('width', '210px');
+        $(this).find('.chosen-search input').css('width', '200px');
+      });
+    }
+  });
+  </script>
 
 </body>
 

@@ -11,6 +11,7 @@
 						<div class="col-xs-12 col-sm-5">
 							<div class="space"></div>
 							<input type="hidden" name="foldername" id="foldername">
+							<input type="hidden" name="shared" id="shared">
 							<input type="hidden" name="filechanged" id="filechanged" value="0">
         		<input type="file" name="uploadfile" id="fileinput"/>
 							<span class="help-block">If no file is chosen, Version will not be affected, Only the display name.</span>
@@ -100,9 +101,16 @@ frm.find('input[type=file]').each(function(){
 					console.log(mydata);
 					$('#myModal').modal('hide');
 					$('#filesedit'+mydata.id).fadeOut('fast', function() {
-						$('#filesedit'+mydata.id).find('td:eq(1)').text(mydata.displayname);
-						$('#filesedit'+mydata.id).find('td:eq(1)').append(mydata.updatedname);
-					$('#filesedit'+mydata.id).find('td:eq(2)').text(mydata.version);
+					$('#filesedit'+mydata.id).find('td:eq(1)').text(mydata.displayname);
+					$('#filesedit'+mydata.id).find('td:eq(1)').append(mydata.updatedname);
+					if(mydata.isshared == 1)
+					{
+						$('#filesedit'+mydata.id).find('td:eq(3)').text(mydata.version);
+					}
+					else
+					{
+						$('#filesedit'+mydata.id).find('td:eq(2)').text(mydata.version);
+					}
 					$('#filesedit'+mydata.id).fadeIn('slow');
 					new PNotify({
 					title: 'Update',

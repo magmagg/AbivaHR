@@ -854,8 +854,15 @@ function do_Upload_gallery()
             $this->User_model->update_file_contents($data,$files_id);
 
        }
-
-       echo json_encode(array('id' => $currentfileID, 'displayname' => $displayname, 'version' => $final_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
+       if($this->input->post('shared') == 1)
+       {
+         $isshared = 1;
+       }
+       else
+       {
+         $isshared = 0;
+       }
+       echo json_encode(array('isshared' => $isshared,'id' => $currentfileID, 'displayname' => $displayname, 'version' => $final_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
     }
      else
      {
@@ -867,7 +874,15 @@ function do_Upload_gallery()
        $data = array('files_display_name'=>$displayname);
 
        $this->User_model->update_file_contents($data,$currentfileID);
-       echo json_encode(array('id' => $currentfileID, 'displayname' => $displayname, 'version' => $current_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
+       if($this->input->post('shared') == 1)
+       {
+         $isshared = 1;
+       }
+       else
+       {
+         $isshared = 0;
+       }
+       echo json_encode(array('isshared' => $isshared, 'id' => $currentfileID, 'displayname' => $displayname, 'version' => $current_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
     }
    }
 

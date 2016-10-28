@@ -1231,15 +1231,19 @@ var_dump($error);
     $use['file'] = $this->Admin_model->get_one_file($file_id);
     foreach($use['file'] as $f)
     {
+      $use['folder'] = $this->Admin_model->get_folder_name($f->files_ffolder_id_fk);
+      foreach($use['folder'] as $u)
+      {
+          $foldername = $u->ffolder_name;
+      }
       $data = array('id'=>$f->files_id,
                     'path'=>$f->files_path,
-                    'display_name'=>$f->files_display_name);
+                    'display_name'=>$f->files_display_name,
+                     'foldername'=>$foldername);
       break;
     }
-
     echo json_encode($data);
   }
-
   function delete_one_file()
   {
     $id = $this->uri->segment(3);
@@ -1344,8 +1348,15 @@ var_dump($error);
            $this->Admin_model->update_file_contents($data,$files_id);
 
       }
-
-      echo json_encode(array('id' => $currentfileID, 'displayname' => $displayname, 'version' => $final_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
+      if($this->input->post('shared') == 1)
+      {
+        $isshared = 1;
+      }
+      else
+      {
+        $isshared = 0;
+      }
+      echo json_encode(array('isshared' => $isshared, 'id' => $currentfileID, 'displayname' => $displayname, 'version' => $final_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
     }
     else
     {
@@ -1357,7 +1368,15 @@ var_dump($error);
       $data = array('files_display_name'=>$displayname);
 
       $this->Admin_model->update_file_contents($data,$currentfileID);
-      echo json_encode(array('id' => $currentfileID, 'displayname' => $displayname, 'version' => $current_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
+      if($this->input->post('shared') == 1)
+      {
+        $isshared = 1;
+      }
+      else
+      {
+        $isshared = 0;
+      }
+      echo json_encode(array('isshared' => $isshared, 'id' => $currentfileID, 'displayname' => $displayname, 'version' => $current_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
     }
   }
 
@@ -1444,6 +1463,7 @@ var_dump($error);
 
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_files_shared_view',$data);
+    $this->load->view('Admin/admin_files_edit_modal');
   }
 
   function view_shared_archive()

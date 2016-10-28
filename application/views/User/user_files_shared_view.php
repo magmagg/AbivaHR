@@ -248,6 +248,7 @@ $(document).ready(function() {
             $('#displayname').val(data.display_name);
             $('#old_file_id').val(data.id);
             $('#foldername').val(data.foldername);
+            $('#shared').val(1);
             $('#myModal').modal('show');
         },
         dataType:"json"
