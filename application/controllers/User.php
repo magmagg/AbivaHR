@@ -746,12 +746,17 @@ function do_Upload_gallery()
      $use['file'] = $this->User_model->get_one_file($file_id);
      foreach($use['file'] as $f)
      {
+       $use['folder'] = $this->User_model->get_folder_name($f->files_ffolder_id_fk);
+       foreach($use['folder'] as $u)
+       {
+           $foldername = $u->ffolder_name;
+       }
        $data = array('id'=>$f->files_id,
                      'path'=>$f->files_path,
-                     'display_name'=>$f->files_display_name);
+                     'display_name'=>$f->files_display_name,
+                      'foldername'=>$foldername);
        break;
      }
-
      echo json_encode($data);
    }
 
@@ -949,6 +954,33 @@ function do_Upload_gallery()
      $this->User_model->delete_files_by_folder($id);
      $this->User_model->delete_shared_by_folder($id);
      $this->User_model->delete_folder($id);
+   }
+
+   function view_shared_files()
+   {
+     $header['active_head'] = 'files';
+     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+
+     $data['files'] = $this->User_model->get_shared_files($this->session->userdata['department']);
+     $data['users'] = $this->User_model->get_user_names();
+     $data['departments'] = $this->User_model->get_departments();
+
+     $this->load->view('User/user_header',$header);
+     $this->load->view('User/user_files_shared_view',$data);
+     $this->load->view('User/user_files_edit_modal');
+   }
+
+   function view_shared_archive()
+   {
+     $header['active_head'] = 'files';
+     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $filesid = $this->uri->segment(3);
+     $data['archive'] = $this->User_model->get_files_archive($filesid);
+     $data['departmentid'] = $this->uri->segment(4);
+     $data['folderid'] = $this->uri->segment(5);
+     $data['users'] = $this->User_model->get_user_names();
+     $this->load->view('User/user_header',$header);
+     $this->load->view('User/user_files_shared_archive', $data);
    }
 
    //============================MESSAGES===================================//

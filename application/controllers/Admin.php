@@ -1446,6 +1446,19 @@ var_dump($error);
     $this->load->view('Admin/admin_files_shared_view',$data);
   }
 
+  function view_shared_archive()
+  {
+    $header['active_head'] = 'files';
+    $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $filesid = $this->uri->segment(3);
+    $data['archive'] = $this->Admin_model->get_files_archive($filesid);
+    $data['departmentid'] = $this->uri->segment(4);
+    $data['folderid'] = $this->uri->segment(5);
+    $data['users'] = $this->Admin_model->get_user_names();
+    $this->load->view('Admin/admin_header',$header);
+    $this->load->view('Admin/admin_files_shared_archive', $data);
+  }
+
   //================================POLICIES======================//
   function policies()
   {
