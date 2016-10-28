@@ -1,0 +1,46 @@
+Install xampp
+  -Change php.ini
+    max post size
+    max upload size
+    max file uploads
+    max execution time
+  -Install apache mysql services
+Install node
+
+on root folder
+npm install -g node-windows
+npm link node-windows
+node server.js
+make server.js a service
+
+in mysql
+import database
+
+truncate table tblannouncements;
+truncate table tblannouncements_visible;
+truncate table tblfiles_archive;
+truncate table tblfiles_content;
+truncate table tblfiles_folder;
+truncate table tblfiles_shared;
+truncate table tblgallery_folder;
+truncate table tblgallery_pictures;
+truncate table message;
+truncate table tbltodolost;
+truncate table tblvideos_content;
+truncate table tblvideos_content;
+truncate table tblusers;
+
+truncate table tblannouncements;
+truncate table tblannouncements_visible;
+truncate table tblfiles_archive;
+truncate table tblfiles_content;
+truncate table tblfiles_folder;
+truncate table tblfiles_shared;
+truncate table tblgallery_folder;
+truncate table tblgallery_pictures;
+truncate table message;
+truncate table tbltodolist;
+truncate table tblpolicies;
+truncate table tblpolicies_sub1;
+truncate table tblpolicies_sub2;
+truncate table tblpolicies_sub3;
