@@ -734,12 +734,17 @@ function do_Upload_gallery()
      $use['file'] = $this->User_model->get_one_file($file_id);
      foreach($use['file'] as $f)
      {
+       $use['folder'] = $this->User_model->get_folder_name($f->files_ffolder_id_fk);
+       foreach($use['folder'] as $u)
+       {
+           $foldername = $u->ffolder_name;
+       }
        $data = array('id'=>$f->files_id,
                      'path'=>$f->files_path,
-                     'display_name'=>$f->files_display_name);
+                     'display_name'=>$f->files_display_name,
+                      'foldername'=>$foldername);
        break;
      }
-
      echo json_encode($data);
    }
 
@@ -950,6 +955,7 @@ function do_Upload_gallery()
 
      $this->load->view('User/user_header',$header);
      $this->load->view('User/user_files_shared_view',$data);
+     $this->load->view('User/user_files_edit_modal');
    }
 
    function view_shared_archive()
