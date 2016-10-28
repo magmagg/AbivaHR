@@ -17,7 +17,6 @@
                  if(($count % 2) == 1)
                  {
                    $time = strtotime($a->ann_timestamp);
-									 echo $count;
 
                      ?>
 			<div class="panel-body">
@@ -51,7 +50,7 @@
                 else
                 {
                   $time = strtotime($a->ann_timestamp);
-									echo $count;
+									
             ?>
 
 						<li class="timeline-inverted">

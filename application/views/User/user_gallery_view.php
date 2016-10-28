@@ -57,7 +57,7 @@
 
 <div class="row">
 	<div class="col-xs-12">
-		<h3 class="header smaller lighter blue"><?=$galleryname?><a href="<?php echo base_url();?>User/upload_pictures/<?=$galleryid?>"><button class="btn btn-success pull-right">Add pictures</button></a>
+		<h3 class="header smaller lighter blue"><?=$galleryname?><a href="<?php echo base_url();?>User/upload_pictures/<?=$galleryid?>"><button class="btn btn-sm btn-success pull-right">Add pictures</button></a>
 </h3>
 		<div>
 

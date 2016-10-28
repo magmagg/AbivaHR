@@ -9,19 +9,7 @@
 		<div class="col-xs-12 col-sm-3 center">
 			<div>
 				<span class="profile-picture">
-
-<?php
-					$uri = $u->user_picture;
-					$pic = substr($uri, 2);
-					//$parsed_url = parse_url($uri);
-					//echo implode("/", array_slice(explode("/", $parsed_url['path']),4));
-
-					//parse_url($uri)
-					//$pic = ltrim($uri, './');
-
-					?>
-
-													<img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="<?php echo $pic ?>" />
+													<img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="<?php echo base_url().$u->user_picture ?>" />
 												</span>
 
 				<div class="space-4"></div>

@@ -254,6 +254,18 @@ class User extends CI_Controller
 
   }
 
+  function view_other_profile()
+  {
+    $header['active_head'] = '';
+    $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+
+
+    $ID = $this->uri->segment(3);
+		$data['userDetails'] = $this->User_model->get_one_user($ID);
+      //var_dump($this->session->all_userdata());
+    $this->load->view('User/user_header',$header);
+    $this->load->view('User/user_view_other_profile',$data);
+  }
   //============================ANNOUNCEMEntS===================================//
   function announcements()
   {
