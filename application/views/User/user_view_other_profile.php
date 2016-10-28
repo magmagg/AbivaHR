@@ -9,6 +9,7 @@
 		<div class="col-xs-12 col-sm-3 center">
 			<div>
 				<span class="profile-picture">
+
 													<img id="avatar" class="editable img-responsive" alt="Alex's Avatar" src="<?php echo base_url().$u->user_picture ?>" />
 												</span>
 
