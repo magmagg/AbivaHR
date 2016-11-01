@@ -31,6 +31,14 @@ class Chat extends CI_Controller
 		}
 
 		$data['users'] = $this->Chat_model->get_users();
+		$data['unread'] = array();
+		foreach($data['users'] as $u)
+		{
+			if($this->Chat_model->get_unread_messages($u->user_id, $this->session->userdata['id']))
+			{
+				$data['unread'][] = $this->Chat_model->get_unread_messages($u->user_id, $this->session->userdata['id']);
+			}
+		}
 		$this->load->view('Chat/users_list',$data);
 	}
 
@@ -106,6 +114,7 @@ class Chat extends CI_Controller
 		if($message_thread_id !== 0)
 		{
 			$data['message'] = $this->Chat_model->get_chats($message_thread_id);
+			$this->Chat_model->mark_read($sender_id,$receiver_id);
 		}
 		else
 		{

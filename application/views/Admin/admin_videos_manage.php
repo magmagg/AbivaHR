@@ -16,8 +16,7 @@
                 $videothumb = base_url().$foldername.str_replace(' ', '%20', $g->vfolder_name).'/'.$picture_name;
               ?>
                     <li id="li<?=$g->video_id?>">
-                        <div style="width:150px; height:150px; background: url(<?=str_replace(' ', '%20', $videothumb)?>) no-repeat; background-size:cover; background-position:center;"></div>
-                        <div class="text">
+                        <img src="<?=$videothumb?>" style="width:150px;height:150px;"><div class="text">
                         </div>
                         <center>
                             <input type="checkbox" name="videos[]" id="c_b" value="<?=$g->video_id?>">

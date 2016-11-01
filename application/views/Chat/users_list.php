@@ -21,8 +21,13 @@
 							<span class="green">3 days ago</span>
 						</div>
 
-						<div>
+						<div id="appendspan<?=$u->user_id?>">
 							<button onclick="load_chat(<?=$this->session->userdata['id']?>,<?=$u->user_id?>)" class="btn btn-minier btn-success"><i class="ace-icon fa fa-comments-o"></i>Chat</button>
+							<?php foreach($unread as $key => $value): ?>
+								<?php if($u->user_id == $value[0]->sender_id): ?>
+								<span class="label label-danger label-sm" id="span<?=$u->user_id?>">Unread</span>
+								<?php endif; ?>
+							<?php endforeach; ?>
 						</div>
 					</div>
 				</div>
@@ -232,7 +237,6 @@ function load_socket()
 	socket.on('new_count_message', function(data) {
 
 		//$( "#new_count_message" ).html( data.new_count_message );
-		$('#notif_audio')[0].play();
 
 	});
 	/*
@@ -258,6 +262,18 @@ function load_socket()
 				'<div class="text">' + data.message + '</div>' +
 				'</div>' +
 				'</div>');
+				if(data.receiver_id == "<?=$this->session->userdata['id']?>")
+				{
+					$('#notif_audio')[0].play();
+					if($('#span'+data.sender_id).length)
+					{
+
+					}
+					else
+					{
+						$("#appendspan"+data.sender_id).append('<span class="label label-danger label-sm" id="span'+data.sender_id+'">Unread</span>');
+					}
+				}
 		}
 		//  $( "#no-message-notif" ).html('');
 		//    $( "#new-message-notif" ).html('<div class="alert alert-success" role="alert"> <i class="fa fa-check"></i><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>New message ...</div>');
@@ -271,6 +287,9 @@ function load_socket()
 <script>
 		function load_chat(sender_id, receiver_id) {
 			$('#spinner').show(0);
+			$("#span"+receiver_id).fadeOut('slow', function(){
+				$("#span"+receiver_id).remove();
+			});
 			$('#loadingdiv').fadeOut('fast', function() {
 				$('#loadingdiv').empty();
 				$("#loadingdiv").load('<?php echo base_url().'Chat/load_chat/'; ?>' + sender_id + '/' + receiver_id,

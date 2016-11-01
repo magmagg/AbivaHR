@@ -10,8 +10,8 @@ class Chat_model extends CI_Model
 
 	function get_users()
 	{
-		$this ->db->select('user_id,user_firstname,user_lastname,user_picture');
-		$this ->db->from('tblusers');
+		$this->db->select('u.user_id,u.user_firstname,u.user_lastname,u.user_picture');
+		$this->db->from('tblusers as u');
 		$query = $this->db->get();
 		return $query->result();
 	}
@@ -57,6 +57,25 @@ class Chat_model extends CI_Model
 		$this->db->where('user_id',$id);
 		$query = $this->db->get();
 		return $query->row();
+	}
+
+	function get_unread_messages($sender_id, $receiver_id)
+	{
+		$this->db->select('read_status,sender_id');
+		$this->db->from('message');
+		$this->db->where('sender_id',$sender_id);
+		$this->db->where('receiver_id',$receiver_id);
+		$this->db->where('read_status', 0);
+		$this->db->limit(1);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function mark_read($sender_id, $receiver_id)
+	{
+		$this->db->where('sender_id',$receiver_id);
+		$this->db->where('receiver_id', $sender_id);
+		$this->db->update('message',array('read_status'=>1));
 	}
 
 }

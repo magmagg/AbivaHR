@@ -146,7 +146,7 @@
 
 					<ul class="nav nav-list">
 						<li class="<?= ($active_page == 'index') ? 'active':''; ?>">
-							<a href="<?php echo base_url();?>User/index">
+							<a href="<?php echo base_url();?>Admin/index">
 								<i class="menu-icon fa fa-dashboard"></i>
 								<span class="menu-text"> Dashboard </span>
 							</a>

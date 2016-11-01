@@ -18,7 +18,7 @@
 							<div class="col-xs-12">
 								<h3 class="header smaller lighter blue">Dashboard</h3>
 								<!-- PAGE CONTENT BEGINS -->
-								<div class="col-xs-8">
+								<div class="col-xs-12">
 								<div class="widget-box">
 									<div class="widget-body">
 										<div class="widget-main padding-4">
