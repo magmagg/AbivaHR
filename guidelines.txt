@@ -17,6 +17,8 @@ make server.js a service
 in mysql
 import database
 
+ALTER TABLE tblusers ADD `user_read_ann` tinyint(4) NOT NULL DEFAULT '0';
+
 truncate table tblannouncements;
 truncate table tblannouncements_visible;
 truncate table tblfiles_archive;
