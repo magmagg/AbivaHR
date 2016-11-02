@@ -148,6 +148,17 @@ class User_model extends CI_Model
         return $query->result();
     }
 
+    function get_specific_gallery_with_user_uploads($galleryid,$userid)
+    {
+      $this->db->select('*');
+      $this->db->from('tblgallery_folder as F');
+      $this->db->join('tblgallery_pictures as P', 'F.gfolder_id = P.gfolder_id_fk');
+      $this->db->where('F.gfolder_id',$galleryid);
+      $this->db->where('P.picture_uploader_id',$userid);
+      $query = $this->db->get();
+      return $query->result();
+    }
+
     function get_gallery_names()
     {
         $this->db->select('gfolder_name');
@@ -158,7 +169,7 @@ class User_model extends CI_Model
 
     function get_one_picture($id)
     {
-        $this->db->select('picture_path');
+        $this->db->select('picture_path,picture_name');
         $this->db->from('tblgallery_pictures');
         $this->db->where('picture_id',$id);
         $query = $this->db->get();
@@ -235,6 +246,31 @@ class User_model extends CI_Model
       $this->db->where('f.vfolder_id',$id);
       $query = $this->db->get();
       return $query->result();
+    }
+
+    function get_specific_videos_with_useruploads($id,$userid)
+    {
+      $this->db->select('*');
+      $this->db->from('tblvideos_folder as f');
+      $this->db->join('tblvideos_content as c', 'f.vfolder_id = c.vfolder_id_fk');
+      $this->db->where('f.vfolder_id',$id);
+      $this->db->where('c.video_uploader_id',$userid);
+      $query = $this->db->get();
+      return $query->result();
+    }
+
+    function get_one_video($id)
+    {
+      $this->db->select('video_path,video_name');
+      $this->db->from('tblvideos_content');
+      $this->db->where('video_id',$id);
+      $query = $this->db->get();
+      return $query->result();
+    }
+
+    function delete_one_video($id)
+    {
+      $this->db->delete('tblvideos_content', array('video_id'=>$id));
     }
 
 

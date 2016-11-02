@@ -57,7 +57,9 @@
 
 <div class="row">
 	<div class="col-xs-12">
-		<h3 class="header smaller lighter blue"><?=$galleryname?><a href="<?php echo base_url();?>User/upload_pictures/<?=$galleryid?>"><button class="btn btn-sm btn-success pull-right">Add pictures</button></a>
+		<h3 class="header smaller lighter blue"><?=$galleryname?>
+    <a href="<?php echo base_url();?>User/manage_gallery/<?=$galleryid?>"><button class="btn btn-sm btn-info pull-right">Manage album</button></a>
+    <a href="<?php echo base_url();?>User/upload_pictures/<?=$galleryid?>"><button class="btn btn-sm btn-success pull-right">Add pictures</button></a>
 </h3>
 		<div>
 
@@ -148,10 +150,12 @@
 <script src="<?php echo base_url();?>assets/js/video.js"></script>
 <script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/jquery.justifiedGallery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/pnotify.custom.min.js"></script>
 <!-- ace scripts -->
 <script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/ace.min.js"></script>
 
+<?=$this->session->flashdata('notify'); ?>
 
 <!-- inline scripts related to this page -->
 <script>

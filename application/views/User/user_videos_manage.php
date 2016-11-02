@@ -4,7 +4,7 @@
 
             <h3 class="header smaller lighter blue">Manage <?=$galleryname?><button id="submit_form" class="btn btn-sm btn-danger pull-right">Delete</button></a></h3>
 
-           <form method="POST" action="<?php echo base_url();?>Admin/delete_videos" id="delete_videos" >
+           <form method="POST" action="<?php echo base_url();?>User/delete_videos" id="delete_videos" >
             <ul class="ace-thumbnails clearfix">
 
                 <?php foreach($videos as $g): ?>
@@ -94,6 +94,7 @@
 
 <!-- inline scripts related to this page -->
 </body>
+
 
 <script>
 $( "#submit_form" ).click(function()

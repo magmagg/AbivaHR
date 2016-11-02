@@ -446,6 +446,54 @@ function do_Upload_gallery()
      $this->User_model->delete_one_picture_model($id);
    }
 
+   function manage_gallery()
+   {
+     $header['active_head'] = 'gallery';
+     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $id = $this->uri->segment(3);
+     $data['gallery'] = $this->User_model->get_specific_gallery_with_user_uploads($id,$this->session->userdata['id']);
+     if($data['gallery'])
+     {
+       foreach($data['gallery'] as $d)
+       {
+         $data['galleryname'] = $d->gfolder_name;
+       }
+       $data['galleryid'] = $id;
+       $this->load->view('User/user_header',$header);
+       $this->load->view('User/user_gallery_manage',$data);
+     }
+     else
+     {
+       $this->session->set_flashdata('notify',"<script>
+          new PNotify({
+           title: 'Error',
+           text: 'No pictures uploaded by you.',
+           type: 'error'
+        });
+       </script>");
+       redirect('User/view_gallery/'.$id);
+     }
+   }
+
+   function delete_pictures()
+   {
+     foreach($this->input->post('pictures') as $id)
+     {
+       $data['details'] = $this->User_model->get_one_picture($id);
+       foreach($data['details'] as $d)
+       {
+         $path = $d->picture_path;
+         $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $d->picture_path);
+         $ext = pathinfo($d->picture_path, PATHINFO_EXTENSION);
+         $picture_name = $withoutExt.'_thumb.'.$ext;
+         unlink($picture_name);
+         unlink($path);
+       }
+       $this->User_model->delete_one_picture_model($id);
+     }
+     redirect('User/manage_gallery/'.$this->input->post('return'));
+   }
+
 
    //===============================VIDEOS=======================================//
    function upload_videos()
@@ -597,6 +645,53 @@ function do_Upload_gallery()
       $data['users'] = $this->User_model->get_users();
       $this->load->view('User/user_header',$header);
       $this->load->view('User/user_videos_view',$data);
+    }
+
+    function manage_videos()
+    {
+      $header['active_head'] = 'gallery';
+      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+      $id = $this->uri->segment(3);
+      $data['videos'] = $this->User_model->get_specific_videos_with_useruploads($id,$this->session->userdata['id']);
+      if($data['videos'])
+      {
+        foreach($data['videos'] as $d)
+        {
+          $data['galleryname'] = $d->vfolder_name;
+        }
+        $data['galleryid'] = $id;
+        $this->load->view('User/user_header',$header);
+        $this->load->view('User/user_videos_manage',$data);
+      }
+      else
+      {
+        $this->session->set_flashdata('notify',"<script>
+           new PNotify({
+            title: 'Error',
+            text: 'No videos uploaded by you.',
+            type: 'error'
+         });
+        </script>");
+        redirect('User/view_videos/'.$id);
+      }
+    }
+
+    function delete_videos()
+    {
+      foreach($this->input->post('videos') as $id)
+      {
+        $data['details'] = $this->User_model->get_one_video($id);
+        foreach($data['details'] as $d)
+        {
+          $path = $d->video_path;
+          $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $d->video_path);
+           $picture_name = $withoutExt.'.png.';
+           unlink($picture_name);
+           unlink($path);
+        }
+        $this->User_model->delete_one_video($id);
+      }
+      redirect('User/manage_videos/'.$this->input->post('return'));
     }
 
 

@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div>
 
-            <h3 class="header smaller lighter blue">Manage <?=$galleryname?><button id="submit_form" class="btn btn-danger pull-right">Delete</button></a></h3>
+            <h3 class="header smaller lighter blue">Manage <?=$galleryname?><button id="submit_form" class="btn btn-sm btn-danger pull-right">Delete</button></a></h3>
 
                              <form method="POST" action="<?php echo base_url();?>Admin/delete_pictures" id="delete_pictures" >
             <ul class="ace-thumbnails clearfix">
@@ -21,11 +21,7 @@
                             <input type="checkbox" name="pictures[]" id="c_b" value="<?=$g->picture_id?>">
                             <input type="hidden" name="return" value="<?=$galleryid?>">
                         </center>
-                        <div class="tools tools-top">
-                            <a href="#" onclick="foo(<?=$g->picture_id?>)">
-                                <i class="ace-icon fa fa-times red"></i>
-                            </a>
-                        </div>
+
 
                     </li>
                     <?php endforeach;?>
@@ -98,34 +94,6 @@
 
 <!-- inline scripts related to this page -->
 </body>
-
-<script>
-    function foo(id) {
-        swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this picture!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            },
-            function(isConfirm) {
-                if (isConfirm) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "<?php echo base_url();?>Admin/delete_one_picture/" + id,
-                        success: function(data) {
-                            $('#li' + id).fadeOut('slow', function() {
-                                $('#li' + id).remove();
-                            });
-                            swal("Deleted!", "Picture deleted!", "success");
-                        }
-                    });
-                } else {}
-            });
-    }
-</script>
 
 <script>
 $( "#submit_form" ).click(function()
