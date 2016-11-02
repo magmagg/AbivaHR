@@ -30,14 +30,14 @@
 								<?php foreach($users as $u):?>
 									<?php if($d->files_user_id_fk == $u->user_id):?>
 										<?php $name = $u->user_firstname.' '.$u->user_lastname;?>
-									  <p class="help-block">Uploaded by:<a href="<?php echo base_url();?>Admin/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
+									  <p class="help-block">Uploaded by:<a href="<?php echo base_url();?>User/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
 									<?php endif;?>
 								<?php endforeach;?>
 								<?php else:?>
 								<?php foreach($users as $u):?>
 									<?php if($d->files_user_id_fk == $u->user_id):?>
 										<?php $name = $u->user_firstname.' '.$u->user_lastname;?>
-										<p class="help-block">Updated by:<?=$name?></p>
+										<p class="help-block">Uploaded by:<a href="<?php echo base_url();?>User/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
 									<?php endif;?>
 								<?php endforeach;?>
 								<?php endif;?>

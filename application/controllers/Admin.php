@@ -1356,7 +1356,7 @@ var_dump($error);
       {
         $isshared = 0;
       }
-      echo json_encode(array('isshared' => $isshared, 'id' => $currentfileID, 'displayname' => $displayname, 'version' => $final_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
+      echo json_encode(array('isshared' => $isshared,'id' => $currentfileID, 'displayname' => $displayname, 'version' => $final_version, 'updatedname' =>"<p class=\"help-block\">Updated by:<a href=\"".base_url()."Admin/view_other_profile/{$this->session->userdata['id']}\">{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</a></p>"));
     }
     else
     {
@@ -1376,7 +1376,7 @@ var_dump($error);
       {
         $isshared = 0;
       }
-      echo json_encode(array('isshared' => $isshared, 'id' => $currentfileID, 'displayname' => $displayname, 'version' => $current_version, 'updatedname' =>"<p class=\"help-block\">Updated by:{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</p>"));
+      echo json_encode(array('isshared' => $isshared,'id' => $currentfileID, 'displayname' => $displayname, 'version' => $final_version, 'updatedname' =>"<p class=\"help-block\">Updated by:<a href=\"".base_url()."Admin/view_other_profile/{$this->session->userdata['id']}\">{$this->session->userdata['firstname']} {$this->session->userdata['lastname']}</a></p>"));
     }
   }
 
