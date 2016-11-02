@@ -247,6 +247,21 @@
 					}
 					else
 					{
+						var values= '';
+						var i = 1;
+						$('#my_select_box option:selected').each(function() {
+							if(i == 1)
+							{
+								values += $(this).val();
+							}
+							else
+							{
+								values += ','+$(this).val();
+							}
+							console.log($(this).val()+i);
+							i++;
+							$("#shareddept").val(values);
+						});
 						var box1 = $('#autocomplete');
 						var box2 = $('#foldername');
 						box2.val(box1.val());
@@ -346,15 +361,7 @@
 		});
 	});
 </script>
-<script>
-	$('#my_select_box').on('change', function() {
-		var values = '';
-		$('#my_select_box option:selected').each(function() {
-			values = values + "," + $(this).val();
-			$("#shareddept").val(values);
-		});
-	});
-</script>
+
 </body>
 
 </html>

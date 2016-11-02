@@ -119,9 +119,12 @@
 						<select class="chosen-select form-control col-xs-10 col-sm-5 tag-input-style" id="my_select_box" data-placeholder="Shared with..." multiple>
 							<option value=""></option>
 							<?php foreach($departments as $d): ?>
+								<?php if($this->session->userdata['department'] == $d->department_id):?>
+								<?php else: ?>
 							<option value="<?=$d->department_id?>">
 								<?=$d->department_name?>
 							</option>
+						<?php endif;?>
 							<?php endforeach; ?>
 						</select>
 						<button type="button" class="btn btn-minier selectall" name="Button" value="Select all">Select all</button>
@@ -247,9 +250,25 @@
 					}
 					else
 					{
+						var values= '';
+						var i = 1;
+						$('#my_select_box option:selected').each(function() {
+							if(i == 1)
+							{
+								values += $(this).val();
+							}
+							else
+							{
+								values += ','+$(this).val();
+							}
+							console.log($(this).val()+i);
+							i++;
+							$("#shareddept").val(values);
+						});
 						var box1 = $('#autocomplete');
 						var box2 = $('#foldername');
 						box2.val(box1.val());
+
 						e.preventDefault();
 						e.stopPropagation();
 						myDropzone.processQueue();
@@ -338,15 +357,6 @@
 	}
 	$('#autocomplete').autocomplete({
 	lookup: newfolders
-	});
-</script>
-<script>
-	$('#my_select_box').on('change', function() {
-		var values = '';
-		$('#my_select_box option:selected').each(function() {
-			values = values + "," + $(this).val();
-			$("#shareddept").val(values);
-		});
 	});
 </script>
 </body>
