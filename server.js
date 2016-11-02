@@ -12,10 +12,9 @@ server.listen(port, function () {
 
 io.on('connection', function (socket) {
 
-  socket.on( 'new_count_message', function( data ) {
-    io.sockets.emit( 'new_count_message', {
-    	new_count_message: data.new_count_message
-
+  socket.on( 'new_announcement', function( data ) {
+    io.sockets.emit('new_announcement',{
+      departments: data.departments
     });
   });
 

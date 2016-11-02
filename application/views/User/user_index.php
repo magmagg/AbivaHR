@@ -158,6 +158,11 @@
 <script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/jquery.validate.min.js"></script>
 
+<script src="<?php echo base_url(); ?>assets/js/pnotify.custom.min.js"></script>
+<!-- ace scripts -->
+<script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/ace.min.js"></script>
+
 <script>
 $( document ).ready(function() {
 			 $($(".finished")).toggleClass("gray");
@@ -216,12 +221,43 @@ var id = $(this).attr("id");
 	}
 </script>
 
+<script src="<?php echo base_url(); ?>node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+<script>
+	var socket = io.connect('http://' + window.location.hostname + ':3000');
+	socket.on('new_announcement', function(data) {
+		var str = data.departments;
+		var str_array = str.split(',');
 
-<!-- ace scripts -->
-<script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/ace.min.js"></script>
+		for(var i = 0; i < str_array.length; i++)
+		{
+			if(str_array[i] == "<?=$this->session->userdata['department']?>")
+			{
+					 new PNotify({
+						title: 'Announcement',
+						text: 'New announcement posted',
+						type: 'success',
+			      addclass: "stack-bottomleft",
+				 });
+			}
+		}
+	});
 
-<!-- inline scripts related to this page -->
+	socket.on('new_message', function(data) {
+		if(data.receiver_id == "<?=$this->session->userdata['id']?>")
+		{
+			if($('#message'+data.receiver_id).length)
+			{
+
+			}
+			else
+			{
+				$('#span'+data.receiver_id).append('<span id="message'+data.receiver_id+'" class="badge badge-transparent tooltip-error" title="Unread messages">'+
+																						'<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>'+
+																						'</span>');
+			}
+		}
+	});
+</script>
 </body>
 
 </html>

@@ -116,6 +116,8 @@
 
 <script src="<?php echo base_url();?>assets/js/sweetalert.min.js"></script>
 <script src="<?php echo base_url();?>assets/js/jquery.validate.min.js"></script>
+<script src="<?php echo base_url(); ?>node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+
 <!-- ace scripts -->
 <script src="<?php echo base_url(); ?>assets/js/ace-elements.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/js/ace.min.js"></script>
@@ -223,6 +225,10 @@ $(".js-example-placeholder-single").select2({
 						$('#form-field-textarea').val('');
 						$('#select1').select2('destroy').find('option').prop('selected', false).end().select2({placeholder:"Select department"});
 
+															var socket = io.connect('http://' + window.location.hostname + ':3000');
+															socket.emit('new_announcement',{
+																departments: data.departments
+															});
 						swal({
 							title: "Success!!",
 							text: "Announcement posted!",
@@ -325,7 +331,7 @@ function editModal(id)
 								$('#'+mydata.id).find('td:eq(1)').text(mydata.title);
 								$('#'+mydata.id).find('td:eq(2)').text(mydata.content);
 								$('#'+mydata.id).find('td:eq(3)').text(mydata.timestamp);
-									$('#'+mydata.id).fadeIn('slow');
+								$('#'+mydata.id).fadeIn('slow');
 
 									swal("Edited!", "Your announcement has been edited.", "success");
 								});

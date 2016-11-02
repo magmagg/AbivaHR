@@ -967,23 +967,32 @@ var_dump($error);
 
 	  $id = $this->Admin_model->submit_announcement_model($data);
 		$time = date("G-m-d H:i:s",time());
-
+    $result = "";
+    $use['users'] = $this->Admin_model->get_users();
     foreach ($this->input->post('departments') as $d)
     {
+      foreach($use['users'] as $u)
+      {
+        if($u->user_department == $d)
+        {
+          $forinsert = array('user_read_ann'=>1);
+          $this->Admin_model->set_user_unread_ann($u->user_id,$forinsert);
+        }
+      }
       $data = array('ann_id_fk'=>$id,
   								  'ann_department_fk'=>$d,
                     );
       $this->Admin_model->insert_into_tblannouncement_visible($data);
+      $result .=','.$d;
     }
-
 		$data = array('ann_title'=>$title,
 									'ann_content'=>$content,
 									'ann_id'=>$id,
 									'ann_time'=>$time
 									);
     $data['success'] = true;
+    $data['departments'] = trim($result, ',');
 		echo json_encode($data);
-
 	  //redirect(base_url().'Admin/announcements');
   }
   function get_one_announcement()

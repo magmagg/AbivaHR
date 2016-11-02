@@ -133,6 +133,12 @@ class Admin_model extends CI_Model
     return $query->result();
   }
 
+  function set_user_unread_ann($userid,$data)
+  {
+    $this->db->where('user_id',$userid);
+    $this->db->update('tblusers',$data);
+  }
+
   //===================================GALLERY============================================//
   function check_existing_gallery($gallery)
   {
@@ -416,7 +422,7 @@ function check_username_duplicate($email)
 
   function get_users()
   {
-    $this ->db->select('user_id,user_firstname,user_lastname,user_picture');
+    $this ->db->select('user_id,user_department,user_firstname,user_lastname,user_picture');
     $this ->db->from('tblusers');
     $query = $this->db->get();
     return $query->result();

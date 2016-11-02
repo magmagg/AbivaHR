@@ -10,6 +10,16 @@ class User extends CI_Controller
     if($this->session->userdata('logged_in_user') == 1)
     {
       $this->load->model('User_model');
+      $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+      if($hasunread)
+        $header['ihasunread'] = 1;
+      else
+        $header['ihasunread'] = 0;
+      $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+      if($annunread)
+        $header['ihasunreadann'] = 1;
+      else
+        $header['ihasunreadann'] = 0;
     }
     else
     {
@@ -30,9 +40,6 @@ class User extends CI_Controller
                              'logged_in_user'=>true
                             );
         }
-
-
-
         $this->session->set_userdata($sessiondata);
       }
       else
@@ -50,6 +57,7 @@ class User extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+
     $ID = $this->session->userdata['id'];
 		$data['todolist'] = $this->User_model->get_todolist($ID);
     $this->load->view('User/user_header',$header);
