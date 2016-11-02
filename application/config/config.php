@@ -25,8 +25,8 @@ date_default_timezone_set('Asia/Manila');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.0.15/AbivaHR/';
-//$config['base_url'] = 'http://localhost/AbivaHR/';
+//$config['base_url'] = 'http://192.168.0.15/AbivaHR/';
+$config['base_url'] = 'http://localhost/AbivaHR/';
 //$config['base_url'] = 'https://abivahr-magmagg.c9users.io/';
 
 /*

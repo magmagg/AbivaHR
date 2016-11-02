@@ -509,6 +509,7 @@ var_dump($error);
       $data['galleryname'] = $d->gfolder_name;
     }
     $data['galleryid'] = $id;
+    $data['users'] = $this->Admin_model->get_users();
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_gallery_view',$data);
   }
@@ -606,6 +607,7 @@ var_dump($error);
             $this->create_thumbnail($target_file);
              $data = array('picture_name'=>$newname,
                             'picture_path'=>$target_file,
+                            'picture_uploader_id'=>$this->session->userdata['id'],
                             'gfolder_id_fk'=>$gfolder_id);
 
               $this->Admin_model->insert_gallery_pictures($data);
@@ -798,6 +800,7 @@ var_dump($error);
 
              $data = array('video_name'=>$newname,
                             'video_path'=>$target_file,
+                            'video_uploader_id'=>$this->session->userdata['id'],
                             'vfolder_id_fk'=>$vfolder_id);
 
               $this->Admin_model->insert_videos($data);
@@ -861,6 +864,7 @@ var_dump($error);
        $data['galleryname'] = $d->vfolder_name;
      }
      $data['galleryid'] = $id;
+     $data['users'] = $this->Admin_model->get_users();
      $this->load->view('Admin/admin_header',$header);
      $this->load->view('Admin/admin_videos_view',$data);
    }

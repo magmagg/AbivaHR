@@ -302,6 +302,7 @@ function view_gallery()
     $data['galleryname'] = $d->gfolder_name;
   }
   $data['galleryid'] = $id;
+  $data['users'] = $this->User_model->get_users();
   $this->load->view('User/user_header',$header);
   $this->load->view('User/user_gallery_view',$data);
 }
@@ -399,6 +400,7 @@ function do_Upload_gallery()
           $this->create_thumbnail($target_file);
            $data = array('picture_name'=>$newname,
                           'picture_path'=>$target_file,
+                          'picture_uploader_id'=>$this->session->userdata['id'],
                           'gfolder_id_fk'=>$gfolder_id);
 
             $this->User_model->insert_gallery_pictures($data);
@@ -528,6 +530,7 @@ function do_Upload_gallery()
 
               $data = array('video_name'=>$newname,
                              'video_path'=>$target_file,
+                             'video_uploader_id'=>$this->session->userdata['id'],
                              'vfolder_id_fk'=>$vfolder_id);
 
                $this->User_model->insert_videos($data);
@@ -591,6 +594,7 @@ function do_Upload_gallery()
         $data['galleryname'] = $d->vfolder_name;
       }
       $data['galleryid'] = $id;
+      $data['users'] = $this->User_model->get_users();
       $this->load->view('User/user_header',$header);
       $this->load->view('User/user_videos_view',$data);
     }

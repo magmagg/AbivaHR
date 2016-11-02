@@ -19,6 +19,14 @@ class User_model extends CI_Model
   		$query = $this->db->get();
   		return $query->result();
     }
+
+    function get_users()
+    {
+      $this ->db->select('user_id,user_firstname,user_lastname,user_picture');
+      $this ->db->from('tblusers');
+      $query = $this->db->get();
+      return $query->result();
+    }
   //==================================END============================//
   //================================DASHBOARD===================================//
 

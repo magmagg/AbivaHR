@@ -6,6 +6,7 @@ Install xampp
     max execution time
   -Install apache mysql services
 Install node
+add exception firewall
 
 on root folder
 npm install -g node-windows

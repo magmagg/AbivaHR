@@ -37,7 +37,7 @@
     opacity: 0.85;
 }
 .fixed-size.lg-outer .lg-inner {
-  background-color: #FFF;
+  background-color: #000000;
 }
 .fixed-size.lg-outer .lg-sub-html {
   position: absolute;
@@ -86,14 +86,18 @@
 
 				<?php foreach($videos as $g): ?>
 				<?php
-						      $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $g->video_name);
-						      $picture_name = $withoutExt.'.png';
+	      $withoutExt = preg_replace('/\\.[^.\\s]{3,4}$/', '', $g->video_name);
+	      $picture_name = $withoutExt.'.png';
 
-						      $videopath = base_url().$foldername.str_replace(' ', '%20', $g->vfolder_name).'/'.$g->video_name;
-						      $videothumb = base_url().$foldername.str_replace(' ', '%20', $g->vfolder_name).'/'.$picture_name;
-						      ?>
+	      $videopath = base_url().$foldername.str_replace(' ', '%20', $g->vfolder_name).'/'.$g->video_name;
+	      $videothumb = base_url().$foldername.str_replace(' ', '%20', $g->vfolder_name).'/'.$picture_name;
+	      ?>
+        <?php foreach($users as $u): ?>
+          <?php if($u->user_id == $g->video_uploader_id){$name = $u->user_firstname.' '.$u->user_lastname;} ?>
+        <?php endforeach;?>
 					<span class="rollover"></span>
-					<a class="item image" data-poster="<?=$videothumb?>" data-sub-html="video caption1" data-html="#video<?=$i?>">
+
+					<a class="item image" data-poster="<?=$videothumb?>" data-sub-html="Uploaded by:<?=$name?>" data-html="#video<?=$i?>">
 													<img src="<?=$videothumb?>" />	</a>
 					<?php $i++;?>
 					<?php endforeach;?>
@@ -197,7 +201,7 @@
 		mode: 'lg-fade',
 		addClass: 'fixed-size',
 		counter: false,
-		download: false,
+		download: true,
 		startClass: '',
 		enableSwipe: false,
 		enableDrag: false,

@@ -37,7 +37,7 @@
     opacity: 0.85;
 }
 .fixed-size.lg-outer .lg-inner {
-  background-color: #FFF;
+  background-color: #000000;
 }
 .fixed-size.lg-outer .lg-sub-html {
   position: absolute;
@@ -70,9 +70,11 @@
 					$picture_name = $withoutExt.'_thumb.'.$ext;
 					$foldername = 'assets/files/gallery/';
 					?>
-
+          <?php foreach($users as $u): ?>
+            <?php if($u->user_id == $g->picture_uploader_id){$name = $u->user_firstname.' '.$u->user_lastname;} ?>
+            <?php endforeach;?>
           	<span class="rollover" ></span>
-						<a class="item image" href="<?php echo base_url().$foldername?><?=$g->gfolder_name?>/<?=$g->picture_name?>">
+						<a class="item image" href="<?php echo base_url().$foldername?><?=$g->gfolder_name?>/<?=$g->picture_name?>" data-sub-html="Uploaded by:<?=$name?>">
 								<img class="img-responsive" src="<?php echo base_url().$foldername?><?=str_replace(' ', '%20', $g->gfolder_name)?>/<?=$picture_name;?>">
 						</a>
 						<?php endforeach;?>

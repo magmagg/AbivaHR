@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2016 at 02:30 AM
+-- Generation Time: Nov 02, 2016 at 03:33 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.23
 
@@ -19,6 +19,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `abivahr`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `read_status` tinyint(1) NOT NULL,
+  `message_thread_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -75,6 +91,7 @@ INSERT INTO `tbldepartments` (`department_id`, `department_name`) VALUES
 CREATE TABLE `tblfiles_archive` (
   `archive_id` int(11) NOT NULL,
   `archive_path` text NOT NULL,
+  `archive_user_id_fk` int(11) NOT NULL,
   `archive_display_name` varchar(50) NOT NULL,
   `archive_version` varchar(255) NOT NULL,
   `archive_timestamp` varchar(50) NOT NULL,
@@ -90,6 +107,7 @@ CREATE TABLE `tblfiles_archive` (
 CREATE TABLE `tblfiles_content` (
   `files_id` int(11) NOT NULL,
   `files_name` varchar(30) NOT NULL,
+  `files_user_id_fk` int(11) NOT NULL,
   `files_path` text NOT NULL,
   `files_display_name` varchar(50) NOT NULL,
   `files_version` varchar(255) NOT NULL DEFAULT '1.0',
@@ -143,34 +161,8 @@ CREATE TABLE `tblgallery_pictures` (
   `picture_id` int(11) NOT NULL,
   `picture_name` text NOT NULL,
   `picture_path` text NOT NULL,
+  `picture_uploader_id` int(11) NOT NULL,
   `gfolder_id_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblmessage_content`
---
-
-CREATE TABLE `tblmessage_content` (
-  `message_id` int(11) NOT NULL,
-  `message_sender` int(11) NOT NULL,
-  `message_receiver` int(11) NOT NULL,
-  `message_subject` varchar(50) NOT NULL,
-  `message` text NOT NULL,
-  `message_isread` tinyint(4) NOT NULL DEFAULT '0',
-  `message_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `thread_id_fk` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tblmessage_threadno`
---
-
-CREATE TABLE `tblmessage_threadno` (
-  `thread_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -266,8 +258,67 @@ CREATE TABLE `tblusers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `tblusers`
+--
+
+INSERT INTO `tblusers` (`user_id`, `user_firstname`, `user_middlename`, `user_lastname`, `user_username`, `user_password`, `user_department`, `user_birthday`, `user_gender`, `user_aboutme`, `user_address`, `user_email`, `user_cpnumber`, `user_google`, `user_linkedin`, `user_wordpress`, `user_picture`, `user_isadmin`, `user_active`) VALUES
+(1, 'Lorenzo', 'C.', 'Magno', 'magmagg', '$2y$10$ssIlFY9Qlaa9XPUub6/d6.mwZ3N/HjXIUFL8mhK3HfoqZeTaUxH8y', 2, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1),
+(2, 'Sample', '.', '1', 'Sample1', '$2y$10$1PEsMDHut5H75JvSBeLlx.VTfhGnKZh4S7MXG6PkPmBvYnpSZYBAm', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1),
+(3, 'Sample', '.', '2', 'Sample2', '$2y$10$D.JTYh6LP/MNYPO923kE1OAKWS39/gPZactv6RipNRuo/ULXc875i', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1),
+(4, 'Sample', '.', '3', 'Sample3', '$2y$10$RZ0TK9sHlOryKdUPCPbgduYvUZlw4N9Cbn5To95YI8zPhgP6/Eda2', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1),
+(5, 'A', 'a', 'A', 'A', '$2y$10$r2VGANAukfiQF5CldMiyX./fKcl4fvdyoUsdo74w.o7i3cSSNkkM6', 2, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1),
+(6, 'B', 'B', 'B', 'B', '$2y$10$feiTRNF97BmzDR9XfL2ZueVLQOVBqbry45D2dpPD9qmMM1QoaBYju', 3, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1),
+(7, 'C', 'C', 'C', 'C', '$2y$10$jmxogHoRDI7MUj3X5GQyVO/VD32TV1qK.ZXLMPqDX0Voz1Y05i9.G', 4, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1),
+(8, 'D', 'D', 'D', 'D', '$2y$10$Wwbnqbm2tm5ae.UNMI1yW.cwlzZwMsfRqkVTlZ0lHIMrqxrlmN8rm', 5, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1),
+(9, 'EDP', 'EDP', 'EDP', 'EDP', '$2y$10$Yayor/WkFOUUnhXICm6qTeZX0EV/Wvj10s9TSSwnCMjPoAXbe942K', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblvideos_content`
+--
+
+CREATE TABLE `tblvideos_content` (
+  `video_id` int(11) NOT NULL,
+  `video_name` text NOT NULL,
+  `video_path` text NOT NULL,
+  `video_uploader_id` int(11) NOT NULL,
+  `vfolder_id_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblvideos_folder`
+--
+
+CREATE TABLE `tblvideos_folder` (
+  `vfolder_id` int(11) NOT NULL,
+  `vfolder_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tblvideos_folder`
+--
+
+INSERT INTO `tblvideos_folder` (`vfolder_id`, `vfolder_name`) VALUES
+(1, 'sdf sdf'),
+(2, 'sd f sdf'),
+(3, 'w3w'),
+(4, 'ddf'),
+(5, 'f'),
+(6, 'sdddd'),
+(7, 'waw');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tblannouncements`
@@ -293,14 +344,16 @@ ALTER TABLE `tbldepartments`
 --
 ALTER TABLE `tblfiles_archive`
   ADD PRIMARY KEY (`archive_id`),
-  ADD KEY `archive_files_id_fk` (`archive_files_id_fk`);
+  ADD KEY `archive_files_id_fk` (`archive_files_id_fk`),
+  ADD KEY `archive_user_id_fk` (`archive_user_id_fk`);
 
 --
 -- Indexes for table `tblfiles_content`
 --
 ALTER TABLE `tblfiles_content`
   ADD PRIMARY KEY (`files_id`),
-  ADD KEY `files_ffolder_id_fk` (`files_ffolder_id_fk`);
+  ADD KEY `files_ffolder_id_fk` (`files_ffolder_id_fk`),
+  ADD KEY `files_user_id_fk` (`files_user_id_fk`);
 
 --
 -- Indexes for table `tblfiles_folder`
@@ -329,19 +382,6 @@ ALTER TABLE `tblgallery_folder`
 ALTER TABLE `tblgallery_pictures`
   ADD PRIMARY KEY (`picture_id`),
   ADD KEY `gfolder_id_fk` (`gfolder_id_fk`);
-
---
--- Indexes for table `tblmessage_content`
---
-ALTER TABLE `tblmessage_content`
-  ADD PRIMARY KEY (`message_id`),
-  ADD KEY `thread_id_fk` (`thread_id_fk`);
-
---
--- Indexes for table `tblmessage_threadno`
---
-ALTER TABLE `tblmessage_threadno`
-  ADD PRIMARY KEY (`thread_id`);
 
 --
 -- Indexes for table `tblpolicies`
@@ -385,9 +425,27 @@ ALTER TABLE `tblusers`
   ADD KEY `fk_department` (`user_department`);
 
 --
+-- Indexes for table `tblvideos_content`
+--
+ALTER TABLE `tblvideos_content`
+  ADD PRIMARY KEY (`video_id`),
+  ADD KEY `vfolder_id_fk` (`vfolder_id_fk`);
+
+--
+-- Indexes for table `tblvideos_folder`
+--
+ALTER TABLE `tblvideos_folder`
+  ADD PRIMARY KEY (`vfolder_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblannouncements`
 --
@@ -429,16 +487,6 @@ ALTER TABLE `tblgallery_folder`
 ALTER TABLE `tblgallery_pictures`
   MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `tblmessage_content`
---
-ALTER TABLE `tblmessage_content`
-  MODIFY `message_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tblmessage_threadno`
---
-ALTER TABLE `tblmessage_threadno`
-  MODIFY `thread_id` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT for table `tblpolicies`
 --
 ALTER TABLE `tblpolicies`
@@ -467,7 +515,17 @@ ALTER TABLE `tbltodolist`
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `tblvideos_content`
+--
+ALTER TABLE `tblvideos_content`
+  MODIFY `video_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tblvideos_folder`
+--
+ALTER TABLE `tblvideos_folder`
+  MODIFY `vfolder_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
@@ -483,13 +541,15 @@ ALTER TABLE `tblannouncements_visible`
 -- Constraints for table `tblfiles_archive`
 --
 ALTER TABLE `tblfiles_archive`
-  ADD CONSTRAINT `tblfiles_archive_ibfk_1` FOREIGN KEY (`archive_files_id_fk`) REFERENCES `tblfiles_content` (`files_id`);
+  ADD CONSTRAINT `tblfiles_archive_ibfk_1` FOREIGN KEY (`archive_files_id_fk`) REFERENCES `tblfiles_content` (`files_id`),
+  ADD CONSTRAINT `tblfiles_archive_ibfk_2` FOREIGN KEY (`archive_user_id_fk`) REFERENCES `tblusers` (`user_id`);
 
 --
 -- Constraints for table `tblfiles_content`
 --
 ALTER TABLE `tblfiles_content`
-  ADD CONSTRAINT `tblfiles_content_ibfk_1` FOREIGN KEY (`files_ffolder_id_fk`) REFERENCES `tblfiles_folder` (`ffolder_id`);
+  ADD CONSTRAINT `tblfiles_content_ibfk_1` FOREIGN KEY (`files_ffolder_id_fk`) REFERENCES `tblfiles_folder` (`ffolder_id`),
+  ADD CONSTRAINT `tblfiles_content_ibfk_2` FOREIGN KEY (`files_user_id_fk`) REFERENCES `tblusers` (`user_id`);
 
 --
 -- Constraints for table `tblfiles_folder`
@@ -509,12 +569,6 @@ ALTER TABLE `tblfiles_shared`
 --
 ALTER TABLE `tblgallery_pictures`
   ADD CONSTRAINT `gfolder_id_fk` FOREIGN KEY (`gfolder_id_fk`) REFERENCES `tblgallery_folder` (`gfolder_id`);
-
---
--- Constraints for table `tblmessage_content`
---
-ALTER TABLE `tblmessage_content`
-  ADD CONSTRAINT `tblmessage_content_ibfk_1` FOREIGN KEY (`thread_id_fk`) REFERENCES `tblmessage_threadno` (`thread_id`);
 
 --
 -- Constraints for table `tblpolicies_sub1`
@@ -545,6 +599,12 @@ ALTER TABLE `tbltodolist`
 --
 ALTER TABLE `tblusers`
   ADD CONSTRAINT `fk_department` FOREIGN KEY (`user_department`) REFERENCES `tbldepartments` (`department_id`);
+
+--
+-- Constraints for table `tblvideos_content`
+--
+ALTER TABLE `tblvideos_content`
+  ADD CONSTRAINT `vfolder_id_fk` FOREIGN KEY (`vfolder_id_fk`) REFERENCES `tblvideos_folder` (`vfolder_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
