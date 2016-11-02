@@ -42,7 +42,7 @@
                                 </button>
                             </a>
 
-                            <a href="#" onclick="foo()" class="tooltip-info" data-rel="tooltip" title="Delete">
+                            <a href="#" onclick="foo(<?=$p->policy_id?>, 0)" class="tooltip-info" data-rel="tooltip" title="Delete">
                                 <button class="btn btn-xs btn-danger">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>
@@ -81,7 +81,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="#" onclick="foo()" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <a href="#" onclick="foo(<?=$p->policy_id?>, 0)" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                 <span class="red">
                                           <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </span>
@@ -127,7 +127,7 @@
                                 </button>
                             </a>
 
-                            <a href="#" onclick="foo()" class="tooltip-info" data-rel="tooltip" title="Delete">
+                            <a href="#" onclick="foo(<?=$s1->sub1_id?>, 1)" class="tooltip-info" data-rel="tooltip" title="Delete">
                                 <button class="btn btn-xs btn-danger">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>
@@ -166,7 +166,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="#" onclick="foo()" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <a href="#" onclick="foo(<?=$s1->sub1_id?>, 1)" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                 <span class="red">
                                           <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </span>
@@ -211,7 +211,7 @@
                                 </button>
                             </a>
 
-                            <a href="#" onclick="foo()" class="tooltip-info" data-rel="tooltip" title="Delete">
+                            <a href="#" onclick="foo(<?=$s2->sub2_id?>, 2)" class="tooltip-info" data-rel="tooltip" title="Delete">
                                 <button class="btn btn-xs btn-danger">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>
@@ -250,7 +250,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="#" onclick="foo()" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <a href="#" onclick="foo(<?=$s2->sub2_id?>, 2)" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                 <span class="red">
                                           <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </span>
@@ -288,7 +288,7 @@
                                 </button>
                             </a>
 
-                            <a href="#" onclick="foo()" class="tooltip-info" data-rel="tooltip" title="Delete">
+                            <a href="#" onclick="foo(<?=$s3->sub3_id?>, 3)" class="tooltip-info" data-rel="tooltip" title="Delete">
                                 <button class="btn btn-xs btn-danger">
                                     <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                 </button>
@@ -318,7 +318,7 @@
                                         </li>
 
                                         <li>
-                                            <a href="#" onclick="foo()" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <a href="#" onclick="foo(<?=$s3->sub3_id?>, 3)" class="tooltip-error" data-rel="tooltip" title="Delete">
                                                 <span class="red">
                                           <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </span>
@@ -462,6 +462,32 @@
     });
 </script>
 
+<script>
+	function foo(policy_id, subtable) {
+		swal({
+				title: "Are you sure?",
+				text: "You will not be able to recover this page!",
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, delete it!",
+				closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: 'POST',
+						url: "<?php echo base_url();?>Admin/delete_one_policy/"+policy_id+"/"+subtable,
+						success: function(data) {
+                            swal({   title: "Success!",   text: "Redirecting...",   timer: 1000,   imageUrl: "<?php echo base_url();?>/assets/img/loading1.gif",    showConfirmButton: false });
+                            setTimeout(function(){ location.href = "<?php echo base_url();?>Admin/policies"; }, 1000);
+						}
+					});
+				} else {}
+			});
+	}
+</script>
 
 
 <!-- inline scripts related to this page -->

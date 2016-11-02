@@ -653,6 +653,11 @@ function check_username_duplicate($email)
     $this->db->update('tblpolicies',$data);
   }
 
+  function delete_tblpolicies($policy_id)
+  {
+    $this->db->delete('tblpolicies', array('policy_id'=>$policy_id));
+  }
+
   //======================POLICIES SUB1=======================//
   function get_sub1_table()
   {
@@ -683,6 +688,24 @@ function check_username_duplicate($email)
     $this->db->update('tblpolicies_sub1',$data);
   }
 
+  function delete_tblpolicies_sub1($policy_id)
+  {
+    $this->db->delete('tblpolicies_sub1', array('sub1_id'=>$policy_id));
+  }
+
+  function get_sub1_ids_fk_policies($policy_id)
+  {
+    $this->db->select('sub1_id');
+    $this->db->from('tblpolicies_sub1');
+    $this->db->where('policy_id_fk',$policy_id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function delete_tblpolicies_sub1_fk_policies($policy_id)
+  {
+    $this->db->delete('tblpolicies_sub1', array('policy_id_fk'=>$policy_id));
+  }
   //======================POLICIES SUB2=======================//
   function get_sub2_table()
   {
@@ -713,6 +736,25 @@ function check_username_duplicate($email)
     $this->db->update('tblpolicies_sub2',$data);
   }
 
+  function delete_tblpolicies_sub2($policy_id)
+  {
+    $this->db->delete('tblpolicies_sub2', array('sub2_id'=>$policy_id));
+  }
+
+  function get_sub2_ids_fk_sub1($policy_id)
+  {
+    $this->db->select('sub2_id');
+    $this->db->from('tblpolicies_sub2');
+    $this->db->where('sub1_id_fk',$policy_id);
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function delete_tblpolicies_sub2_fk_sub1($policy_id)
+  {
+    $this->db->delete('tblpolicies_sub2', array('sub1_id_fk'=>$policy_id));
+  }
+
   //======================POLICIES SUB3=======================//
   function get_sub3_table()
   {
@@ -741,5 +783,15 @@ function check_username_duplicate($email)
   {
     $this->db->where('sub3_id',$id);
     $this->db->update('tblpolicies_sub3',$data);
+  }
+
+  function delete_tblpolicies_sub3($policy_id)
+  {
+    $this->db->delete('tblpolicies_sub3', array('sub3_id'=>$policy_id));
+  }
+
+  function delete_tblpolicies_sub3_fk_sub2($policy_id)
+  {
+    $this->db->delete('tblpolicies_sub3', array('sub2_id_fk'=>$policy_id));
   }
 }

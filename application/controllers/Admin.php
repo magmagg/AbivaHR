@@ -1570,6 +1570,47 @@ var_dump($error);
     $this->load->view('Admin/admin_policies_view_page',$data);
   }
 
+  function delete_one_policy()
+  {
+    $policy_id = $this->uri->segment(3);
+    $subtable = $this->uri->segment(4);
+
+    if($subtable == 3)
+    {
+      $this->Admin_model->delete_tblpolicies_sub3($policy_id);
+    }
+    if($subtable == 2)
+    {
+      $this->Admin_model->delete_tblpolicies_sub3_fk_sub2($policy_id);
+      $this->Admin_model->delete_tblpolicies_sub2($policy_id);
+    }
+    if($subtable == 1)
+    {
+      $data['sub2'] = $this->Admin_model->get_sub2_ids_fk_sub1($policy_id);
+      foreach($data['sub2'] as $s2)
+      {
+        $this->Admin_model->delete_tblpolicies_sub3_fk_sub2($s2->sub2_id);
+      }
+      $this->Admin_model->delete_tblpolicies_sub2_fk_sub1($policy_id);
+      $this->Admin_model->delete_tblpolicies_sub1($policy_id);
+    }
+    if($subtable == 0)
+    {
+      $data['sub1'] = $this->Admin_model->get_sub1_ids_fk_policies($policy_id);
+      foreach($data['sub1'] as $s1)
+      {
+        $data['sub2'] = $this->Admin_model->get_sub2_ids_fk_sub1($s1->sub1_id);
+        foreach($data['sub2'] as $s2)
+        {
+          $this->Admin_model->delete_tblpolicies_sub3_fk_sub2($s2->sub2_id);
+        }
+        $this->Admin_model->delete_tblpolicies_sub2_fk_sub1($s1->sub1_id);
+      }
+      $this->Admin_model->delete_tblpolicies_sub1_fk_policies($policy_id);
+      $this->Admin_model->delete_tblpolicies($policy_id);
+    }
+  }
+
   //===========================POLICIES SUB 1=========================//
   function create_sub1_policy_page()
   {
