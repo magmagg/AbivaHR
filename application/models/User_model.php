@@ -117,6 +117,12 @@ class User_model extends CI_Model
       return $query->row();
     }
 
+    function set_read_announcements($userid)
+    {
+      $this->db->where('user_id',$userid);
+      $this->db->update('tblusers', array('user_read_ann'=>0));
+    }
+
     //===================================GALLERY============================================//
     function check_existing_gallery($gallery)
     {

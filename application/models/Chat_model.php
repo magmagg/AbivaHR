@@ -78,4 +78,24 @@ class Chat_model extends CI_Model
 		$this->db->update('message',array('read_status'=>1));
 	}
 
+	function get_unread_messages_forchck($userid)
+	{
+		$this->db->select('read_status');
+		$this->db->from('message');
+		$this->db->where('receiver_id',$userid);
+		$this->db->where('read_status', 0);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
+	function get_unread_ann($userid)
+	{
+		$this->db->select('user_read_ann');
+		$this->db->from('tblusers');
+		$this->db->where('user_id',$userid);
+		$this->db->where('user_read_ann',1);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
 }

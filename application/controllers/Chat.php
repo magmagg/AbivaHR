@@ -21,6 +21,17 @@ class Chat extends CI_Controller
 		$header['active_head'] = 'messages';
 		$header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
 
+		$hasunread = $this->Chat_model->get_unread_messages_forchck($this->session->userdata['id']);
+		if($hasunread)
+			$header['ihasunread'] = 1;
+		else
+			$header['ihasunread'] = 0;
+		$annunread = $this->Chat_model->get_unread_ann($this->session->userdata['id']);
+		if($annunread)
+			$header['ihasunreadann'] = 1;
+		else
+			$header['ihasunreadann'] = 0;
+
 		if($this->session->userdata('logged_in') == 1)
 		{
 			$this->load->view('Admin/admin_header',$header);

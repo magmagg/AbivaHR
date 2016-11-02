@@ -10,16 +10,6 @@ class User extends CI_Controller
     if($this->session->userdata('logged_in_user') == 1)
     {
       $this->load->model('User_model');
-      $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
-      if($hasunread)
-        $header['ihasunread'] = 1;
-      else
-        $header['ihasunread'] = 0;
-      $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
-      if($annunread)
-        $header['ihasunreadann'] = 1;
-      else
-        $header['ihasunreadann'] = 0;
     }
     else
     {
@@ -57,7 +47,16 @@ class User extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
+    $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+    if($annunread)
+      $header['ihasunreadann'] = 1;
+    else
+      $header['ihasunreadann'] = 0;
     $ID = $this->session->userdata['id'];
 		$data['todolist'] = $this->User_model->get_todolist($ID);
     $this->load->view('User/user_header',$header);
@@ -107,7 +106,16 @@ class User extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
+    $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+    if($annunread)
+      $header['ihasunreadann'] = 1;
+    else
+      $header['ihasunreadann'] = 0;
 
     $ID = $this->session->userdata['id'];
 		$data['userDetails'] = $this->User_model->get_one_user($ID);
@@ -266,7 +274,16 @@ class User extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
+    $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+    if($annunread)
+      $header['ihasunreadann'] = 1;
+    else
+      $header['ihasunreadann'] = 0;
 
     $ID = $this->uri->segment(3);
 		$data['userDetails'] = $this->User_model->get_one_user($ID);
@@ -279,10 +296,19 @@ class User extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
+    $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+    if($annunread)
+      $header['ihasunreadann'] = 1;
+    else
+      $header['ihasunreadann'] = 0;
     $dept = $this->session->userdata['department'];
     $data['announcements'] = $this->User_model->get_announce($dept);
-
+    $this->User_model->set_read_announcements($this->session->userdata['id']);
     $this->load->view('User/user_header',$header);
     $this->load->view('User/user_announcements',$data);
   }
@@ -294,6 +320,16 @@ function gallery()
 {
   $header['active_head'] = 'gallery';
   $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+  $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+  if($hasunread)
+    $header['ihasunread'] = 1;
+  else
+    $header['ihasunread'] = 0;
+  $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+  if($annunread)
+    $header['ihasunreadann'] = 1;
+  else
+    $header['ihasunreadann'] = 0;
   $data['gallery'] = $this->User_model->get_all_gallery();
   $this->load->view('User/user_header',$header);
   $this->load->view('User/user_gallery',$data);
@@ -303,6 +339,16 @@ function view_gallery()
 {
   $header['active_head'] = 'gallery';
   $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+  $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+  if($hasunread)
+    $header['ihasunread'] = 1;
+  else
+    $header['ihasunread'] = 0;
+  $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+  if($annunread)
+    $header['ihasunreadann'] = 1;
+  else
+    $header['ihasunreadann'] = 0;
   $id = $this->uri->segment(3);
   $data['gallery'] = $this->User_model->get_specific_gallery($id);
   foreach($data['gallery'] as $d)
@@ -319,6 +365,16 @@ function upload_pictures()
 {
   $header['active_head'] = 'gallery';
   $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+  $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+  if($hasunread)
+    $header['ihasunread'] = 1;
+  else
+    $header['ihasunread'] = 0;
+  $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+  if($annunread)
+    $header['ihasunreadann'] = 1;
+  else
+    $header['ihasunreadann'] = 0;
   $use['gallery'] = $this->User_model->get_gallery_names();
   $data['gallery'] = array();
   foreach($use['gallery'] as $key => $value)
@@ -458,6 +514,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = 'gallery';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
      $id = $this->uri->segment(3);
      $data['gallery'] = $this->User_model->get_specific_gallery_with_user_uploads($id,$this->session->userdata['id']);
      if($data['gallery'])
@@ -508,6 +574,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = 'gallery';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
      $use['vfolder_name'] = $this->User_model->get_videos_folder();
      $data['vfolder_name'] = array();
      foreach($use['vfolder_name'] as $key => $value)
@@ -634,6 +710,16 @@ function do_Upload_gallery()
     {
       $header['active_head'] = 'gallery';
       $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+      $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+      if($hasunread)
+        $header['ihasunread'] = 1;
+      else
+        $header['ihasunread'] = 0;
+      $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+      if($annunread)
+        $header['ihasunreadann'] = 1;
+      else
+        $header['ihasunreadann'] = 0;
       $data['videos'] = $this->User_model->get_all_videos();
       $this->load->view('User/user_header',$header);
       $this->load->view('User/user_videos',$data);
@@ -643,6 +729,16 @@ function do_Upload_gallery()
     {
       $header['active_head'] = 'gallery';
       $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+      $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+      if($hasunread)
+        $header['ihasunread'] = 1;
+      else
+        $header['ihasunread'] = 0;
+      $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+      if($annunread)
+        $header['ihasunreadann'] = 1;
+      else
+        $header['ihasunreadann'] = 0;
       $id = $this->uri->segment(3);
       $data['videos'] = $this->User_model->get_specific_videos($id);
       foreach($data['videos'] as $d)
@@ -659,6 +755,16 @@ function do_Upload_gallery()
     {
       $header['active_head'] = 'gallery';
       $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+      $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+      if($hasunread)
+        $header['ihasunread'] = 1;
+      else
+        $header['ihasunread'] = 0;
+      $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+      if($annunread)
+        $header['ihasunreadann'] = 1;
+      else
+        $header['ihasunreadann'] = 0;
       $id = $this->uri->segment(3);
       $data['videos'] = $this->User_model->get_specific_videos_with_useruploads($id,$this->session->userdata['id']);
       if($data['videos'])
@@ -708,6 +814,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = 'upload_files';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
      $departmentid =  $this->session->userdata['department'];
      $data['folders'] = $this->User_model->get_folders_dept($departmentid);
      $data['departmentid'] = $departmentid;
@@ -737,6 +853,16 @@ function do_Upload_gallery()
    {
        $header['active_head'] = 'files';
        $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+       $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+       if($hasunread)
+         $header['ihasunread'] = 1;
+       else
+         $header['ihasunread'] = 0;
+       $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+       if($annunread)
+         $header['ihasunreadann'] = 1;
+       else
+         $header['ihasunreadann'] = 0;
        $data['foldernew'] = $this->User_model->get_folder_names_department($this->session->userdata['department']);
        $data['departments'] = $this->User_model->get_departments();
        $this->load->view('User/user_header',$header);
@@ -1082,7 +1208,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = 'files';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
      $data['files'] = $this->User_model->get_shared_files($this->session->userdata['department']);
      $data['users'] = $this->User_model->get_user_names();
      $data['departments'] = $this->User_model->get_departments();
@@ -1096,6 +1231,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = 'files';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
      $filesid = $this->uri->segment(3);
      $data['archive'] = $this->User_model->get_files_archive($filesid);
      $data['departmentid'] = $this->uri->segment(4);
@@ -1110,6 +1255,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = 'messages';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
 
      $data['recipients'] = $this->User_model->get_list_employees();
 
@@ -1143,6 +1298,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = '';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
 
      $data['policies'] = $this->User_model->get_policies_table();
 
@@ -1154,6 +1319,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = '';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
      $id = $this->uri->segment(3);
 
      $data['policies'] = $this->User_model->get_policies_table_specific($id);
@@ -1194,6 +1369,16 @@ function do_Upload_gallery()
    {
      $header['active_head'] = 'policies';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
+     $annunread = $this->User_model->get_unread_ann($this->session->userdata['id']);
+     if($annunread)
+       $header['ihasunreadann'] = 1;
+     else
+       $header['ihasunreadann'] = 0;
      $id = $this->uri->segment(3);
      $type = $this->uri->segment(4);
      //0-main
