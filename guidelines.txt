@@ -1,18 +1,4 @@
-Install xampp
-  -Change php.ini
-    max post size
-    max upload size
-    max file uploads
-    max execution time
-  -Install apache mysql services
-Install node
 add exception firewall
-
-on root folder
-npm install -g node-windows
-npm link node-windows
-node server.js
-make server.js a service
 
 in mysql
 import database
