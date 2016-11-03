@@ -75,7 +75,7 @@
 
 					<div class="navbar-buttons navbar-header pull-right" role="navigation">
 						<ul class="nav ace-nav">
-
+<!--
 							<li class="purple dropdown-modal">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-bell icon-animated-bell"></i>
@@ -112,7 +112,7 @@
 								</li>
 							</ul>
 						</li>
-
+-->
 
 
 							<li class="light-blue dropdown-modal">
