@@ -65,12 +65,13 @@
 											<i class="ace-icon fa fa-trash-o bigger-120"></i>
 										</button>
 									</a>
-
+<!--
 									<a href="<?php echo base_url();?>Admin/view_one_file/<?=$d->archive_id?>" class="tooltip-info" data-rel="tooltip" title="View">
 										<button class="btn btn-xs btn-light">
 											<i class="ace-icon fa fa-eye bigger-120"></i>
 										</button>
 									</a>
+								-->
 								</div>
 								<center>
 									<div class="hidden-md hidden-lg">
@@ -95,7 +96,7 @@
                           </span>
 													</a>
 												</li>
-
+<!--
 												<li>
 													<a href="<?php echo base_url();?>Admin/view_one_file/<?=$d->archive_id?>" class="tooltip-success" data-rel="tooltip" title="View">
 														<span class="light">
@@ -103,7 +104,7 @@
                           </span>
 													</a>
 												</li>
-
+-->
 											</ul>
 										</div>
 									</div>

@@ -67,13 +67,13 @@
 											<i class="ace-icon fa fa-pencil bigger-120"></i>
 										</button>
 									</a>
-
+<!--
 									<a href="<?php echo base_url();?>Admin/view_one_file/<?=$d->files_id?>" class="tooltip-info" data-rel="tooltip" title="View">
 										<button class="btn btn-xs btn-light">
 											<i class="ace-icon fa fa-eye bigger-120"></i>
 										</button>
 									</a>
-
+-->
 									<a href="#">
 			              <button class="btn btn-xs btn-yellow filearchive" type="button" id="<?=$d->files_id?>" class="tooltip-info" data-rel="tooltip" title="View archive">
 			                <i class="ace-icon glyphicon glyphicon-list-alt bigger-120"></i>
@@ -104,7 +104,7 @@
 													</a>
 												</li>
 
-
+<!--
 												<li>
 													<a href="<?php echo base_url();?>Admin/view_one_file/<?=$d->files_id?>" class="tooltip-success" data-rel="tooltip" title="View">
 														<span class="light">
@@ -112,6 +112,7 @@
 			                    </span>
 													</a>
 												</li>
+-->
 												<li>
 													<a href="#" class="tooltip-success filearchive" id="<?=$d->files_id?>" data-rel="tooltip" title="Versions">
 														<span class="yellow">
