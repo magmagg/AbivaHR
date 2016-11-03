@@ -794,4 +794,15 @@ function check_username_duplicate($email)
   {
     $this->db->delete('tblpolicies_sub3', array('sub2_id_fk'=>$policy_id));
   }
+
+  //===================CHAT=========================//
+  function get_unread_messages($userid)
+  {
+    $this->db->select('read_status');
+    $this->db->from('message');
+    $this->db->where('receiver_id',$userid);
+    $this->db->where('read_status', 0);
+    $query = $this->db->get();
+    return $query->row();
+  }
 }

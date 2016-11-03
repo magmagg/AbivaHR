@@ -163,6 +163,11 @@
 							<a href="<?php echo base_url();?>Chat">
 								<i class="menu-icon fa fa-envelope-o"></i>
 								<span class="menu-text"> Messages </span>
+								<?php if($ihasunread == 1): ?>
+									<span class="badge badge-transparent tooltip-error" title="Unread messages">
+										<i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i>
+									</span>
+								<?php endif;?>
 							</a>
 						</li>
 

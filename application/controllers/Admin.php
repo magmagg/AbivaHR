@@ -45,6 +45,11 @@ class Admin extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $this->session->set_flashdata('notify',"<script>
     		new PNotify({
         title: 'Regular Success',
@@ -100,7 +105,11 @@ class Admin extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
 
     $ID = $this->session->userdata['id'];
 		$data['userDetails'] = $this->Admin_model->get_one_user($ID);
@@ -258,7 +267,11 @@ class Admin extends CI_Controller
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
 
     $ID = $this->uri->segment(3);
 		$data['userDetails'] = $this->Admin_model->get_one_user($ID);
@@ -314,6 +327,11 @@ class Admin extends CI_Controller
   {
     $header['active_head'] = 'employees';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $data['employees'] = $this->Admin_model->get_employees();
 
     //Should be row id
@@ -331,6 +349,11 @@ class Admin extends CI_Controller
   {
     $header['active_head'] = 'employees';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $ID = $this->uri->segment(3);
 		$data['employee'] = $this->Admin_model->get_one_employee($ID);
     $data['departments'] = $this->Admin_model->get_departments();
@@ -383,6 +406,11 @@ function add_employees()
 {
   $header['active_head'] = 'employees';
   $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+  $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+  if($hasunread)
+    $header['ihasunread'] = 1;
+  else
+    $header['ihasunread'] = 0;
   $data['departments'] = $this->Admin_model->get_departments();
 
   $this->load->view('Admin/admin_header',$header);
@@ -493,6 +521,11 @@ var_dump($error);
   {
     $header['active_head'] = 'gallery';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $data['gallery'] = $this->Admin_model->get_all_gallery();
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_gallery',$data);
@@ -502,6 +535,11 @@ var_dump($error);
   {
     $header['active_head'] = 'gallery';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
     $data['gallery'] = $this->Admin_model->get_specific_gallery($id);
     foreach($data['gallery'] as $d)
@@ -518,6 +556,11 @@ var_dump($error);
   {
     $header['active_head'] = 'gallery';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $use['gallery'] = $this->Admin_model->get_gallery_names();
     $data['gallery'] = array();
     foreach($use['gallery'] as $key => $value)
@@ -675,6 +718,11 @@ var_dump($error);
      {
        $header['active_head'] = 'gallery';
        $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+       $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+       if($hasunread)
+         $header['ihasunread'] = 1;
+       else
+         $header['ihasunread'] = 0;
        $id = $this->uri->segment(3);
        $data['gallery'] = $this->Admin_model->get_specific_gallery($id);
        if($data['gallery'])
@@ -717,6 +765,11 @@ var_dump($error);
   {
     $header['active_head'] = 'gallery';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $use['vfolder_name'] = $this->Admin_model->get_videos_folder();
     $data['vfolder_name'] = array();
     foreach($use['vfolder_name'] as $key => $value)
@@ -848,6 +901,11 @@ var_dump($error);
    {
      $header['active_head'] = 'gallery';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
      $data['videos'] = $this->Admin_model->get_all_videos();
      $this->load->view('Admin/admin_header',$header);
      $this->load->view('Admin/admin_videos',$data);
@@ -857,6 +915,11 @@ var_dump($error);
    {
      $header['active_head'] = 'gallery';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
      $id = $this->uri->segment(3);
      $data['videos'] = $this->Admin_model->get_specific_videos($id);
      foreach($data['videos'] as $d)
@@ -890,6 +953,11 @@ var_dump($error);
    {
      $header['active_head'] = 'gallery';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+     $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+     if($hasunread)
+       $header['ihasunread'] = 1;
+     else
+       $header['ihasunread'] = 0;
      $id = $this->uri->segment(3);
      $data['videos'] = $this->Admin_model->get_specific_videos($id);
      if($data['videos'])
@@ -947,6 +1015,11 @@ var_dump($error);
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $data['departments'] = $this->Admin_model->get_departments();
     $data['announcements'] = $this->Admin_model->get_announce();
 
@@ -1042,6 +1115,11 @@ var_dump($error);
   {
     $header['active_head'] = 'announcements';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $data['departments'] = $this->Admin_model->get_departments();
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_announcements_view',$data);
@@ -1051,6 +1129,11 @@ var_dump($error);
   {
     $header['active_head'] = '';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $dept = $this->uri->segment(3);
     $data['announcements'] = $this->Admin_model->get_announce_bydept($dept);
     $this->load->view('Admin/admin_header',$header);
@@ -1062,6 +1145,11 @@ var_dump($error);
   {
       $header['active_head'] = 'files';
       $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+      $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+      if($hasunread)
+        $header['ihasunread'] = 1;
+      else
+        $header['ihasunread'] = 0;
       $data['foldernew'] = $this->Admin_model->get_folder_names();
       /*
       $data['foldernew'] = array();
@@ -1184,7 +1272,11 @@ var_dump($error);
   {
       $header['active_head'] = 'files';
       $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+      $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+      if($hasunread)
+        $header['ihasunread'] = 1;
+      else
+        $header['ihasunread'] = 0;
       $data['departments'] = $this->Admin_model->get_dept_with_files();
 
       $indicator = $this->uri->segment(3);
@@ -1205,7 +1297,11 @@ var_dump($error);
   {
     $header['active_head'] = 'files';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
     $data['files'] = $this->Admin_model->get_files_folder($id);
     $this->load->view('Admin/admin_header',$header);
@@ -1469,7 +1565,11 @@ var_dump($error);
   {
     $header['active_head'] = 'files';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $data['files'] = $this->Admin_model->get_shared_files($this->session->userdata['department']);
     $data['users'] = $this->Admin_model->get_user_names();
     $data['departments'] = $this->Admin_model->get_departments();
@@ -1483,6 +1583,11 @@ var_dump($error);
   {
     $header['active_head'] = 'files';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $filesid = $this->uri->segment(3);
     $data['archive'] = $this->Admin_model->get_files_archive($filesid);
     $data['departmentid'] = $this->uri->segment(4);
@@ -1497,7 +1602,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
-
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $data['policies'] = $this->Admin_model->get_policies_table();
     $data['sub1'] = $this->Admin_model->get_sub1_table();
     $data['sub2'] = $this->Admin_model->get_sub2_table();
@@ -1515,6 +1624,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $title = $this->input->post('title');
 
     $data = array('policy_title'=>$title);
@@ -1527,6 +1641,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $data['detail'] = $this->Admin_model->get_policy_details($id);
@@ -1556,6 +1675,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $use['content'] = $this->Admin_model->get_policy_details($id);
@@ -1616,6 +1740,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
 
     $data = array('sub1_title'=>$this->input->post('title'),
                   'policy_id_fk'=>$this->input->post('policy_id_fk'));
@@ -1628,6 +1757,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $data['detail'] = $this->Admin_model->get_sub1_details($id);
@@ -1657,6 +1791,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $use['content'] = $this->Admin_model->get_sub1_details($id);
@@ -1675,6 +1814,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
 
     $data = array('sub2_title'=>$this->input->post('title'),
                   'sub1_id_fk'=>$this->input->post('policy_id_fk'));
@@ -1687,6 +1831,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $data['detail'] = $this->Admin_model->get_sub2_details($id);
@@ -1716,6 +1865,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $use['content'] = $this->Admin_model->get_sub2_details($id);
@@ -1734,6 +1888,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
 
     $data = array('sub3_title'=>$this->input->post('title'),
                   'sub2_id_fk'=>$this->input->post('policy_id_fk'));
@@ -1746,6 +1905,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $data['detail'] = $this->Admin_model->get_sub3_details($id);
@@ -1775,6 +1939,11 @@ var_dump($error);
   {
     $header['active_head'] = 'policies';
     $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
     $id = $this->uri->segment(3);
 
     $use['content'] = $this->Admin_model->get_sub3_details($id);
