@@ -22,7 +22,7 @@
 						</div>
 
 						<div id="appendspan<?=$u->user_id?>">
-							<button onclick="load_chat(<?=$this->session->userdata['id']?>,<?=$u->user_id?>)" class="btn btn-minier btn-success"><i class="ace-icon fa fa-comments-o"></i>Chat</button>
+							<button data-senderid="<?=$this->session->userdata['id']?>" data-receiverid="<?=$u->user_id?>" data-firstname="<?=$u->user_firstname?>" data-lastname="<?=$u->user_lastname?>" class="btn btn-minier btn-success loadchat"><i class="ace-icon fa fa-comments-o"></i>Chat</button>
 							<?php foreach($unread as $key => $value): ?>
 								<?php if($u->user_id == $value[0]->sender_id): ?>
 								<span class="label label-danger label-sm" id="span<?=$u->user_id?>">Unread</span>
@@ -284,6 +284,7 @@ function load_socket()
 		$('#spinner').hide();
 	});
 </script>
+<!--
 <script>
 		function load_chat(sender_id, receiver_id) {
 			$('#spinner').show(0);
@@ -292,7 +293,7 @@ function load_socket()
 			});
 			$('#loadingdiv').fadeOut('fast', function() {
 				$('#loadingdiv').empty();
-				$("#loadingdiv").load('<?php echo base_url().'Chat/load_chat/'; ?>' + sender_id + '/' + receiver_id,
+				$("#loadingdiv").load('<?php echo base_url().'Chat/load_chat/'; ?>' + sender_id + '/' + receiver_id,{fname: firstname, lname: lastname}
 					function() {
 						$('#spinner').hide();
 						$('#loadingdiv').fadeIn('slow');
@@ -302,6 +303,31 @@ function load_socket()
 					});
 			});
 		}
+</script>
+-->
+
+<script>
+$('.loadchat').click(function() {
+var sender_id = $(this).attr('data-senderid');
+var receiver_id = $(this).attr('data-receiverid');
+var firstname =$(this).attr('data-firstname');
+var lastname = $(this).attr('data-lastname');
+$('#spinner').show(0);
+$("#span"+receiver_id).fadeOut('slow', function(){
+	$("#span"+receiver_id).remove();
+});
+$('#loadingdiv').fadeOut('fast', function() {
+	$('#loadingdiv').empty();
+	$("#loadingdiv").load('<?php echo base_url().'Chat/load_chat/'; ?>' + sender_id + '/' + receiver_id,{fname: firstname, lname: lastname},
+		function() {
+			$('#spinner').hide();
+			$('#loadingdiv').fadeIn('slow');
+			$('#message-tbody').addClass('dropdown-content');
+			scrollme();
+			load_socket();
+		});
+});
+});
 </script>
 
 <script>

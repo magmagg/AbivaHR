@@ -1,3 +1,14 @@
+<div class="widget-header">
+  <h4 class="widget-title lighter smaller">
+    <i class="ace-icon fa fa-comment blue"></i>
+<?=$chatname?>
+<!--
+      <a onclick="foo()"><button class="btn btn-minier btn-danger pull-right">Delete conversation</button></a>
+    -->
+  </h4>
+</div>
+
+
 <div class="dialogs openchat<?=$sender_id?>" id="message-tbody">
   <!-- DIALOGS HERE -->
   <?php foreach($message as $m): ?>

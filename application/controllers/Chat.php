@@ -131,6 +131,7 @@ class Chat extends CI_Controller
 		{
 			$data['message'] = array();
 		}
+
 		$data['sender_id'] = $sender_id;
 		$data['receiver_id'] = $receiver_id;
 		$data['users'] = $this->Chat_model->get_users();

@@ -203,7 +203,7 @@
 			parallelUploads: 100,
 			maxFiles: 100,
 			addRemoveLinks: true,
-			acceptedFiles: "image/*,.docx,.doc,.ppt,.pdf,.txt,.xls,.xlsx,.rar,.zip,.7z",
+			acceptedFiles: "image/*,.docx,.doc,.ppt,.pdf,.txt,.xls,.xlsx,.rar,.zip,.7z,.epub",
 			previewTemplate: $('#preview-template').html(),
 
 			thumbnailHeight: 120,
