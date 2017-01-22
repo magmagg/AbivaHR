@@ -6,7 +6,7 @@ class User extends CI_Controller
 	function __construct()
 	{
     parent::__construct();
-
+kdjjmfmfkmdkmfmdkmkfmklkdmfklmdksmdlfkdmdlskdmfkdlsdkmfkdmkmfkmdkmflkmdklfmkdlmfkllloorenzomagndkkemifmklskdjfkmd
     if($this->session->userdata('logged_in_user') == 1)
     {
       $this->load->model('User_model');
@@ -395,7 +395,7 @@ function upload_pictures()
 
 function do_Upload_gallery()
  {
-     $this->load->helper('inflector');
+   $this->load->helper('inflector');
    $gallery = $this->input->post('gallery');
    $count = 1;
    $data['check'] = $this->User_model->check_existing_gallery($gallery);
