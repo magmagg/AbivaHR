@@ -385,6 +385,11 @@
 										swal({   title: "Success!",   text: "Redirecting in 2 seconds",   timer: 2000,   imageUrl: "<?php echo base_url();?>/assets/img/loading1.gif",    showConfirmButton: false });
 										setTimeout(function(){ location.href = "<?php echo base_url();?>User"; }, 2000);
 								}
+								else if(data.success == 3)
+								{
+										swal({   title: "Success!",   text: "Redirecting in 2 seconds",   timer: 2000,   imageUrl: "<?php echo base_url();?>/assets/img/loading1.gif",    showConfirmButton: false });
+										setTimeout(function(){ location.href = "<?php echo base_url();?>AdminDept"; }, 2000);
+								}
 								else if(data == 3)
 								{
 										swal({   title: "Error!!",   text: "Wrong password",   type: "error",   confirmButtonText: "Ok" });

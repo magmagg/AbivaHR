@@ -15,6 +15,10 @@ class Login extends CI_Controller
 		{
 			redirect('Admin');
 		}
+		else if($this->session->userdata('logged_in_admin') == 2)
+		{
+			redirect('AdminDept');
+		}
 		else if($this->session->userdata('logged_in_user')==1)
 		{
 			redirect('user');
@@ -73,6 +77,13 @@ class Login extends CI_Controller
 					{
 						$data = array('username'=>$this->input->post('username'),
 													'success'=>2);
+						$this->session->set_flashdata('username', $this->input->post('username'));
+						echo json_encode($data);
+					}
+					if($isadmin == 2)
+					{
+						$data = array('username'=>$this->input->post('username'),
+													'success'=>3);
 						$this->session->set_flashdata('username', $this->input->post('username'));
 						echo json_encode($data);
 					}

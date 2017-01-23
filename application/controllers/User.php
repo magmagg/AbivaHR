@@ -6,7 +6,6 @@ class User extends CI_Controller
 	function __construct()
 	{
     parent::__construct();
-kdjjmfmfkmdkmfmdkmkfmklkdmfklmdksmdlfkdmdlskdmfkdlsdkmfkdmkmfkmdkmflkmdklfmkdlmfkllloorenzomagndkkemifmklskdjfkmd
     if($this->session->userdata('logged_in_user') == 1)
     {
       $this->load->model('User_model');
