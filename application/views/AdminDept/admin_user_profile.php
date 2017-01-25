@@ -228,7 +228,7 @@
 							<div id="edit-basic" class="tab-pane in active">
 								<h4 class="header blue bolder smaller">General</h4>
 
-								<form method="POST" action="<?php echo base_url();?>Admin/submit_edit_one_user" id="userprofile" enctype="multipart/form-data">
+								<form method="POST" action="<?php echo base_url();?>AdminDept/submit_edit_one_user" id="userprofile" enctype="multipart/form-data">
 
 									<!-- IMPORTANT LINE OF CODE!!! -->
 									<input type="hidden" name="id" value="<?php echo $this->session->userdata['id']; ?>">
@@ -476,7 +476,7 @@
 							<div id="edit-password" class="tab-pane">
 								<div class="space-10"></div>
 
-								<form method="POST" action="<?php echo base_url();?>Admin/change_password" id="change_password">
+								<form method="POST" action="<?php echo base_url();?>AdminDept/change_password" id="change_password">
 									<!-- IMPORTANT LINE OF CODE!!! -->
 									<input type="hidden" name="userid" value="<?php echo $this->session->userdata['id'];?>">
 									<!-- IMPORTANT LINE OF CODE!!! -->
@@ -671,7 +671,7 @@
 											confirmButtonText: "Ok"
 										},
 										function() {
-											window.location.href = "<?php echo base_url();?>Admin/user_profile";
+											window.location.href = "<?php echo base_url();?>AdminDept/user_profile";
 										});
 								} else {
 									swal({

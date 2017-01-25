@@ -23,7 +23,7 @@
 									<div class="widget-body">
 										<div class="widget-main padding-4">
 											<div class="tab-content padding-8">
-												<form action="<?php echo base_url();?>Admin/submit_todolist" method="POST">
+												<form action="<?php echo base_url();?>AdminDept/submit_todolist" method="POST">
 													<div id="task-tab" class="tab-pane active">
 														<h4 class="smaller lighter green">
 												    																<i class="ace-icon fa fa-list"></i>
@@ -180,7 +180,7 @@
 					$(this).toggleClass("gray");
 					$("." + id + " span").toggle();
 					var value = id.substring('todo'.length);
-					var link = "<?php echo base_url();?>Admin/process_todo/" + value;
+					var link = "<?php echo base_url();?>AdminDept/process_todo/" + value;
 					$.ajax({
 						type: "POST",
 						url: link,
@@ -206,7 +206,7 @@
 							if (isConfirm) {
 								$.ajax({
 									type: 'POST',
-									url: "<?php echo base_url();?>Admin/delete_one_todo/" + id,
+									url: "<?php echo base_url();?>AdminDept/delete_one_todo/" + id,
 									success: function(data) {
 
 										$('#todo' + id).fadeOut('slow', function() {

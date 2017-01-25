@@ -6,7 +6,7 @@ class Chat extends CI_Controller
 	function __construct()
 	{
     parent::__construct();
-		if($this->session->userdata('logged_in') == 1 || $this->session->userdata('logged_in_user')==1)
+		if($this->session->userdata('logged_in') == 1 || $this->session->userdata('logged_in_user')==1 || $this->session->userdata('logged_in_admin')==1)
 		{
 			$this->load->model('Chat_model');
 		}
@@ -39,6 +39,10 @@ class Chat extends CI_Controller
 		else if($this->session->userdata('logged_in_user')==1)
 		{
 			$this->load->view('User/user_header',$header);
+		}
+		else if($this->session->userdata('logged_in_admin')==1)
+		{
+			$this->load->view('AdminDept/admin_header',$header);
 		}
 
 		$data['users'] = $this->Chat_model->get_users();
@@ -135,6 +139,13 @@ class Chat extends CI_Controller
 		$data['sender_id'] = $sender_id;
 		$data['receiver_id'] = $receiver_id;
 		$data['users'] = $this->Chat_model->get_users();
+		foreach($data['users'] as $d)
+		{
+			if($receiver_id == $d->user_id)
+			{
+				$data['chatname'] = $d->user_firstname . ' ' . $d->user_lastname;
+			}
+		}
 		$this->load->view('Chat/load_chat',$data);
 	}
 
