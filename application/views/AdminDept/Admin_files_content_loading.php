@@ -25,14 +25,14 @@
 					<?php foreach($users as $u):?>
 						<?php if($d->files_user_id_fk == $u->user_id):?>
 							<?php $name = $u->user_firstname.' '.$u->user_lastname;?>
-						  <p class="help-block">Uploaded by:<a href="<?php echo base_url();?>Admin/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
+						  <p class="help-block">Uploaded by:<a href="<?php echo base_url();?>AdminDept/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
 						<?php endif;?>
 					<?php endforeach;?>
 					<?php else:?>
 					<?php foreach($users as $u):?>
 						<?php if($d->files_user_id_fk == $u->user_id):?>
 							<?php $name = $u->user_firstname.' '.$u->user_lastname;?>
-							<p class="help-block">Updated by:<a href="<?php echo base_url();?>Admin/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
+							<p class="help-block">Updated by:<a href="<?php echo base_url();?>AdminDept/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
 						<?php endif;?>
 					<?php endforeach;?>
 					<?php endif;?>
@@ -46,7 +46,7 @@
 				</td>
 				<td>
 					<div class="hidden-sm hidden-xs btn-group">
-						<a href="<?php echo base_url();?>Admin/download_one_file/<?=$d->files_id?>" class="tooltip-info" data-rel="tooltip" title="Download">
+						<a href="<?php echo base_url();?>AdminDept/download_one_file/<?=$d->files_id?>" class="tooltip-info" data-rel="tooltip" title="Download">
 							<button class="btn btn-xs btn-success">
 								<i class="ace-icon fa fa-download bigger-120"></i>
 							</button>
@@ -83,7 +83,7 @@
 
 								<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
 									<li>
-										<a href="<?php echo base_url();?>Admin/download_one_file/<?=$d->files_id?>" class="tooltip-info" data-rel="tooltip" title="View">
+										<a href="<?php echo base_url();?>AdminDept/download_one_file/<?=$d->files_id?>" class="tooltip-info" data-rel="tooltip" title="View">
 											<span class="blue">
                       <i class="ace-icon fa fa-download bigger-120"></i>
                     </span>
@@ -167,7 +167,7 @@
 				if (isConfirm) {
 					$.ajax({
 						type: 'POST',
-						url: "<?php echo base_url();?>Admin/delete_one_file/" + id,
+						url: "<?php echo base_url();?>AdminDept/delete_one_file/" + id,
 						success: function(data) {
 
 							$('#filesedit' + id).fadeOut('slow', function() {
@@ -190,7 +190,7 @@
 			var id = "<?php echo $departmentid;?>";
 			$('#loadingdiv').fadeOut('fast', function() {
 				$('#loadingdiv').empty();
-				$("#loadingdiv").load('<?php echo base_url().'Admin/load_folders/'; ?>' + id,
+				$("#loadingdiv").load('<?php echo base_url().'AdminDept/load_folders/'; ?>' + id,
 					function() {
 						$('#spinner').hide();
 						$('#loadingdiv').fadeIn('slow');
@@ -222,7 +222,7 @@
 			var folderid = "<?php echo $folderid;?>";
 			$('#loadingdiv').fadeOut('fast', function() {
 				$('#loadingdiv').empty();
-				$("#loadingdiv").load('<?php echo base_url().'Admin/load_archive/'; ?>' + id + "/" + departmentid + "/" + folderid,
+				$("#loadingdiv").load('<?php echo base_url().'AdminDept/load_archive/'; ?>' + id + "/" + departmentid + "/" + folderid,
 					function() {
 						$('#spinner').hide();
 						$('#loadingdiv').fadeIn('100');
@@ -250,7 +250,7 @@
 			var id = $(this).attr("id");
 			$.ajax({
 				type: 'POST',
-				url: "<?php echo base_url();?>Admin/get_one_file/" + id,
+				url: "<?php echo base_url();?>AdminDept/get_one_file/" + id,
 				success: function(data) {
 					$('#displayname').val(data.display_name);
 					$('#old_file_id').val(data.id);

@@ -1270,18 +1270,11 @@ var_dump($error);
         $header['ihasunread'] = 0;
       $data['departments'] = $this->AdminDept_model->get_dept_with_files();
 
-      $indicator = $this->uri->segment(3);
-      if($indicator == 1){
-      $this->session->set_flashdata('notify',"<script>
-          new PNotify({
-          title: 'Success!',
-          text: 'File has been uploaded',
-          type: 'success'
-        });
-      </script>");
-      }
+      $departmentid =  $this->session->userdata['department'];
+      $data['folders'] = $this->AdminDept_model->get_folders_dept($departmentid);
+      $data['departmentid'] = $departmentid;
       $this->load->view('AdminDept/admin_header',$header);
-      $this->load->view('AdminDept/admin_files_view',$data);
+      $this->load->view('AdminDept/admin_files_view1', $data);
 
   }
   function view_files_folder()
@@ -1311,7 +1304,7 @@ var_dump($error);
   {
     $folderid = $this->uri->segment(3);
     $data['files'] = $this->AdminDept_model->get_files_folder($folderid);
-    $data['departmentid'] = $this->uri->segment(4);
+    $data['departmentid'] = $this->session->userdata['department'];
 
     $get['foldername'] = $this->AdminDept_model->get_folder_name($folderid);
     foreach($get['foldername'] as $f)
