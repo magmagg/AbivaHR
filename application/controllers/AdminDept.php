@@ -332,7 +332,7 @@ class AdminDept extends CI_Controller
       $header['ihasunread'] = 1;
     else
       $header['ihasunread'] = 0;
-    $data['employees'] = $this->AdminDept_model->get_employees();
+    $data['employees'] = $this->AdminDept_model->get_employees_department();
 
     //Should be row id
     $ID = $this->session->userdata('id');

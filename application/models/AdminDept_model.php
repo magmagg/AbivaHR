@@ -360,6 +360,16 @@ function get_employees()
   return $query->result();
 }
 
+function get_employees_department()
+{
+  $this->db->select('*');
+  $this->db->from('tblusers as u');
+  $this->db->join('tbldepartments as d', 'u.user_department = d.department_id');
+  $this->db->where('user_department',$this->session->userdata('department'))
+  $query = $this->db->get();
+  return $query->result();
+}
+
 function get_one_employee($ID)
 {
   $this->db->select('*');
