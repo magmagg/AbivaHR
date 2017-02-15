@@ -5,7 +5,7 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="blue bigger">Please fill the following form fields</h4>
 			</div>
-			<form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>Admin/do_update_one_file" id="updatingform">
+			<form method="POST" enctype="multipart/form-data" action="<?php echo base_url();?>AdminDept/do_update_one_file" id="updatingform">
 				<div class="modal-body">
 					<div class="row">
 						<div class="col-xs-12 col-sm-5">

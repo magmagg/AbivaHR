@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2016 at 03:35 AM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.6.23
+-- Generation Time: Feb 15, 2017 at 04:37 PM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -101,6 +101,22 @@ CREATE TABLE `tblfiles_archive` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblfiles_archive_deleted`
+--
+
+CREATE TABLE `tblfiles_archive_deleted` (
+  `archive_id` int(11) NOT NULL,
+  `archive_path` text NOT NULL,
+  `archive_user_id_fk` int(11) NOT NULL,
+  `archive_display_name` varchar(50) NOT NULL,
+  `archive_version` varchar(255) NOT NULL,
+  `archive_timestamp` varchar(50) NOT NULL,
+  `archive_files_id_fk` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblfiles_content`
 --
 
@@ -114,6 +130,24 @@ CREATE TABLE `tblfiles_content` (
   `files_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `files_ffolder_id_fk` int(11) NOT NULL,
   `files_active` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblfiles_deleted`
+--
+
+CREATE TABLE `tblfiles_deleted` (
+  `files_id` int(11) NOT NULL,
+  `files_name` varchar(30) NOT NULL,
+  `files_deletedby` int(11) NOT NULL,
+  `files_path` text NOT NULL,
+  `files_display_name` varchar(50) NOT NULL,
+  `files_version` varchar(255) NOT NULL,
+  `files_timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `files_foldername` varchar(100) NOT NULL,
+  `files_department` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -263,15 +297,47 @@ CREATE TABLE `tblusers` (
 --
 
 INSERT INTO `tblusers` (`user_id`, `user_firstname`, `user_middlename`, `user_lastname`, `user_username`, `user_password`, `user_department`, `user_birthday`, `user_gender`, `user_aboutme`, `user_address`, `user_email`, `user_cpnumber`, `user_google`, `user_linkedin`, `user_wordpress`, `user_picture`, `user_read_ann`, `user_isadmin`, `user_active`) VALUES
-(1, 'Lorenzo', 'C.', 'Magno', 'magmagg', '$2y$10$ssIlFY9Qlaa9XPUub6/d6.mwZ3N/HjXIUFL8mhK3HfoqZeTaUxH8y', 2, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
-(2, 'Sample', '.', '1', 'Sample1', '$2y$10$1PEsMDHut5H75JvSBeLlx.VTfhGnKZh4S7MXG6PkPmBvYnpSZYBAm', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 0, 1),
+(1, 'Lorenzo', 'C.', 'Magno', 'magmagg', '$2y$10$ssIlFY9Qlaa9XPUub6/d6.mwZ3N/HjXIUFL8mhK3HfoqZeTaUxH8y', 2, '', 'female', '																																																																					', '', '', '', '', '', '', './assets/files/profile_pictures/photo1080433688446085048.jpg', 1, 1, 1),
+(2, 'Sample', '.', '1', 'Sample1', '$2y$10$1PEsMDHut5H75JvSBeLlx.VTfhGnKZh4S7MXG6PkPmBvYnpSZYBAm', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 2, 1),
 (3, 'Sample', '.', '2', 'Sample2', '$2y$10$D.JTYh6LP/MNYPO923kE1OAKWS39/gPZactv6RipNRuo/ULXc875i', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 0, 1),
 (4, 'Sample', '.', '3', 'Sample3', '$2y$10$RZ0TK9sHlOryKdUPCPbgduYvUZlw4N9Cbn5To95YI8zPhgP6/Eda2', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 0, 1),
 (5, 'A', 'a', 'A', 'A', '$2y$10$r2VGANAukfiQF5CldMiyX./fKcl4fvdyoUsdo74w.o7i3cSSNkkM6', 2, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 0, 1),
 (6, 'B', 'B', 'B', 'B', '$2y$10$feiTRNF97BmzDR9XfL2ZueVLQOVBqbry45D2dpPD9qmMM1QoaBYju', 3, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 0, 1),
 (7, 'C', 'C', 'C', 'C', '$2y$10$jmxogHoRDI7MUj3X5GQyVO/VD32TV1qK.ZXLMPqDX0Voz1Y05i9.G', 4, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 0, 1),
 (8, 'D', 'D', 'D', 'D', '$2y$10$Wwbnqbm2tm5ae.UNMI1yW.cwlzZwMsfRqkVTlZ0lHIMrqxrlmN8rm', 5, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 0, 1),
-(9, 'EDP', 'EDP', 'EDP', 'EDP', '$2y$10$Yayor/WkFOUUnhXICm6qTeZX0EV/Wvj10s9TSSwnCMjPoAXbe942K', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 0, 1);
+(9, 'EDP', 'EDP', 'EDP', 'EDP', '$2y$10$Yayor/WkFOUUnhXICm6qTeZX0EV/Wvj10s9TSSwnCMjPoAXbe942K', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 0, 0, 1),
+(10, 'Adrian', '.', 'Jimenez', 'ajimenez', '$2y$10$fXeVMUQcFcLJxNWptL/A3urBo5RNJDl4F9pM9Lofy1efmJGykyE7G', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(11, 'Aldrin', '.', 'Claudio', 'aclaudio', '$2y$10$9E89iIO8e/RQRoLr67AFEuP8ANkAQop9D.qMYZIMnZpePGigXDEPS', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(12, 'Arman', '.', 'Gersin', 'agersin', '$2y$10$T/2UNdNC0sUgelHYSBaUke4.Gq8S8CeniZgNtVQEiklbP9hk9MGfK', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(13, 'Caren Clariza', '.', 'Cortez', 'ccortez', '$2y$10$dz/creKEQfu2Aa5bQLJRxenPA.6MVYE1xkJrVTr.qY75IC.arbCfa', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(14, 'Carmencita', '.', 'Usman', 'cusman', '$2y$10$IQj2JXEpBCv6W/vC/Jr6x.Xv1FcFzRS7OcE/4U7azYijOZLNLevSm', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(15, 'Cristina', '.', 'Rotairo', 'crotairo', '$2y$10$gZXnY2nYdysUA.IHtONVTulsRSJPkiZUOBCEB.HGX4IpY2Bts.FHO', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(16, 'Danilo Nirto', '.', 'Calalang', 'dcalalang', '$2y$10$PmqE5qAFIKEVJcWW/M1w8Oaiahnc7L/4HSHB7cvQjBhY5RUQGNRUS', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(17, 'Dick', '.', 'Bantolino', 'dbantolino', '$2y$10$M6IydHwNdXHf6AC8mC9pnuJHylFr.vxv5qh4q6yYkGzzHuJRfSkWa', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(18, 'Eman', '.', 'Pelagio', 'epelagio', '$2y$10$QnyU5vwlaaIWFjksrqSkOOEeR8QuFgueUXviYOI7PacLvmau7KnXK', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(19, 'Eva', '.', 'Tuvilla', 'etuvilla', '$2y$10$2nqUeWn043Op/BSVNxi/DuP36ysCxuYfGGj5LV6zC.AIOecKTawtK', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(20, 'Helen', '.', 'de Guzman', 'hdeguzman', '$2y$10$tZfHFK9hCDwBkextIWb1jewpJZ/fxZ0RRk2ildl8wQHjT2XIn91nS', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(21, 'Janice', '.', 'Pangilinar', 'jpangilinar', '$2y$10$MgbqjdmRjIvzMCEL2yqrCuGbYjdKMvCi.j0d8qQCR.jIGDWmdKUs2', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(22, 'Jayson', '.', 'Fajardo', 'jfajardo', '$2y$10$3STUD1Y0DL87TjJr885p4Ofo4yWaZl6zUitnJcdSyVoxAyjNa39DO', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(23, 'Jessa', '.', 'Borres', 'jborres', '$2y$10$7odRkMuwl4WQSzN0pMZAk.u4ISMlR52lp7v.U.1n4lJJuocIdchXa', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(24, 'Jhoanna Fe', '.', 'Manaog', 'jmanaog', '$2y$10$q1OQLn.hyhQEAcoioUrWUu25lxZ/yXxq5qNOYbGTsIxNKBYtnryiW', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(25, 'Joey', '.', 'Maniclang', 'jmaniclang', '$2y$10$7nHoQDNdm76D70TTLH8mDejf2/LpBD4GXyCeJmfi4m4Q4Q.EkwAD6', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(26, 'Josie', '.', 'Caoael', 'jcaoael', '$2y$10$IPkQPKUy8S0TD66Gv8JB7.KGcD9u81S/mbLmO3nC5m7DAQHwhb6qa', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(27, 'Kristine Joy', '.', 'Bartolome', 'kbartolome', '$2y$10$Zfz/odKy047TyNRJ19HxcuSRYXwhBf47fwPCm6WaZ8KnxbzyiUxBa', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(28, 'Loydgee James', '.', 'Andaya', 'landaya', '$2y$10$4CaEAfdpGUWrVHw0GOejJ.T8e5Pjr.KGz7J5ClyEmHr4ojStV5Y2G', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(29, 'Ma. Jose', '.', 'Bayani', 'mbayani', '$2y$10$IKI3cgdLlmQX9olDxsyzOurQdfi9sRah.98lNEOBy9QI/MlUAhYb2', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(30, 'Maribel', '.', 'Quintinc', 'mquintinc', '$2y$10$51hYmZVmWNFU1wlnosJHA.Lednet9ggfYZoMm94DZ4cNEzTtBIJjK', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(31, 'Martin', '.', 'Racza', 'mracza', '$2y$10$av774cRDQCgGmy9xNDtIcOoytxLJPMhSo3w4wJzsAQl9e0c7z9MwK', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(32, 'Nikki Mae', '.', 'Lucas', 'nlucas', '$2y$10$jBRn97nErRrIbrke9wlP5.V.MXN0AIATfe1EQxKXd2Vh6clLJT9tq', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(33, 'Nimfa Grace', '.', 'Jorvina', 'njorvina', '$2y$10$sboqqbWW7JvhUgGfzyVd6OawbFI9e0T4QRX.8B2U9gQ90P57.sgHq', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(34, 'Raphael', '.', 'Cristobal', 'rcristobal', '$2y$10$0Ud0DE4N.gKY0mmErHRY.eF7A/OjSVIJG.t8Paz9EIpBXIfM7QbfS', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(35, 'Raya', '.', 'Moron', 'rmoron', '$2y$10$8WI8qMC3weabtRx1UENG1u.0G5QCHTtLxnaMXccXhKQrrvqKwEboO', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(36, 'Santiago', '.', 'Melarpis', 'smelarpis', '$2y$10$9njGD0QuJKbEDmmVpKKM4O8.r5JsHRlqoo/WnwXaGUmKk6/aQbCsK', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(37, 'Sharmaine', '.', 'Lizaca', 'slizaca', '$2y$10$UrleuzOcuP0Utj9tDlyCP.92RZHDmfqszodLew5TxuLW/P7v43/Zq', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(38, 'Victorio', '.', 'Malatbalat', 'vmalatbalat', '$2y$10$LIJHAfDShMNWNxs2Sxj9LuNUa/7cdZNWCsYmcDaMYai9tFyKJpAU.', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(39, 'Ida Grace', '.', 'Baylor', 'ibaylor', '$2y$10$qTftIRWQXAg8/Qcjs7gRb.Q0KIvrIxxR3Eyx6dr2MW99Rv0WQhXPy', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(40, 'Josefina DG', '.', 'Sison', 'jsison', '$2y$10$p6tmat3h9UgkQYPaFjhwmuQZ2HDF1ds6XP3IWA9F/VURU/G8/L8Ne', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1),
+(41, 'Lyn', '.', 'Moreno', 'lmoreno', '$2y$10$XPlul0H4jGDHQGrOPBvf2uchoM2KcVmtvAM.RwhUT5x7wj2ah.qKO', 1, '', '', '', '', '', '', '', '', '', './assets/images/avatars/avatar2.png', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -350,12 +416,28 @@ ALTER TABLE `tblfiles_archive`
   ADD KEY `archive_user_id_fk` (`archive_user_id_fk`);
 
 --
+-- Indexes for table `tblfiles_archive_deleted`
+--
+ALTER TABLE `tblfiles_archive_deleted`
+  ADD PRIMARY KEY (`archive_id`),
+  ADD KEY `archive_files_id_fk` (`archive_files_id_fk`),
+  ADD KEY `archive_user_id_fk` (`archive_user_id_fk`);
+
+--
 -- Indexes for table `tblfiles_content`
 --
 ALTER TABLE `tblfiles_content`
   ADD PRIMARY KEY (`files_id`),
   ADD KEY `files_ffolder_id_fk` (`files_ffolder_id_fk`),
   ADD KEY `files_user_id_fk` (`files_user_id_fk`);
+
+--
+-- Indexes for table `tblfiles_deleted`
+--
+ALTER TABLE `tblfiles_deleted`
+  ADD PRIMARY KEY (`files_id`),
+  ADD KEY `files_user_id_fk` (`files_deletedby`),
+  ADD KEY `files_department` (`files_department`);
 
 --
 -- Indexes for table `tblfiles_folder`
@@ -464,9 +546,19 @@ ALTER TABLE `tbldepartments`
 ALTER TABLE `tblfiles_archive`
   MODIFY `archive_id` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `tblfiles_archive_deleted`
+--
+ALTER TABLE `tblfiles_archive_deleted`
+  MODIFY `archive_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tblfiles_content`
 --
 ALTER TABLE `tblfiles_content`
+  MODIFY `files_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tblfiles_deleted`
+--
+ALTER TABLE `tblfiles_deleted`
   MODIFY `files_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `tblfiles_folder`
@@ -517,7 +609,7 @@ ALTER TABLE `tbltodolist`
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `tblvideos_content`
 --
@@ -552,6 +644,12 @@ ALTER TABLE `tblfiles_archive`
 ALTER TABLE `tblfiles_content`
   ADD CONSTRAINT `tblfiles_content_ibfk_1` FOREIGN KEY (`files_ffolder_id_fk`) REFERENCES `tblfiles_folder` (`ffolder_id`),
   ADD CONSTRAINT `tblfiles_content_ibfk_2` FOREIGN KEY (`files_user_id_fk`) REFERENCES `tblusers` (`user_id`);
+
+--
+-- Constraints for table `tblfiles_deleted`
+--
+ALTER TABLE `tblfiles_deleted`
+  ADD CONSTRAINT `tblfiles_deleted_ibfk_1` FOREIGN KEY (`files_department`) REFERENCES `tbldepartments` (`department_id`);
 
 --
 -- Constraints for table `tblfiles_folder`

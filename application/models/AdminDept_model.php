@@ -453,6 +453,44 @@ function check_username_duplicate($email)
 		  $this->db->update('tblusers',$data);
 	}
   //=====================================FILES===========================================//
+	function delete_one_file_deleted($id)
+	{
+		$this->db->delete('tblfiles_deleted', array('files_id'=>$id));
+	}
+
+	function delete_archive_by_files_id_deleted($id)
+	{
+		$this->db->delete('tblfiles_archive_deleted', array('archive_files_id_fk'=>$id));
+	}
+
+	function get_deleted_archive_by_files_id($id)
+	{
+		$this->db->select('*');
+		$this->db->from('tblfiles_archive_deleted');
+		$this->db->where('archive_files_id_fk',$id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_one_deleted_archive($id)
+	{
+		$this->db->select('*');
+		$this->db->from('tblfiles_deleted');
+		$this->db->where('files_id',$id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	function get_deleted_archive($id)
+	{
+		$this->db->select('*');
+		$this->db->from('tblfiles_deleted');
+    $this->db->where('files_department',$id);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+
   function get_folder_names()
   {
       $this->db->select('ffolder_name,ffolder_dept_id_fk');
@@ -529,7 +567,8 @@ function check_username_duplicate($email)
   function get_one_file($id)
   {
     $this->db->select('*');
-    $this->db->from('tblfiles_content');
+    $this->db->from('tblfiles_content as c');
+    $this->db->join('tblfiles_folder as f', 'c.files_ffolder_id_fk = f.ffolder_id');
     $this->db->where('files_id',$id);
     $query = $this->db->get();
     return $query->result();
@@ -539,6 +578,17 @@ function check_username_duplicate($email)
   {
     $this->db->delete('tblfiles_content', array('files_id'=>$id));
   }
+
+	function insert_tblfiles_deleted($data)
+	{
+		$this->db->insert('tblfiles_deleted',$data);
+		return $this->db->insert_id();
+	}
+
+	function insert_tblfiles_archive_deleted($data)
+	{
+		$this->db->insert('tblfiles_archive_deleted',$data);
+	}
 
   function get_folder_name($id)
   {
@@ -586,7 +636,7 @@ function check_username_duplicate($email)
 
   function get_archive_by_files_id($id)
   {
-    $this->db->select('archive_path');
+    $this->db->select('*');
     $this->db->from('tblfiles_archive');
     $this->db->where('archive_files_id_fk',$id);
     $query = $this->db->get();

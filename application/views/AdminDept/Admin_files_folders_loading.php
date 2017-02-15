@@ -42,7 +42,7 @@
 			var departmentid = "<?php echo $departmentid;?>";
 			$('#loadingdiv').fadeOut('fast', function() {
 				$('#loadingdiv').empty();
-				$("#loadingdiv").load('<?php echo base_url().'Admin/load_files/'; ?>' + id + "/" + departmentid,
+				$("#loadingdiv").load('<?php echo base_url().'AdminDept/load_files/'; ?>' + id + "/" + departmentid,
 					function() {
 						$('#spinner').hide();
 						$('#loadingdiv').fadeIn('slow');
@@ -89,7 +89,7 @@
 				if (inputValue == foldername) {
 					$.ajax({
 						type: 'POST',
-						url: "<?php echo base_url();?>Admin/delete_folder_files/" + id,
+						url: "<?php echo base_url();?>AdminDept/delete_folder_files/" + id,
 						success: function(data) {
 
 							$('#folders' + id).fadeOut('slow', function() {

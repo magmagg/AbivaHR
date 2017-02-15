@@ -1259,6 +1259,51 @@ var_dump($error);
 
   }
 
+	function view_archived_files()
+	{
+		$header['active_head'] = 'files';
+		$header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+		$hasunread = $this->AdminDept_model->get_unread_messages($this->session->userdata['id']);
+		if($hasunread)
+			$header['ihasunread'] = 1;
+		else
+			$header['ihasunread'] = 0;
+		$data['files'] = $this->AdminDept_model->get_deleted_archive($this->session->userdata('department'));
+		$data['users'] = $this->AdminDept_model->get_users();
+		$data['departments'] = $this->AdminDept_model->get_departments();
+
+		$this->load->view('AdminDept/admin_header',$header);
+		$this->load->view('AdminDept/admin_view_archived_files',$data);
+	}
+
+	function download_one_archive()
+	{
+		$id = $this->uri->segment(3);
+
+		$data['file'] = $this->AdminDept_model->get_one_deleted_archive($id);
+		foreach($data['file'] as $d)
+		{
+			force_download($d->files_path, NULL);
+		}
+	}
+
+	function delete_permanently()
+	{
+		$id = $this->uri->segment(3);
+		$data['file'] = $this->AdminDept_model->get_one_deleted_archive($id);
+		foreach($data['file'] as $d)
+		{
+			unlink($d->files_path);
+		}
+		$data['archive'] = $this->AdminDept_model->get_deleted_archive_by_files_id($id);
+		foreach($data['archive'] as $d)
+		{
+			unlink($d->archives_path);
+		}
+		$this->AdminDept_model->delete_archive_by_files_id($id);
+		$this->AdminDept_model->delete_one_file($id);
+	}
+
   function view_files()
   {
       $header['active_head'] = 'files';
@@ -1344,12 +1389,25 @@ var_dump($error);
     $data['file'] = $this->AdminDept_model->get_one_file($id);
     foreach($data['file'] as $d)
     {
-      unlink($d->files_path);
+			$data = array('files_display_name'=>$d->files_display_name,
+										'files_deletedby'=>$this->session->userdata['id'],
+										 'files_name'=>$d->files_name,
+										 'files_path'=>$d->files_path,
+										 'files_foldername'=>$d->ffolder_name,
+											'files_version'=>$d->files_version,
+											'files_department'=>$d->ffolder_dept_id_fk);
+		$archiveid = $this->AdminDept_model->insert_tblfiles_deleted($data);
     }
     $data['archive'] = $this->AdminDept_model->get_archive_by_files_id($id);
     foreach($data['archive'] as $d)
     {
-      unlink($d->archives_path);
+			$data = array('archive_path'=>$d->archive_path,
+										'archive_display_name'=>$d->archive_display_name,
+										'archive_version'=>$d->archive_version,
+										'archive_user_id_fk'=>$d->archive_user_id_fk,
+										'archive_timestamp'=>$d->archive_timestamp,
+										'archive_files_id_fk'=>$archiveid);
+			$this->AdminDept_model->insert_tblfiles_archive_deleted($data);
     }
     $this->AdminDept_model->delete_archive_by_files_id($id);
     $this->AdminDept_model->delete_one_file($id);

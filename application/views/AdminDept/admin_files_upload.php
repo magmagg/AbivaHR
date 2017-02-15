@@ -34,7 +34,7 @@
 		<!-- PAGE CONTENT BEGINS -->
 		<h3 class="header smaller lighter blue">Upload files</h3>
 		<div class="col-md-6">
-			<form action="<?php echo base_url();?>User/do_Upload_files" id="my-awesome-dropzone" method="POST" enctype="multipart/form-data" class="dropzone well">
+			<form action="<?php echo base_url();?>Admindept/do_Upload_files" id="my-awesome-dropzone" method="POST" enctype="multipart/form-data" class="dropzone well">
 				<input type="hidden" name="maindept" value="<?php echo $this->session->userdata['department'];?>" />
 				<input type="hidden" name="foldername" id="foldername" />
 				<input type="hidden" name="shareddept" id="shareddept" />
@@ -290,7 +290,7 @@
 						showConfirmButton: false
 					});
 					setTimeout(function() {
-						location.href = "<?php echo base_url();?>User/view_files/";
+						location.href = "<?php echo base_url();?>AdminDept/view_files/";
 					}, 2000);
 
 					// Gets triggered when the files have successfully been sent.

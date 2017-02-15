@@ -337,7 +337,7 @@ class User_model extends CI_Model
     }
     function get_archive_by_files_id($id)
     {
-      $this->db->select('archive_path');
+      $this->db->select('*');
       $this->db->from('tblfiles_archive');
       $this->db->where('archive_files_id_fk',$id);
       $query = $this->db->get();
@@ -347,7 +347,8 @@ class User_model extends CI_Model
     function get_one_file($id)
     {
       $this->db->select('*');
-      $this->db->from('tblfiles_content');
+      $this->db->from('tblfiles_content as c');
+      $this->db->join('tblfiles_folder as f', 'c.files_ffolder_id_fk = f.ffolder_id');
       $this->db->where('files_id',$id);
       $query = $this->db->get();
       return $query->result();
@@ -403,6 +404,17 @@ class User_model extends CI_Model
     {
       $this->db->delete('tblfiles_content', array('files_id'=>$id));
     }
+
+		function insert_tblfiles_deleted($data)
+		{
+			$this->db->insert('tblfiles_deleted',$data);
+			return $this->db->insert_id();
+		}
+
+		function insert_tblfiles_archive_deleted($data)
+		{
+			$this->db->insert('tblfiles_archive_deleted',$data);
+		}
 
     function insert_file_archive($data)
     {

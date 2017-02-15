@@ -253,6 +253,15 @@
 										<b class="arrow"></b>
 									</li>
 
+									<li class=" <?= ($active_page == 'view_archived_files') ? 'active':''; ?>">
+										<a href="<?php echo base_url();?>AdminDept/view_archived_files">
+											<i class="menu-icon fa fa-caret-right"></i>
+											View archived files
+										</a>
+
+										<b class="arrow"></b>
+									</li>
+
 								</ul>
 							</li>
 

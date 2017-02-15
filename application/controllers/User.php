@@ -1011,12 +1011,25 @@ function do_Upload_gallery()
        $data['file'] = $this->User_model->get_one_file($id);
        foreach($data['file'] as $d)
        {
-         unlink($d->files_path);
+				 $data = array('files_display_name'=>$d->files_display_name,
+											 'files_deletedby'=>$this->session->userdata['id'],
+												'files_name'=>$d->files_name,
+												'files_path'=>$d->files_path,
+												'files_foldername'=>$d->ffolder_name,
+												 'files_version'=>$d->files_version,
+												 'files_department'=>$d->ffolder_dept_id_fk);
+			 $archiveid = $this->User_model->insert_tblfiles_deleted($data);
        }
        $data['archive'] = $this->User_model->get_archive_by_files_id($id);
        foreach($data['archive'] as $d)
        {
-         unlink($d->archives_path);
+				 $data = array('archive_path'=>$d->archive_path,
+	 										'archive_display_name'=>$d->archive_display_name,
+	 										'archive_version'=>$d->archive_version,
+	 										'archive_user_id_fk'=>$d->archive_user_id_fk,
+	 										'archive_timestamp'=>$d->archive_timestamp,
+	 										'archive_files_id_fk'=>$archiveid);
+	 			$this->User_model->insert_tblfiles_archive_deleted($data);
        }
        $this->User_model->delete_archive_by_files_id($id);
        $this->User_model->delete_one_file($id);

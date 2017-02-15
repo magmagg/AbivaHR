@@ -35,3 +35,5 @@ truncate table tblpolicies_sub2;
 truncate table tblpolicies_sub3;
 truncate table tblvideos_content;
 truncate table tblvideos_content;
+truncate table tblfiles_archive_deleted;
+truncate table tblfiles_deleted;
