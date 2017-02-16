@@ -1337,7 +1337,7 @@ var_dump($error);
 		$data['archive'] = $this->Admin_model->get_deleted_archive_by_files_id($id);
 		foreach($data['archive'] as $d)
 		{
-			unlink($d->archives_path);
+			unlink($d->archive_path);
 		}
 		$this->Admin_model->delete_archive_by_files_id_deleted($id);
 		$this->Admin_model->delete_one_file_deleted($id);

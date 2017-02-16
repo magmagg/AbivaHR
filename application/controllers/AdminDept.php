@@ -1329,7 +1329,7 @@ var_dump($error);
 		$data['archive'] = $this->AdminDept_model->get_deleted_archive_by_files_id($id);
 		foreach($data['archive'] as $d)
 		{
-			unlink($d->archives_path);
+			unlink($d->archive_path);
 		}
 		$this->AdminDept_model->delete_archive_by_files_id_deleted($id);
 		$this->AdminDept_model->delete_one_file_deleted($id);
