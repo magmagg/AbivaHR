@@ -240,6 +240,16 @@ $(document).ready(function() {
 	}
 </script>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".filearchive").click(function(e) {
+			e.preventDefault();
+			var id = $(this).attr("id");
+window.open("<?=base_url();?>AdminDept/view_archive_of_archived_files/"+id, "", "width=750,height=500");
+		});
+	});
+</script>
+
 
 <!-- inline scripts related to this page -->
 </body>

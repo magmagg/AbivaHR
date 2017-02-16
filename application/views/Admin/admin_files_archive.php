@@ -50,12 +50,13 @@
 								<i class="ace-icon fa fa-download bigger-120"></i>
 							</button>
 						</a>
+						<!--
 						<a href="#" onclick="foo(<?=$d->archive_id?>)" class="tooltip-info" data-rel="tooltip" title="Delete">
 							<button class="btn btn-xs btn-danger">
 								<i class="ace-icon fa fa-trash-o bigger-120"></i>
 							</button>
 						</a>
-<!--
+
 						<a href="<?php echo base_url();?>Admin/view_one_file/<?=$d->archive_id?>" class="tooltip-info" data-rel="tooltip" title="View">
 							<button class="btn btn-xs btn-light">
 								<i class="ace-icon fa fa-eye bigger-120"></i>
@@ -78,7 +79,7 @@
                     </span>
 										</a>
 									</li>
-
+<!--
 									<li>
 										<a href="#" onclick="foo(<?=$d->archive_id?>)" class="tooltip-error" data-rel="tooltip" title="Delete">
 											<span class="red">
@@ -86,7 +87,7 @@
                     </span>
 										</a>
 									</li>
-<!--
+
 									<li>
 										<a href="<?php echo base_url();?>Admin/view_one_file/<?=$d->archive_id?>" class="tooltip-success" data-rel="tooltip" title="View">
 											<span class="light">

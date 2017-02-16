@@ -1285,6 +1285,24 @@ var_dump($error);
     $this->load->view('Admin/admin_view_archived_files',$data);
 	}
 
+	function view_archive_of_archived_files()
+	{
+		$header['active_head'] = 'files';
+		$header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+		$hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+		if($hasunread)
+			$header['ihasunread'] = 1;
+		else
+			$header['ihasunread'] = 0;
+
+    $id = $this->uri->segment(3);
+		$data['archive'] = $this->Admin_model->get_deleted_archive_by_files_id($id);
+    $data['users'] = $this->Admin_model->get_users();
+
+		$this->load->view('Admin/admin_header',$header);
+		$this->load->view('Admin/admin_view_archive_of_archived_files',$data);
+	}
+
   function download_one_archive()
   {
     $id = $this->uri->segment(3);
@@ -1294,6 +1312,18 @@ var_dump($error);
     {
       force_download($d->files_path, NULL);
     }
+  }
+
+  function download_one_archive_of_archive()
+  {
+    $id = $this->uri->segment(3);
+
+    $data['file'] = $this->Admin_model->get_deleted_archive_by_files_id($id);
+    foreach($data['file'] as $d)
+    {
+      force_download($d->archive_path, NULL);
+    }
+
   }
 
 	function delete_permanently()
@@ -1309,8 +1339,8 @@ var_dump($error);
 		{
 			unlink($d->archives_path);
 		}
-		$this->Admin_model->delete_archive_by_files_id($id);
-		$this->Admin_model->delete_one_file($id);
+		$this->Admin_model->delete_archive_by_files_id_deleted($id);
+		$this->Admin_model->delete_one_file_deleted($id);
 	}
 
   function view_files()
