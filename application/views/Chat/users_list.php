@@ -13,13 +13,9 @@
 
 					<div class="body">
 						<div class="name">
-							<a href="#"><?=$u->user_firstname?> <?=$u->user_lastname?></a>
+							<?=$u->user_firstname?> <?=$u->user_lastname?>
 						</div>
 
-						<div class="time">
-							<i class="ace-icon fa fa-clock-o"></i>
-							<span class="green">3 days ago</span>
-						</div>
 
 						<div id="appendspan<?=$u->user_id?>">
 							<button data-senderid="<?=$this->session->userdata['id']?>" data-receiverid="<?=$u->user_id?>" data-firstname="<?=$u->user_firstname?>" data-lastname="<?=$u->user_lastname?>" class="btn btn-minier btn-success loadchat"><i class="ace-icon fa fa-comments-o"></i>Chat</button>
