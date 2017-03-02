@@ -90,6 +90,7 @@
 
 		<div class="col-md-6">
 			<div class="form-horizontal">
+				<!--
 				<div class="form-group">
 					<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Department:</label>
 					<div class="col-sm-9">
@@ -103,7 +104,7 @@
 						<input readonly="" type="text" class="col-xs-10 col-sm-5" id="form-input-readonly" value="<?php echo $dept;?>" />
 					</div>
 				</div>
-
+-->
 
 
 				<div class="form-group">

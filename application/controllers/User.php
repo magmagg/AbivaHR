@@ -812,7 +812,7 @@ function do_Upload_gallery()
    //===========================FILES=====================//
    function view_files()
    {
-     $header['active_head'] = 'upload_files';
+     $header['active_head'] = 'files';
      $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
      $hasunread = $this->User_model->get_unread_messages($this->session->userdata['id']);
      if($hasunread)
