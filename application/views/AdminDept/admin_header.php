@@ -243,7 +243,7 @@
 
 										<b class="arrow"></b>
 									</li>
-
+<!--
 									<li class=" <?= ($active_page == 'view_shared_files') ? 'active':''; ?>">
 										<a href="<?php echo base_url();?>AdminDept/view_shared_files">
 											<i class="menu-icon fa fa-caret-right"></i>
@@ -252,7 +252,7 @@
 
 										<b class="arrow"></b>
 									</li>
-
+-->
 									<li class=" <?= ($active_page == 'view_archived_files') ? 'active':''; ?>">
 										<a href="<?php echo base_url();?>AdminDept/view_archived_files">
 											<i class="menu-icon fa fa-caret-right"></i>
@@ -267,7 +267,7 @@
 
 									<b class="arrow"></b>
 								</li>
-
+<!--
 								<li class="<?= ($active_page == 'policies') ? 'active':''; ?>">
 									<a href="<?php echo base_url();?>AdminDept/policies">
 										<i class="menu-icon fa fa-newspaper-o"></i>
@@ -276,7 +276,7 @@
 
 									<b class="arrow"></b>
 								</li>
-
+-->
 									<li class="<?= ($active_head == 'employees') ? 'active open':''; ?>">
 										<a href="#" class="dropdown-toggle">
 											<i class="menu-icon fa fa-user-plus"></i>

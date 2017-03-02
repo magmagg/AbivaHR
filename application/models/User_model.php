@@ -12,7 +12,7 @@ class User_model extends CI_Model
 
   	function get_user_details($username)
     {
-  		$this ->db->select('a.user_department,a.user_id,a.user_username,a.user_firstname,a.user_middlename,a.user_picture,a.user_lastname,a.user_department,d.department_id');
+  		$this ->db->select('a.user_department,a.user_id,a.user_username,a.user_firstname,a.user_middlename,a.user_picture,a.user_lastname,a.user_department,a.user_teams_id_fk,d.department_id');
   		$this->db->from('tblusers as a');
   		$this->db->join('tbldepartments as d', 'a.user_department = d.department_id');
   		$this->db->where('a.user_username', $username);
@@ -291,12 +291,24 @@ class User_model extends CI_Model
 
 
     //=============================FILE======================//
-    function get_folders_dept($id)
+    function get_folders_dept_team($id,$team)
     {
-      $this->db->select('f.ffolder_name,f.ffolder_id');
+      $this->db->select('f.ffolder_name,f.ffolder_id,f.ffolder_teams_id_fk');
       $this->db->from('tbldepartments as d');
       $this->db->join('tblfiles_folder as f', 'd.department_id = f.ffolder_dept_id_fk');
       $this->db->where('d.department_id',$id);
+      $this->db->where('f.ffolder_teams_id_fk',$team);
+      $query = $this->db->get();
+      return $query->result();
+    }
+
+    function get_folders_generic($id)
+    {
+      $this->db->select('f.ffolder_name,f.ffolder_id,f.ffolder_teams_id_fk');
+      $this->db->from('tbldepartments as d');
+      $this->db->join('tblfiles_folder as f', 'd.department_id = f.ffolder_dept_id_fk');
+      $this->db->where('d.department_id',$id);
+      $this->db->where('f.ffolder_teams_id_fk',1);
       $query = $this->db->get();
       return $query->result();
     }
@@ -335,6 +347,16 @@ class User_model extends CI_Model
       $query = $this->db->get();
       return $query->result();
     }
+
+		function get_teams()
+		{
+			$this ->db->select('*');
+			$this ->db->from('tblteams');
+			$query = $this->db->get();
+			return $query->result();
+		}
+
+
     function get_archive_by_files_id($id)
     {
       $this->db->select('*');
@@ -362,12 +384,13 @@ class User_model extends CI_Model
         return $query->result();
     }
 
-    function check_existing_folder_department($foldername,$maindept)
+    function check_existing_folder_department($foldername,$maindept,$team)
     {
       $this->db->select('*');
       $this->db->from('tblfiles_folder');
       $this->db->where('ffolder_name',$foldername);
       $this->db->where('ffolder_dept_id_fk',$maindept);
+      $this->db->where('ffolder_teams_id_fk',$team);
       $query = $this->db->get();
       return $query->result();
     }

@@ -38,6 +38,7 @@
 				<input type="hidden" name="maindept" value="<?php echo $this->session->userdata['department'];?>" />
 				<input type="hidden" name="foldername" id="foldername" />
 				<input type="hidden" name="shareddept" id="shareddept" />
+				<input type="hidden" name="team" id="team" value="1" />
 
 				<!-- DROPZONE -->
 				<div id="preview-template" class="hide">
@@ -112,7 +113,20 @@
 					</div>
 				</div>
 
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Team:</label>
+					<div class="col-sm-9">
+						<select class="chosen-select form-control" id="form-field-select-3" data-placeholder="Team" required>
+							<?php foreach($teams as $d): ?>
+							<option value="<?=$d->teams_id?>">
+								<?=$d->teams_name?>
+							</option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
 
+<!--
 				<div class="form-group">
 					<label class="col-sm-3 control-label no-padding-right" for="form-field-1">Shared with...:</label>
 					<div class="col-sm-9">
@@ -131,6 +145,8 @@
 						<button type="button" class="btn btn-minier selectnone" name="Button" value="Clear">Clear</button>
 					</div>
 				</div>
+
+			-->
 			</div>
 		</div>
 
@@ -359,6 +375,15 @@
 	lookup: newfolders
 	});
 </script>
+
+<script>
+	$('#form-field-select-3').on('change', function() {
+		$("#team").val(this.value);
+
+	});
+</script>
+
+
 </body>
 
 </html>

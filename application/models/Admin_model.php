@@ -11,7 +11,7 @@ class Admin_model extends CI_Model
 
   	function get_user_details($username)
     {
-  		$this ->db->select('a.user_department,a.user_id,a.user_username,a.user_firstname,a.user_middlename,a.user_picture,a.user_lastname,a.user_department,d.department_id');
+  		$this ->db->select('a.user_department,a.user_id,a.user_username,a.user_firstname,a.user_middlename,a.user_picture,a.user_lastname,a.user_department,a.user_teams_id_fk,d.department_id');
   		$this->db->from('tblusers as a');
   		$this->db->join('tbldepartments as d', 'a.user_department = d.department_id');
   		$this->db->where('a.user_username', $username);
@@ -66,6 +66,14 @@ class Admin_model extends CI_Model
     $query = $this->db->get();
     return $query->result();
   }
+
+	function get_teams()
+	{
+		$this ->db->select('*');
+		$this ->db->from('tblteams');
+		$query = $this->db->get();
+		return $query->result();
+	}
   //==============================ANNOUNCEMENTS=============================//
   function submit_announcement_model($data)
   {

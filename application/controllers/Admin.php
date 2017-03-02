@@ -29,6 +29,7 @@ class Admin extends CI_Controller
                              'lastname'=>$row->user_lastname,
                              'department'=>$row->user_department,
                              'picture'=>$row->user_picture,
+                             'team'=>$row->user_teams_id_fk,
                              'logged_in'=>true
                             );
         }
@@ -333,11 +334,13 @@ class Admin extends CI_Controller
     else
       $header['ihasunread'] = 0;
     $data['employees'] = $this->Admin_model->get_employees();
+    $data['teams'] = $this->Admin_model->get_teams();
 
     //Should be row id
     $ID = $this->session->userdata('id');
 		$data_modal['employee'] = $this->Admin_model->get_one_employee($ID);
     $data_modal['departments'] = $this->Admin_model->get_departments();
+    $data_modal['teams'] = $this->Admin_model->get_teams();
 
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_employee_edit_modal',$data_modal);
@@ -372,13 +375,15 @@ class Admin extends CI_Controller
     $lastname = $this->input->post('lname');
     $email = $this->input->post('email');
     $department = $this->input->post('department');
+    $team = $this->input->post('team');
 
     $data = array('user_username'=>$username,
                   'user_firstname'=>$firstname,
                   'user_middlename'=>$middlename,
                   'user_lastname'=>$lastname,
                   'user_email'=>$email,
-                  'user_department'=>$department
+                  'user_department'=>$department,
+                  'user_teams_id_fk'=>$team
                 );
 
     $this->Admin_model->submit_one_employee($data, $id);
@@ -412,7 +417,7 @@ function add_employees()
   else
     $header['ihasunread'] = 0;
   $data['departments'] = $this->Admin_model->get_departments();
-
+  $data['teams'] = $this->Admin_model->get_teams();
   $this->load->view('Admin/admin_header',$header);
   $this->load->view('Admin/admin_employees_add',$data);
 }
@@ -423,6 +428,7 @@ function submit_add_employee()
                 'user_middlename'=>$this->input->post('middlename'),
                 'user_lastname'=>$this->input->post('lastname'),
                 'user_username'=>$this->input->post('username'),
+                'user_teams_id_fk'=>$this->input->post('team'),
                 'user_password'=>password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'user_department'=>$this->input->post('department'),
                 'user_picture'=>"./assets/images/avatars/avatar2.png",
@@ -501,6 +507,7 @@ var_dump($error);
                                         'user_middlename'=>$row['Middle name'],
                                         'user_lastname'=>$row['Last name'],
                                         'user_username'=>$row['Username'],
+																				'user_teams_id_fk'=>8,
                                         'user_password'=>password_hash('password', PASSWORD_DEFAULT),
                                         'user_department'=>$department,
                                         'user_picture'=>"./assets/images/avatars/avatar2.png",

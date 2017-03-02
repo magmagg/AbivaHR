@@ -65,6 +65,19 @@
 				</div>
 
 				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 control-label no-padding-right" > Department </label>
+					<div class="col-xs-12 col-sm-5">
+						<select class="js-example-placeholder-single1 form-control" style="width:100%" name="team">
+							<option></option>
+							<?php foreach($teams as $d): ?>
+								<option value="<?=$d->teams_id?>"><?=$d->teams_name?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="col-sm-5"></div>
+				</div>
+
+				<div class="form-group">
 					<label class="col-xs-12 col-sm-3 control-label no-padding-right"> Password </label>
 					<div class="col-xs-12 col-sm-5">
 						<span class="block input-icon input-icon-right">
@@ -202,6 +215,12 @@
 <script type="text/javascript">
 	$(".js-example-placeholder-single").select2({
 		placeholder: "Select department"
+	});
+</script>
+
+<script type="text/javascript">
+	$(".js-example-placeholder-single1").select2({
+		placeholder: "Select Team"
 	});
 </script>
 

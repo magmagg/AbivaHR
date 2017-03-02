@@ -81,6 +81,35 @@
 							</select>
 						</div>
 					</div>
+
+					<div class="form-group">
+						<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Team </label>
+						<div class="col-sm-4">
+							<select class="js-example-placeholder-single1" style="width:100%;" name="team">
+								<?php
+
+						foreach($teams as $d)
+						{
+							$selected = '';
+							foreach($employee as $p)
+							{
+								if ($d->teams_id == $p->user_teams_id_fk)
+								{
+									$selected = 'selected';
+								}
+								else
+								{
+									//Do nothing
+								}
+							}
+							echo "<option value=\"{$d->teams_id}\" {$selected}>{$d->teams_name}</option>";
+						}
+						?>
+							</select>
+						</div>
+					</div>
+
+
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

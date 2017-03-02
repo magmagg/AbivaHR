@@ -26,6 +26,7 @@ class User extends CI_Controller
                              'lastname'=>$row->user_lastname,
                              'department'=>$row->user_department,
                              'picture'=>$row->user_picture,
+                             'team'=>$row->user_teams_id_fk,
                              'logged_in_user'=>true
                             );
         }
@@ -824,7 +825,17 @@ function do_Upload_gallery()
      else
        $header['ihasunreadann'] = 0;
      $departmentid =  $this->session->userdata['department'];
-     $data['folders'] = $this->User_model->get_folders_dept($departmentid);
+     $team = $this->session->userdata['team'];
+     $data['teams'] = $this->User_model->get_teams();
+     if($this->session->userdata['team'] == 1)
+     {
+       $data['folders'] = $this->User_model->get_folders_dept_team($departmentid,$team);
+     }
+     else
+     {
+       $data['folders'] = $this->User_model->get_folders_dept_team($departmentid,$team);
+       $data['generic'] = $this->User_model->get_folders_generic($departmentid);
+     }
      $data['departmentid'] = $departmentid;
      $this->load->view('User/user_header',$header);
      $this->load->view('User/user_files_view', $data);
@@ -864,6 +875,7 @@ function do_Upload_gallery()
          $header['ihasunreadann'] = 0;
        $data['foldernew'] = $this->User_model->get_folder_names_department($this->session->userdata['department']);
        $data['departments'] = $this->User_model->get_departments();
+       $data['teams'] = $this->User_model->get_teams();
        $this->load->view('User/user_header',$header);
        $this->load->view('User/user_files_upload',$data);
    }
@@ -873,10 +885,11 @@ function do_Upload_gallery()
        $this->load->helper('inflector');
        $foldername = $this->input->post('foldername');
        $maindept   = $this->input->post('maindept');
+       $team = $this->input->post('team');
        $shareddept = explode(",",$this->input->post('shareddept'));
        $ffolder_id; //tblfiles_folder primary key
 
-       $data['check'] = $this->User_model->check_existing_folder_department($foldername,$maindept);
+       $data['check'] = $this->User_model->check_existing_folder_department($foldername,$maindept,$team);
        if($data['check'])
        {
          foreach($data['check'] as $d)
@@ -887,7 +900,8 @@ function do_Upload_gallery()
        else
        {
          $data = array('ffolder_name'=>$foldername,
-                       'ffolder_dept_id_fk'=>$maindept);
+                       'ffolder_dept_id_fk'=>$maindept,
+                        'ffolder_teams_id_fk'=>$team);
          $ffolder_id = $this->User_model->insert_new_ffolder($data);
          mkdir( './assets/files/documents/'.$foldername, 0777, true);
        }

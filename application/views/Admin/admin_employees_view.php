@@ -9,12 +9,10 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Last Name</th>
-						<th>First Name</th>
-						<th>Middle Name</th>
+						<th>Name</th>
 						<th>Username</th>
 						<th>Department</th>
-						<th>Address</th>
+						<th>Team</th>
 						<th>Email</th>
 						<th>Phone</th>
 						<th>Edit</th>
@@ -33,16 +31,9 @@
 						</td>
 
 						<td>
-							<?=$e->user_lastname?>
+							<?=$e->user_lastname?> , <?=$e->user_firstname?> <?=$e->user_middlename?>
 						</td>
 
-						<td>
-							<?=$e->user_firstname?>
-						</td>
-
-						<td>
-							<?=$e->user_middlename?>
-						</td>
 
 						<td>
 							<?=$e->user_username?>
@@ -53,7 +44,11 @@
 						</td>
 
 						<td>
-							<?=$e->user_address?>
+							<?php foreach($teams as $t): ?>
+								<?php if($t->teams_id == $e->user_teams_id_fk):?>
+							<?=$t->teams_name?>
+								<?php endif;?>
+							<?php endforeach;?>
 						</td>
 
 						<td>
@@ -75,6 +70,7 @@
 								data-updateaddress="<?=$e->user_address?>"
 								data-updateemail="<?=$e->user_email?>"
 								data-updatecpnumber="<?=$e->user_cpnumber?>"
+								data-updateteam="<?=$e->user_teams_id_fk?>"
 								>
 								<button class="btn btn-block  btn-info"><i class="ace-icon fa fa-pencil bigger-120"></i></button>
 							</a>
@@ -198,6 +194,12 @@
 	});
 </script>
 
+<script type="text/javascript">
+	$(".js-example-placeholder-single1").select2({
+		placeholder: "Select department"
+	});
+</script>
+
 <script>
 	function foo(id) {
 		swal({
@@ -274,6 +276,7 @@ $(".ace-switch-5").change(function () {
     var updateuname = $(e.relatedTarget).data('updateuname');
 		var updateemail = $(e.relatedTarget).data('updateemail');
     var updatedept = $(e.relatedTarget).data('updatedept');
+    var updateteam = $(e.relatedTarget).data('updateteam');
     //populate the textbox
     $(e.currentTarget).find('input[name="id"]').val(updateid);
     $(e.currentTarget).find('input[name="fname"]').val(updatefname);
@@ -282,6 +285,7 @@ $(".ace-switch-5").change(function () {
     $(e.currentTarget).find('input[name="uname"]').val(updateuname);
     $(e.currentTarget).find('input[name="email"]').val(updateemail);
     $(e.currentTarget).find('input[name="dept"]').val(updatedept);
+    $(e.currentTarget).find('input[name="team"]').val(updateteam);
 });
     </script>
 

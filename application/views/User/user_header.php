@@ -198,14 +198,14 @@
 								<span class="menu-text"> Profile </span>
 							</a>
 						</li>
-
+<!--
 						<li class="<?= ($active_page == 'policies') ? 'active':''; ?>">
 							<a href="<?php echo base_url();?>User/policies">
 								<i class="menu-icon fa fa-newspaper-o"></i>
 								<span class="menu-text"> Policies </span>
 							</a>
 						</li>
-
+-->
 						<li class="<?= ($active_page == 'messages') ? 'active':''; ?>">
 							<a href="<?php echo base_url();?>Chat">
 								<i class="menu-icon fa fa-envelope-o"></i>
@@ -266,7 +266,7 @@
 									<b class="arrow"></b>
 								</li>
 
-
+<!--
 								<li class=" <?= ($active_page == 'view_shared_files') ? 'active':''; ?>">
 									<a href="<?php echo base_url();?>User/view_shared_files">
 										<i class="menu-icon fa fa-caret-right"></i>
@@ -275,7 +275,7 @@
 
 									<b class="arrow"></b>
 								</li>
-
+-->
 							</ul>
 						</li>
 

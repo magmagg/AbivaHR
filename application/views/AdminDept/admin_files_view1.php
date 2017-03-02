@@ -23,6 +23,13 @@
 							</td>
 							<td>
 								<?=$d->ffolder_name?>
+								<p class="help-block">Team:
+									 <?php foreach($teams as $t):?>
+										 <?php if($d->ffolder_teams_id_fk == $t->teams_id): ?>
+											 <?= $t->teams_name; ?>
+										 <?php endif;?>
+									 <?php endforeach;?>
+								</p>
 							</td>
 							<td>
 							<center><button class="btn btn-white btn-info filesclick" id="<?=$d->ffolder_id?>"><i class="ace-icon fa fa-folder bigger-130"></i></button></center>
@@ -30,6 +37,23 @@
 						</tr>
 						<?php $count++; ?>
 						<?php endforeach; ?>
+						<?php if(isset($generic)): ?>
+							<?php foreach($generic as $d): ?>
+								<tr>
+									<td>
+										<?=$count;?>
+									</td>
+									<td>
+										<?=$d->ffolder_name?>
+										<p class="help-block">Team: Generic</p>
+									</td>
+									<td>
+									<center><button class="btn btn-white btn-info filesclick" id="<?=$d->ffolder_id?>"><i class="ace-icon fa fa-folder bigger-130"></i></button></center>
+									</td>
+								</tr>
+								<?php $count++; ?>
+							<?php endforeach;?>
+						<?php endif; ?>
 				</tbody>
 			</table>
 		</div>
