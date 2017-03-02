@@ -876,6 +876,14 @@ function do_Upload_gallery()
        $data['foldernew'] = $this->User_model->get_folder_names_department($this->session->userdata['department']);
        $data['departments'] = $this->User_model->get_departments();
        $data['teams'] = $this->User_model->get_teams();
+			 $use['filetypes'] = $this->User_model->get_filetypes();
+       $filetype = '';
+       foreach($use['filetypes'] as $f)
+       {
+         $filetype = $filetype.'.'.$f->accepted_files.',';
+       }
+       $filetype = $filetype. 'image/*';
+       $data['filetype'] = $filetype;
        $this->load->view('User/user_header',$header);
        $this->load->view('User/user_files_upload',$data);
    }

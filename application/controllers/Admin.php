@@ -532,7 +532,7 @@ function submit_add_employee()
                 'user_username'=>$this->input->post('username'),
                 'user_teams_id_fk'=>$this->input->post('team'),
                 'user_password'=>password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-                'user_department'=>$this->input->post('department'),
+                'user_department'=>1,
                 'user_picture'=>"./assets/images/avatars/avatar2.png",
                 'user_isadmin'=>0
               );
@@ -2142,6 +2142,48 @@ var_dump($error);
 
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_policies_view_page',$data);
+  }
+
+  function manage_filetypes()
+  {
+    $header['active_head'] = '';
+    $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
+    $id = $this->uri->segment(3);
+
+    $data['filetypes'] = $this->Admin_model->get_filetypes();
+
+    $this->load->view('Admin/admin_header',$header);
+    $this->load->view('Admin/admin_manage_filetypes_add_modal');
+    $this->load->view('Admin/admin_manage_filetypes_edit_modal');
+    $this->load->view('Admin/admin_manage_filetypes',$data);
+  }
+
+  function submit_edit_filetype()
+  {
+    $id = $this->input->post('id');
+    $name = $this->input->post('updatename');
+    $data = array('accepted_files'=>$name);
+    $this->Admin_model->update_filetype_name($data,$id);
+    redirect('Admin/manage_filetypes');
+  }
+
+  function submit_add_filetype()
+  {
+    $name = $this->input->post('updatename');
+    $data = array('accepted_files'=>$name);
+    $this->Admin_model->add_filetype_name($data);
+    redirect('Admin/manage_filetypes');
+  }
+
+  function delete_one_filetype()
+  {
+    $id = $this->uri->segment(3);
+    $this->Admin_model->delete_one_filetype($id);
   }
 
 

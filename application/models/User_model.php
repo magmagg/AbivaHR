@@ -637,6 +637,14 @@ class User_model extends CI_Model
       return $query->row();
     }
 
+		function get_filetypes()
+		{
+      $this->db->select('*');
+      $this->db->from('tblacceptedfiles');
+      $query = $this->db->get();
+      return $query->result();
+		}
+
 
 
 }

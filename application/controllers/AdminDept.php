@@ -1152,6 +1152,14 @@ var_dump($error);
       $data['foldernew'] = $this->AdminDept_model->get_folder_names_department($this->session->userdata['department']);
       $data['departments'] = $this->AdminDept_model->get_departments();
 			$data['teams'] = $this->AdminDept_model->get_teams();
+			$use['filetypes'] = $this->AdminDept_model->get_filetypes();
+			$filetype = '';
+			foreach($use['filetypes'] as $f)
+			{
+				$filetype = $filetype.'.'.$f->accepted_files.',';
+			}
+			$filetype = $filetype. 'image/*';
+			$data['filetype'] = $filetype;
       $this->load->view('AdminDept/admin_header',$header);
       $this->load->view('AdminDept/admin_files_upload',$data);
   }

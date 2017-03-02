@@ -364,6 +364,7 @@ function update_team_name($data,$id)
   $this->db->update('tblteams',$data);
 }
 
+
 function update_user_team_id($data,$id)
 {
   $this->db->where('user_id',$id);
@@ -889,5 +890,29 @@ function check_username_duplicate($email)
     $this->db->where('read_status', 0);
     $query = $this->db->get();
     return $query->row();
+  }
+
+  function get_filetypes()
+  {
+    $this->db->select('*');
+    $this->db->from('tblacceptedfiles');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
+  function update_filetype_name($data,$id)
+  {
+    $this->db->where('accepted_files_id',$id);
+    $this->db->update('tblacceptedfiles',$data);
+  }
+
+  function add_filetype_name($data)
+  {
+    $this->db->insert('tblacceptedfiles',$data);
+  }
+
+  function delete_one_filetype($id)
+  {
+    $this->db->delete('tblacceptedfiles', array('accepted_files_id'=>$id));
   }
 }

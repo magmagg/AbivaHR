@@ -50,7 +50,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-reset inline"></div>
 				</div>
-
+<!--
 				<div class="form-group">
 					<label class="col-xs-12 col-sm-3 control-label no-padding-right" > Department </label>
 					<div class="col-xs-12 col-sm-5">
@@ -63,7 +63,7 @@
 					</div>
 					<div class="col-sm-5"></div>
 				</div>
-
+-->
 				<div class="form-group">
 					<label class="col-xs-12 col-sm-3 control-label no-padding-right" > Department </label>
 					<div class="col-xs-12 col-sm-5">

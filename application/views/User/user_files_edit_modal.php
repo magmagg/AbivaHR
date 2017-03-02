@@ -11,7 +11,7 @@
 						<div class="col-xs-12 col-sm-5">
 							<div class="space"></div>
 							<input type="hidden" name="foldername" id="foldername">
-							<input type="text" name="shared" id="shared">
+							<input type="hidden" name="shared" id="shared">
 							<input type="hidden" name="filechanged" id="filechanged" value="0">
         		<input type="file" name="uploadfile" id="fileinput"/>
 							<span class="help-block">If no file is chosen, Version will not be affected, Only the display name.</span>
