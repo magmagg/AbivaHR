@@ -151,7 +151,7 @@
 								<span class="menu-text"> Dashboard </span>
 							</a>
 						</li>
-
+<!--
 						<li class="<?= ($active_page == 'user_profile') ? 'active':''; ?>">
 							<a href="<?php echo base_url();?>Admin/user_profile">
 								<i class="menu-icon fa fa-user"></i>
@@ -207,6 +207,7 @@
 
 							</ul>
 						</li>
+					-->
 
 								<b class="arrow"></b>
 							</li>
@@ -226,6 +227,7 @@
 								<b class="arrow"></b>
 
 								<ul class="submenu">
+									<!--
 									<li class=" <?= ($active_page == 'upload_files') ? 'active ':''; ?>">
 										<a href="<?php echo base_url();?>Admin/upload_files">
 											<i class="menu-icon fa fa-caret-right"></i>
@@ -234,6 +236,7 @@
 
 										<b class="arrow"></b>
 									</li>
+								-->
 
 									<li class=" <?= ($active_page == 'view_files') ? 'active':''; ?>">
 										<a href="<?php echo base_url();?>Admin/view_files">
@@ -311,9 +314,54 @@
 												<b class="arrow"></b>
 											</li>
 
+											<li class=" <?= ($active_page == 'grant_admin') ? 'active ':''; ?>">
+												<a href="<?php echo base_url();?>Admin/grant_admin">
+													<i class="menu-icon fa fa-caret-right"></i>
+													Grant admin
+												</a>
+
+												<b class="arrow"></b>
+											</li>
+
 										</ul>
 									</li>
 
+									<li class="<?= ($active_head == 'teams') ? 'active open':''; ?>">
+										<a href="#" class="dropdown-toggle">
+											<i class="menu-icon fa fa-users"></i>
+
+											<span class="menu-text">
+												Teams
+
+											</span>
+
+											<b class="arrow fa fa-angle-down"></b>
+										</a>
+
+										<b class="arrow"></b>
+
+										<ul class="submenu">
+											<li class=" <?= ($active_page == 'view_team_members') ? 'active ':''; ?>">
+												<a href="<?php echo base_url();?>Admin/view_team_members">
+													<i class="menu-icon fa fa-caret-right"></i>
+												View team members
+												</a>
+
+												<b class="arrow"></b>
+											</li>
+
+											<li class=" <?= ($active_page == 'manage_teams') ? 'active':''; ?>">
+												<a href="<?php echo base_url();?>Admin/manage_teams">
+													<i class="menu-icon fa fa-caret-right"></i>
+													Manage teams
+												</a>
+
+												<b class="arrow"></b>
+											</li>
+
+										</ul>
+									</li>
+<!--
 						<li class="<?= ($active_head == 'gallery') ? 'active open':''; ?>">
 							<a href="#" class="dropdown-toggle">
 								<i class="menu-icon fa fa-picture-o"></i>
@@ -367,6 +415,7 @@
 
 							</ul>
 						</li>
+					-->
 
 					</ul><!-- /.nav-list -->
 

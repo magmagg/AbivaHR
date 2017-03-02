@@ -39,7 +39,8 @@ class Login extends CI_Controller
 									'user_password'=>password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 									'user_department'=>$this->input->post('department'),
                   'user_picture'=>"./assets/images/avatars/avatar2.png",
-									'user_isadmin'=>0
+									'user_isadmin'=>0,
+									'user_teams_id_fk'=>1
 								);
 		$duplicate_username = $this->Login_model->check_username_duplicate($this->input->post('username'));
 		if($duplicate_username)

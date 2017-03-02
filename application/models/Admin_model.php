@@ -358,7 +358,36 @@ function get_thread_number()
   }
 
 //===================================EMPLOYEES============================================//
+function update_team_name($data,$id)
+{
+  $this->db->where('teams_id',$id);
+  $this->db->update('tblteams',$data);
+}
 
+function update_user_team_id($data,$id)
+{
+  $this->db->where('user_id',$id);
+  $this->db->update('tblusers',$data);
+}
+
+function delete_one_team($id)
+{
+  $this->db->delete('tblteams', array('teams_id' => $id));
+}
+
+function add_team_name($data)
+{
+  $this->db->insert('tblteams',$data);
+}
+
+function get_employees_per_team($id)
+{
+  $this->db->select('*');
+  $this->db->from('tblusers');
+  $this->db->where('user_teams_id_fk',$id);
+  $query = $this->db->get();
+  return $query->result();
+}
 function get_employees()
 {
   $this->db->select('*');

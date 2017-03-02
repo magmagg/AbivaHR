@@ -348,6 +348,110 @@ class Admin extends CI_Controller
 
   }
 
+  function submit_edit_teamname()
+  {
+    $id = $this->input->post('id');
+    $name = $this->input->post('updatename');
+    $data = array('teams_name'=>$name);
+    $this->Admin_model->update_team_name($data,$id);
+    redirect('Admin/manage_teams');
+  }
+
+  function submit_add_teamname()
+  {
+    $name = $this->input->post('updatename');
+    $data = array('teams_name'=>$name);
+    $this->Admin_model->add_team_name($data);
+    redirect('Admin/manage_teams');
+  }
+
+  function delete_one_team()
+  {
+    $id = $this->uri->segment(3);
+
+    $data['employees'] = $this->Admin_model->get_employees_per_team($id);
+    $update = array('user_teams_id_fk'=>1);
+    foreach($data['employees'] as $d)
+    {
+      $this->Admin_model->update_user_team_id($update,$d->user_id);
+    }
+
+    $this->Admin_model->delete_one_team($id);
+  }
+
+  function view_team_members()
+  {
+    $header['active_head'] = 'teams';
+    $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
+    $data['employees'] = $this->Admin_model->get_employees();
+    $data['teams'] = $this->Admin_model->get_teams();
+
+
+    $this->load->view('Admin/admin_header',$header);
+    $this->load->view('Admin/admin_team_view_members',$data);
+  }
+
+  function manage_teams()
+  {
+    $header['active_head'] = 'teams';
+    $header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+    $hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+    if($hasunread)
+      $header['ihasunread'] = 1;
+    else
+      $header['ihasunread'] = 0;
+    $data['teams'] = $this->Admin_model->get_teams();
+
+
+    $this->load->view('Admin/admin_header',$header);
+    $this->load->view('Admin/admin_team_add_modal');
+    $this->load->view('Admin/admin_team_edit_modal');
+    $this->load->view('Admin/admin_team_manage_teams',$data);
+  }
+
+	function grant_admin()
+	{
+		$header['active_head'] = 'employees';
+		$header['active_page'] = basename($_SERVER['PHP_SELF'], ".php");
+		$hasunread = $this->Admin_model->get_unread_messages($this->session->userdata['id']);
+		if($hasunread)
+			$header['ihasunread'] = 1;
+		else
+			$header['ihasunread'] = 0;
+		$data['employees'] = $this->Admin_model->get_employees();
+		$data['teams'] = $this->Admin_model->get_teams();
+
+		//Should be row id
+		$ID = $this->session->userdata('id');
+		$data_modal['employee'] = $this->Admin_model->get_one_employee($ID);
+		$data_modal['departments'] = $this->Admin_model->get_departments();
+		$data_modal['teams'] = $this->Admin_model->get_teams();
+
+		$this->load->view('Admin/admin_header',$header);
+		$this->load->view('Admin/admin_employees_grant_admin',$data);
+	}
+
+  function deactivate_admin()
+  {
+    $ID = $this->uri->segment(3);
+    $data = array('user_isadmin'=>0);
+    $this->Admin_model->process_activation($data,$ID);
+    echo 0;
+  }
+
+  function activate_admin()
+  {
+    $ID = $this->uri->segment(3);
+    $data = array('user_isadmin'=>2);
+    $this->Admin_model->process_activation($data,$ID);
+    echo 1;
+  }
+
   function edit_one_employee()
   {
     $header['active_head'] = 'employees';
@@ -374,7 +478,6 @@ class Admin extends CI_Controller
     $middlename = $this->input->post('mname');
     $lastname = $this->input->post('lname');
     $email = $this->input->post('email');
-    $department = $this->input->post('department');
     $team = $this->input->post('team');
 
     $data = array('user_username'=>$username,
@@ -382,7 +485,6 @@ class Admin extends CI_Controller
                   'user_middlename'=>$middlename,
                   'user_lastname'=>$lastname,
                   'user_email'=>$email,
-                  'user_department'=>$department,
                   'user_teams_id_fk'=>$team
                 );
 

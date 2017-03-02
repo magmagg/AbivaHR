@@ -4,6 +4,8 @@
 		<div class="col-sm-4 dialogs">
 			<div class="clearfix">
 				<?php foreach($users as $u):?>
+					<?php if($u->user_id == 41):?>
+					<?php else:?>
 					<?php if($u->user_id == $this->session->userdata['id']):?>
 					<?php else:?>
 				<div class="itemdiv memberdiv">
@@ -27,6 +29,8 @@
 						</div>
 					</div>
 				</div>
+
+			<?php endif;?>
 			<?php endif;?>
 				<?php endforeach; ?>
 			</div>
