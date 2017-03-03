@@ -1388,7 +1388,7 @@ var_dump($error);
       $header['ihasunread'] = 0;
     $data['files'] = $this->Admin_model->get_deleted_archive();
     $data['users'] = $this->Admin_model->get_users();
-    $data['departments'] = $this->Admin_model->get_departments();
+    $data['teams'] = $this->Admin_model->get_teams();
 
     $this->load->view('Admin/admin_header',$header);
     $this->load->view('Admin/admin_view_archived_files',$data);
@@ -1486,6 +1486,7 @@ var_dump($error);
   {
     $departmentid = $this->uri->segment(3);
     $data['folders'] = $this->Admin_model->get_folders_dept($departmentid);
+		$data['teams'] = $this->Admin_model->get_teams();
     $data['departmentid'] = $departmentid;
     $this->load->view('Admin/Admin_files_folders_loading', $data);
   }
@@ -1532,15 +1533,24 @@ var_dump($error);
     $id = $this->uri->segment(3);
 
     $data['file'] = $this->Admin_model->get_one_file($id);
+    $data['teams'] = $this->Admin_model->get_teams();
     foreach($data['file'] as $d)
     {
+      foreach($data['teams'] as $t)
+      {
+        if($d->ffolder_teams_id_fk == $t->teams_id)
+        {
+          $teamid = $t->teams_id;
+        }
+      }
 			$data = array('files_display_name'=>$d->files_display_name,
 										'files_deletedby'=>$this->session->userdata['id'],
+                    'files_last_updated'=>$d->files_user_id_fk,
 										 'files_name'=>$d->files_name,
 										 'files_path'=>$d->files_path,
 										 'files_foldername'=>$d->ffolder_name,
 									 		'files_version'=>$d->files_version,
-											'files_department'=>$d->ffolder_dept_id_fk);
+											'files_team_id_fk'=>$teamid);
     $archiveid = $this->Admin_model->insert_tblfiles_deleted($data);
     }
     $data['archive'] = $this->Admin_model->get_archive_by_files_id($id);

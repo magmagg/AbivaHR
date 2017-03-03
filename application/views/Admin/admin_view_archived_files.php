@@ -10,9 +10,10 @@
   			<th>#</th>
   			<th>File</th>
   			<th>Version</th>
-        <th>Department</th>
+        <th>Team</th>
         <th>Folder</th>
   			<th>Timestamp</th>
+        <th>Deleted by</th>
   			<th>Action</th>
   		</tr>
   	</thead>
@@ -26,18 +27,18 @@
   				<td>
   					<?=$count?>
   				</td>
-  				<td>
+          <td>
   					<?=$d->files_display_name?>
   					<?php if($d->files_version == 1.0):?>
   					<?php foreach($users as $u):?>
-  						<?php if($d->files_deletedby == $u->user_id):?>
+  						<?php if($d->files_last_updated == $u->user_id):?>
   							<?php $name = $u->user_firstname.' '.$u->user_lastname;?>
   						  <p class="help-block">Uploaded by:<a href="<?php echo base_url();?>Admin/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
   						<?php endif;?>
   					<?php endforeach;?>
   					<?php else:?>
   					<?php foreach($users as $u):?>
-  						<?php if($d->files_deletedby == $u->user_id):?>
+  						<?php if($d->files_last_updated == $u->user_id):?>
   							<?php $name = $u->user_firstname.' '.$u->user_lastname;?>
   							<p class="help-block">Updated by:<a href="<?php echo base_url();?>Admin/view_other_profile/<?=$u->user_id?>"> <?=$name?> </a></p>
   						<?php endif;?>
@@ -49,11 +50,11 @@
   					<?=$d->files_version?>
   				</td>
           <td>
-            <?php foreach($departments as $de): ?>
-              <?php if($d->files_department == $de->department_id):?>
-                  <?=$de->department_name?>
+            <?php foreach($teams as $t):?>
+              <?php if($d->files_team_id_fk == $t->teams_id):?>
+                <?=$t->teams_name?>
               <?php endif;?>
-            <?php endforeach; ?>
+            <?php endforeach;?>
           </td>
           <td>
             <?=$d->files_foldername?>
@@ -61,6 +62,14 @@
   				<td>
   					<?=$d->files_timestamp?>
   				</td>
+          <td>
+            <?php foreach($users as $u):?>
+              <?php if($d->files_deletedby == $u->user_id):?>
+                <?php $name = $u->user_firstname.' '.$u->user_lastname;?>
+              <?=$name?>
+              <?php endif;?>
+            <?php endforeach;?>
+          </td>s
   				<td>
   					<div class="hidden-sm hidden-xs btn-group">
   						<a href="<?php echo base_url();?>Admin/download_one_archive/<?=$d->files_id?>" class="tooltip-info" data-rel="tooltip" title="Download">

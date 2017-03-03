@@ -575,12 +575,12 @@ function check_username_duplicate($email)
 
   function get_folders_dept($id)
   {
-    $this->db->select('f.ffolder_name,f.ffolder_id');
-    $this->db->from('tbldepartments as d');
-    $this->db->join('tblfiles_folder as f', 'd.department_id = f.ffolder_dept_id_fk');
-    $this->db->where('d.department_id',$id);
-    $query = $this->db->get();
-    return $query->result();
+		$this->db->select('f.ffolder_name,f.ffolder_id,f.ffolder_teams_id_fk');
+		$this->db->from('tbldepartments as d');
+		$this->db->join('tblfiles_folder as f', 'd.department_id = f.ffolder_dept_id_fk');
+		$this->db->where('d.department_id',$id);
+		$query = $this->db->get();
+		return $query->result();
   }
 
   function get_files_folder($id)

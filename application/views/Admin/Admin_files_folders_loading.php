@@ -19,6 +19,13 @@
 				</td>
 				<td>
 					<?=$d->ffolder_name?>
+					<p class="help-block">Team:
+						 <?php foreach($teams as $t):?>
+							 <?php if($d->ffolder_teams_id_fk == $t->teams_id): ?>
+								 <?= $t->teams_name; ?>
+							 <?php endif;?>
+						 <?php endforeach;?>
+					</p>
 				</td>
 				<td>
 					<center>

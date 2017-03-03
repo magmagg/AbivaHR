@@ -493,7 +493,7 @@ function check_username_duplicate($email)
 	{
 		$this->db->select('*');
 		$this->db->from('tblfiles_deleted');
-    $this->db->where('files_department',$id);
+    $this->db->where('files_team_id_fk',$id);
 		$query = $this->db->get();
 		return $query->result();
 	}
