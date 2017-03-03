@@ -51,13 +51,6 @@ class Admin extends CI_Controller
       $header['ihasunread'] = 1;
     else
       $header['ihasunread'] = 0;
-    $this->session->set_flashdata('notify',"<script>
-    		new PNotify({
-        title: 'Regular Success',
-        text: 'That thing that you were trying to do worked!',
-        type: 'success'
-    	});
-    </script>");
     $ID = $this->session->userdata['id'];
     $data['todolist'] = $this->Admin_model->get_todolist($ID);
 
@@ -489,15 +482,6 @@ class Admin extends CI_Controller
                 );
 
     $this->Admin_model->submit_one_employee($data, $id);
-
-    $this->session->set_flashdata('notify',"<script>
-        new PNotify({
-        title: 'Success!',
-        text: 'Employee has been edited',
-        type: 'success'
-      });
-    </script>");
-
 
     redirect(base_url().'Admin/employees');
   }

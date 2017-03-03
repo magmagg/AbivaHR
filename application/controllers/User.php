@@ -119,6 +119,7 @@ class User extends CI_Controller
 
     $ID = $this->session->userdata['id'];
 		$data['userDetails'] = $this->User_model->get_one_user($ID);
+		$data['teams'] = $this->User_model->get_teams();
       //var_dump($this->session->all_userdata());
     $this->load->view('User/user_header',$header);
     $this->load->view('User/user_user_profile',$data);

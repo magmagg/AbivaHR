@@ -51,13 +51,7 @@ class AdminDept extends CI_Controller
       $header['ihasunread'] = 1;
     else
       $header['ihasunread'] = 0;
-    $this->session->set_flashdata('notify',"<script>
-    		new PNotify({
-        title: 'Regular Success',
-        text: 'That thing that you were trying to do worked!',
-        type: 'success'
-    	});
-    </script>");
+
     $ID = $this->session->userdata['id'];
     $data['todolist'] = $this->AdminDept_model->get_todolist($ID);
 
@@ -114,6 +108,7 @@ class AdminDept extends CI_Controller
 
     $ID = $this->session->userdata['id'];
 		$data['userDetails'] = $this->AdminDept_model->get_one_user($ID);
+		$data['teams'] = $this->AdminDept_model->get_teams();
       //var_dump($this->session->all_userdata());
     $this->load->view('AdminDept/admin_header',$header);
     $this->load->view('AdminDept/admin_user_profile',$data);
@@ -384,13 +379,6 @@ class AdminDept extends CI_Controller
 
     $this->AdminDept_model->submit_one_employee($data, $id);
 
-    $this->session->set_flashdata('notify',"<script>
-        new PNotify({
-        title: 'Success!',
-        text: 'Employee has been edited',
-        type: 'success'
-      });
-    </script>");
 
 
     redirect(base_url().'AdminDept/employees');

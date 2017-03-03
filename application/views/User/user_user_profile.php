@@ -37,6 +37,13 @@
 				 $Google = $d->user_google;
 				 $Linkedin = $d->user_linkedin;
 				 $Wordpress = $d->user_wordpress;
+				 foreach($teams as $t)
+				 {
+					 if($t->teams_id == $d->user_teams_id_fk)
+					 {
+						 $teamname = $t->teams_name;
+					 }
+				 }
 			 	}
  ?>
 
@@ -123,6 +130,14 @@
 
 					<div class="profile-info-value">
 						<span><?php echo $this->session->userdata['id']; ?></span>
+					</div>
+				</div>
+
+				<div class="profile-info-row">
+					<div class="profile-info-name"> Team </div>
+
+					<div class="profile-info-value">
+						<span><?php echo $teamname; ?></span>
 					</div>
 				</div>
 
