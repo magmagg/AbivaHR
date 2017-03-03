@@ -498,6 +498,14 @@ function check_username_duplicate($email)
 		return $query->result();
 	}
 
+  function get_deleted_archive_all()
+  {
+    $this->db->select('*');
+    $this->db->from('tblfiles_deleted');
+    $query = $this->db->get();
+    return $query->result();
+  }
+
 
   function get_folder_names()
   {

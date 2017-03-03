@@ -63,7 +63,8 @@ Manage teams</h3>
 		                    </span>
 											</a>
 										</li>
-
+										<?php if($t->teams_id == 1):?>
+										<?php else:?>
 										<li>
 											<a href="#" onclick="foo(<?=$t->teams_id?>)" class="tooltip-error" data-rel="tooltip" title="Delete">
 												<span class="red">
@@ -71,6 +72,7 @@ Manage teams</h3>
 		                    </span>
 											</a>
 										</li>
+									<?php endif; ?>
 
 									</ul>
 								</div>

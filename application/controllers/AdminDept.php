@@ -1268,7 +1268,14 @@ var_dump($error);
 			$header['ihasunread'] = 1;
 		else
 			$header['ihasunread'] = 0;
-		$data['files'] = $this->AdminDept_model->get_deleted_archive($this->session->userdata('team'));
+    if($this->session->userdata('team') == 1)
+    {
+    		$data['files'] = $this->AdminDept_model->get_deleted_archive_all();
+    }
+    else
+    {
+  		$data['files'] = $this->AdminDept_model->get_deleted_archive($this->session->userdata('team'));
+    }
 		$data['users'] = $this->AdminDept_model->get_users();
 		$data['teams'] = $this->AdminDept_model->get_teams();
 
