@@ -1347,9 +1347,10 @@ var_dump($error);
       $departmentid =  $this->session->userdata['department'];
       $team = $this->session->userdata['team'];
       $data['teams'] = $this->AdminDept_model->get_teams();
+      $this->session->all_userdata();
       if($this->session->userdata['team'] == 1)
       {
-        $data['folders'] = $this->AdminDept_model->get_folders_dept_team($departmentid,$team);
+        $data['folders'] = $this->AdminDept_model->get_generic_admindept($departmentid);
       }
       else
       {
